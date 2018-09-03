@@ -1,0 +1,33 @@
+#menu ul {
+	padding:0px;
+	margin:0px;
+	list-style:none;
+    text-align: center;
+}
+
+#menu ul li { display: inline; }
+
+#menu ul li a {
+	padding: 10px 32px;
+	display: inline-block;
+ 
+	/* visual do link */
+	background-color:white;
+	color: #333;
+	text-decoration: none;
+}
+
+#menu ul li a:hover {
+	background-color:black;
+	color: #00FFBF;
+}
+
+header
+{
+    height: 200px;
+    text-align: center;
+    background: url();
+    color: red;
+    font-family: cursive;
+    font-size: 100;
+}

@@ -3,6 +3,7 @@
 	margin:0px;
 	list-style:none;
     text-align: center;
+    
 }
 
 #menu ul li { display: inline; }
@@ -12,7 +13,7 @@
 	display: inline-block;
  
 	/* visual do link */
-	background-color:white;
+	background-color:aliceblue;
 	color: #333;
 	text-decoration: none;
 }
@@ -26,8 +27,13 @@ header
 {
     height: 200px;
     text-align: center;
-    background: url();
+    background: url("Imagens/FundoHeader.jpg");
     color: red;
     font-family: cursive;
     font-size: 100;
+}
+
+body
+{
+    background-color: aliceblue;
 }

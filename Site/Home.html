@@ -7,22 +7,39 @@
     <link rel = "stylesheet" href="Site.css" type="text/css"/>
     
 </head>
+<script type="text/javascript">
+    function AbrirLogin()
+    {
+        location.href="Login.html";
+    }
+    function AbrirCadastro()
+    {
+        location.href="Cadastro.html";
+    }
 
+</script>
 <body>
 
-<header></header>
+<header id="pagina"></header>
 
 <nav id="menu">
     <ul>
 		<li><a href="Home.html">Home</a></li>
-		<li><a href="Gastos.html">Seus Gastos</a></li>
-		<li><a href="Login.html">Login</a></li>
+        <li><a href="Login.html">Login</a></li>
+        <li><a href="Cadastro.html">Cadastre-se</a></li>
 	</ul>
 </nav>
 
 <div id="textoHome">Controlar seus gastos nunca foi tão fácil!</div>
 
 <div id="imagemPorco"></div>
+
+<div id="cortandoGastos"></div>
+
+<input type="button" value="Cadastre-se" id="cadastrar" onclick="AbrirCadastro();">
+
+<input type="button" value="Login" id="login" onclick="AbrirLogin();">
+
 </body>
 
 </html>

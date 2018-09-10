@@ -7,18 +7,26 @@
     <link rel = "stylesheet" href="Site.css" type="text/css"/>
     
 </head>
-
+<script type="text/javascript">
+    
+    function abrirGastos() {
+        var menu = document.getElementById("menu");
+        document.menu.document.appendChild("<li><a href='Gastos.html'>Seus Gastos</a></li>");
+    } 
+    </script>
 <body>
 
-<header></header>
+<header id="pagina"></header>
 
 <nav id="menu">
     <ul>
 		<li><a href="Home.html">Home</a></li>
-		<li><a href="Gastos.html">Seus Gastos</a></li>
-		<li><a href="Login.html">Login</a></li>
+        <li><a href="Login.html">Login</a></li>
+        <li><a href="Cadastro.html">Cadastre-se</a></li>
 	</ul>
 </nav>
+
+<input type="button" id="btn_login" onclick="abrirGastos();" value="Login">
 
 </body>
 

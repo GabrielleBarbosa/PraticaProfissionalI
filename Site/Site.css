@@ -25,7 +25,7 @@
 	font-weight: bold;
 }
 
-header
+header#pagina
 {
     height: 200px;
     text-align: center;
@@ -47,7 +47,7 @@ body
 	width: 250px;
 	height: 250px;
 	left: 50px;
-	top: 270px;
+	top: 240px;
 }
 
 #textoHome
@@ -58,4 +58,43 @@ body
 	font-family: Engravers MT;
 	font-size: 25;
 	color: rgb(7, 75, 7);
+}
+
+#cortandoGastos
+{
+	position: absolute;
+	top: 340px;
+	left: 480px;
+	width: 590px; /*820*/
+	height: 350px;
+	background: url("Imagens/CortandoGastosTesoura.jpg") no-repeat;
+}
+
+button#botao 
+{
+	background-color: blue;
+}
+
+#cadastrar
+{
+	position: absolute;
+	background-color: rgb(14, 105, 60);
+	color: white;
+	border-color: rgb(161, 240, 240);
+	left: 550px;
+	top: 700px;
+	width: 120px;
+	height: 30px;
+}
+
+#login
+{
+	position: absolute;
+	background-color: rgb(14, 105, 60);
+	color: white;
+	border-color: rgb(161, 240, 240);
+	left: 850px;
+	top: 700px;
+	width: 120px;
+	height: 30px;
 }

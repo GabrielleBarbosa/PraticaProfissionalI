@@ -17,8 +17,50 @@
         location.href="Cadastro.html";
     }
 
+    var imgPorco = new Image();
+    var imgMoeda = new Image();
+    var imgFundo = new Image();
+    imgFundo.src = "Imagens/Porquinho2.png";
+    imgMoeda.src = "Imagens/moeda.png";
+    imgPorco.src = "Imagens/Porquinho3.png";
+
+    var objCanvas=null; 
+    var objContexto=null;
+
+    var posicaoPorco = 240;
+    var posicaoMoeda = 10;
+    var timerDaMoeda = null;
+
+    var paraCima = true;
+
+    function Iniciar(){
+        objCanvas = document.getElementById("meuCanvas");
+        objContexto = objCanvas.getContext("2d");
+
+        timerDaMoeda = setInterval(function(){MudarMoeda()},100);
+        AtualizarTela();
+    }
+
+    function AtualizarTela(){
+        objContexto.drawImage(imgFundo,0,0);
+        objContexto.drawImage(imgMoeda,87,posicaoMoeda);
+        objContexto.drawImage(imgPorco,0,0);
+    }
+
+    function MudarMoeda(){
+        if(posicaoMoeda == 0)
+           paraCima = false;
+        else if(posicaoMoeda == 10)
+            paraCima = true;
+            
+        if(paraCima)
+           posicaoMoeda = posicaoMoeda - 1;
+        else 
+           posicaoMoeda = posicaoMoeda + 1;
+        AtualizarTela();
+    }
 </script>
-<body>
+<body onload="Iniciar();">
 
 <header id="pagina"></header>
 
@@ -31,6 +73,8 @@
 </nav>
 
 <div id="textoHome">Controlar seus gastos nunca foi tão fácil!</div>
+
+<canvas id="meuCanvas" width="250" height="250"></canvas>
 
 <div id="imagemPorco"></div>
 

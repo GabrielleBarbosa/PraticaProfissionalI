@@ -105,3 +105,72 @@ button#botao
 	width: 120px;
 	height: 30px;
 }
+#gastosLazer {
+    font-size: 20px;
+    font-family: "Maiandra GD";
+    background-color: antiquewhite;
+    position: absolute;
+    border-width: 30px;
+    border-radius: 20px;
+    height: 300px;
+    width: 500px;
+    top: 310px;
+}
+
+#gastosAutomoveis {
+    font-size: 20px;
+    font-family: "Maiandra GD";
+    background-color: antiquewhite;
+    text-align:left;
+    border-width: 30px;
+    border-radius: 20px;
+    height: 300px;
+    width: 500px;
+    position: absolute;
+    left: 1000px;
+    top: 310px;
+    
+}
+
+#gastosDomesticos {
+    font-size: 20px;
+    font-family: "Maiandra GD";
+    background-color: antiquewhite;
+    position: absolute;
+    border-width: 30px;
+    border-radius: 20px;
+    height: 300px;
+    width: 500px;
+    top: 630px;
+}
+
+#gastosImpostosContas {
+    font-size: 20px;
+    font-family: "Maiandra GD";
+    background-color: antiquewhite;
+    border-width: 30px;
+    border-radius: 20px;
+    height: 300px;
+    width: 500px;
+    position: absolute;
+    left: 1000;
+    top:630px;
+}
+
+#gastosImovel {
+    font-size: 20px;
+    font-family: "Maiandra GD";
+    background-color: antiquewhite;
+    position: absolute;
+    border-width: 30px;
+    border-radius: 20px;
+    height: 300px;
+    width: 500px;
+    top: 960px;
+}
+
+#EmCima
+{
+    text-align: center;
+    
+}

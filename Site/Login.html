@@ -22,11 +22,29 @@
     <ul>
 		<li><a href="Home.html">Home</a></li>
         <li><a href="Login.html">Login</a></li>
-        <li><a href="Cadastro.html">Cadastre-se</a></li>
 	</ul>
 </nav>
+<div id="computador"></div>
+<form id="formularioLogin" method="post">
+    <table>
+        <tr>
+            <td>Usuário:</td>
+            <td><input type="text" id="usuario"></td>
+        </tr>
+        
+        <tr>
+            <td>Senha: </td>
+            <td><input type="password" id="senha"></td>
+        </tr>
+            
+    </table>
 
-<input type="button" id="btn_login" onclick="abrirGastos();" value="Login">
+</form>
+
+<input type="submit" id="botaoLogin" onclick="abrirGastos();" value="Login">
+<input type="button" id="botaoCadastro" onclick="abrirGastos();" value="Cadastre-se">
+
+<nav id="esqueciMinhaSenha"><a href="#">Esqueci minha senha</a></nav>
 
 </body>
 

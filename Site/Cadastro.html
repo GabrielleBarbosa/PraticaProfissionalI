@@ -16,9 +16,46 @@
     <ul>
 		<li><a href="Home.html">Home</a></li>
         <li><a href="Login.html">Login</a></li>
-        <li><a href="Cadastro.html">Cadastre-se</a></li>
 	</ul>
 </nav>
+
+<section>
+    <article>
+
+<div id="computador2"></div>
+
+<form name="frmPrincipal" method="post" action="home.html"  id="formularioCadastro">
+   <table id="formatacaoLogin">
+
+       <tr>
+            <td><label for="lb_Telefone">Telefone:</label></td>
+            <td><input type="tel" name="txt_Tel" pattern="^\d{2}-\d{5}-\d{4}$" required></td>
+       </tr>
+       
+       <tr>
+           <td>Email: </td>
+           <td><input type="email" name="txt_Email" required></td>
+       </tr>
+       
+       <tr>
+           <td>Data de Nascimento:</td>
+           <td><input type="date" name="txt_Data" required></td>
+       </tr>
+       
+       <tr>
+           <td>Senha:</td>
+           <td><input type="password" name="txt_Senha" required></td>
+       </tr>
+
+</table>
+</form>
+        <br>
+        <center>
+            <input type="submit" value="Efetuar Cadastro" id="botaoCadastro">
+        </center>
+
+    </article>
+</section>
 
 </body>
 

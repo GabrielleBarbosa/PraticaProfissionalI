@@ -3,7 +3,7 @@
 	margin:0px;
 	list-style:none;
     text-align: center;
-     background-color: rgb(227, 240, 227);
+    background-color: rgb(227, 240, 227);
 }
 
 #menu ul li { display: inline;}
@@ -30,25 +30,12 @@ header#pagina
     height: 200px;
     text-align: center;
     background: url("Imagens/FundoHeader.jpg");
-    color: red;
-    font-family: cursive;
-    font-size: 100;
 }
 
 body
 {
     background-color: aliceblue;
 }
-
-/*#imagemPorco
-{
-	position: absolute;
-	background: url("Imagens/Porquinho.png") no-repeat;
-	width: 250px;
-	height: 250px;
-	left: 50px;
-	top: 240px;
-}*/
 
 canvas#meuCanvas
 {
@@ -74,6 +61,7 @@ canvas#meuCanvas
 	left: 480px;
 	width: 590px; /*820*/
 	height: 350px;
+	border-radius: 22pt; 
 	background: url("Imagens/CortandoGastosTesoura.jpg") no-repeat;
 }
 
@@ -105,6 +93,80 @@ button#botao
 	width: 120px;
 	height: 30px;
 }
+
+#formularioLogin 
+{
+	list-style:none;
+	position: absolute;
+	left: 43%;
+	top: 50%;
+	font-size: 22;
+	font-family: candara;
+}
+
+#botaoLogin
+{
+	position: absolute;
+	color: blue;
+	background-color: lightblue;
+	font-size: 20;
+	font-family: candara;
+	left: 700px;
+	top: 475px; 
+}
+
+#botaoCadastro
+{
+	color: blue;
+	background-color: lightblue;
+	text-decoration: none;
+	position: absolute;
+	left: 800px;
+	top: 475px; 
+	font-size: 20;
+	font-family: candara;
+}
+
+#esqueciMinhaSenha
+{
+	text-decoration: none;
+	color: blue;
+	font-family: candara;
+	position: absolute;
+	left: 46.5%;
+	top: 520px;
+}
+
+#formularioCadastro
+{
+	position: absolute;
+	left: 650px;
+	top: 365px;
+	list-style:none;
+	font-size: 22;
+	font-family: candara;
+}
+
+#computador
+{
+	position: absolute;
+	background: url("Imagens/Computador.png") no-repeat;
+	left: 500px;
+	top: 260px;
+	width: 651px;
+	height: 637px;
+}
+
+#computador2
+{
+	position: absolute;
+	background: url("Imagens/Computador2.png") no-repeat;
+	left: 490px;
+	top: 260px;
+	width: 1000px;
+	height: 1000px;
+}
+
 #gastosLazer {
     font-size: 20px;
     font-family: "Maiandra GD";

@@ -108,7 +108,7 @@ button#botao
 #gastosLazer {
     font-size: 20px;
     font-family: "Maiandra GD";
-    background-color: antiquewhite;
+    background-color: lightblue;
     position: absolute;
     border-width: 30px;
     border-radius: 20px;
@@ -120,7 +120,7 @@ button#botao
 #gastosAutomoveis {
     font-size: 20px;
     font-family: "Maiandra GD";
-    background-color: antiquewhite;
+    background-color: lightblue;
     text-align:left;
     border-width: 30px;
     border-radius: 20px;
@@ -135,7 +135,7 @@ button#botao
 #gastosDomesticos {
     font-size: 20px;
     font-family: "Maiandra GD";
-    background-color: antiquewhite;
+    background-color: lightblue;
     position: absolute;
     border-width: 30px;
     border-radius: 20px;
@@ -147,7 +147,7 @@ button#botao
 #gastosImpostosContas {
     font-size: 20px;
     font-family: "Maiandra GD";
-    background-color: antiquewhite;
+    background-color: lightblue;
     border-width: 30px;
     border-radius: 20px;
     height: 300px;
@@ -160,7 +160,7 @@ button#botao
 #gastosImovel {
     font-size: 20px;
     font-family: "Maiandra GD";
-    background-color: antiquewhite;
+    background-color: lightblue;
     position: absolute;
     border-width: 30px;
     border-radius: 20px;

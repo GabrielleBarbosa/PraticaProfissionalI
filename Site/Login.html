@@ -3,49 +3,105 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Cuidando dos gastos</title>
-    <link rel = "stylesheet" href="Site.css" type="text/css"/>
-    
+    <title>Seus Gastos</title>
+    <link rel="stylesheet" href="Site.css" type="text/css" />
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
+
+
+
 <script type="text/javascript">
-    
+    function abrirCadastro() {
+        location.href = "Cadastro.html";
+    }
+
     function abrirGastos() {
-        var menu = document.getElementById("menu");
-        document.menu.document.appendChild("<li><a href='Gastos.html'>Seus Gastos</a></li>");
-    } 
-    </script>
-<body>
+        var menu = document.getElementById("seila");
+        menu.appendChild("<li><a href='Gastos.html'>Seus Gastos</a></li>");
+    }
 
-<header id="pagina"></header>
+</script>
 
-<nav id="menu">
-    <ul>
-		<li><a href="Home.html">Home</a></li>
-        <li><a href="Login.html">Login</a></li>
-	</ul>
-</nav>
-<div id="computador"></div>
-<form id="formularioLogin" method="post">
-    <table>
-        <tr>
-            <td>Usuário:</td>
-            <td><input type="text" id="usuario"></td>
-        </tr>
-        
-        <tr>
-            <td>Senha: </td>
-            <td><input type="password" id="senha"></td>
-        </tr>
-            
-    </table>
 
-</form>
 
-<input type="submit" id="botaoLogin" onclick="abrirGastos();" value="Login">
-<input type="button" id="botaoCadastro" onclick="abrirGastos();" value="Cadastre-se">
 
-<nav id="esqueciMinhaSenha"><a href="#">Esqueci minha senha</a></nav>
+<body class="teal lighten-2">
+
+<!--    <header id="pagina"></header>-->
+
+<!--
+    <nav id="menu">
+        <ul id="seila">
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="Login.html">Login</a></li>
+            <a id="cadastroDoMenu" href="Cadastro.html">Cadastre-se</a>
+        </ul>
+    </nav>
+-->
+    <nav class="nav-extended blue darken-1">
+
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Logo</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Login.html">Login</a></li>
+                <li><a href="Cadastro.html" class="waves-effect waves-light btn">Cadastre-se<i class="material-icons right"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id="computador"></div>
+    <form id="formularioLogin" method="post">
+        <table>
+            <tr>
+                <td>Usuário:</td>
+                <td><input type="text" id="usuario"></td>
+            </tr>
+
+            <tr>
+                <td>Senha: </td>
+                <td><input type="password" id="senha"></td>
+            </tr>
+
+        </table>
+
+    </form>
+
+    <input type="submit" id="botaoLogin" onclick="abrirGastos();" value="Login">
+    <button id="botaoCadastro" onclick="abrirCadastro();">Cadastre-se</button>
+
+    <a id="esqueciMinhaSenha" href="#">Esqueci minha senha</a>
 
 </body>
 
+    
+    
+    <!--------------------------------------------------------------------------------->
+    
+    <footer class="page-footer blue darken-1 " style="position: relative; top: 100%;">
+        <img src="Imagens/logoCotuca.png" style="position: absolute; left: 1200px;">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h2 class="white-text" style="font-family:'Segoe Print' ">Economize</h2>
+                    <p class="grey-text text-lighten-4" style="font-size: 20px">Organizar mais, Gastar Menos</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">Contate-nos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+            </div>
+        </div>
+    </footer>
 </html>

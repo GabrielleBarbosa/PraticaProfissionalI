@@ -3,22 +3,34 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Cuidando dos gastos</title>
-    <link rel = "stylesheet" href="Site.css" type="text/css"/>
+    <title>Seus Gastos</title>
+    <link rel="stylesheet" href="Site.css" type="text/css" />
+    
+   <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     
 </head>
 
-<body>
+<body class="nav-extended teal accent-3">
 
-<header id="pagina"></header>
 
-<nav id="menu">
-    <ul>
-		<li><a href="Home.html">Home</a></li>
-        <li><a href="Login.html">Login</a></li>
-	</ul>
-</nav>
 
+<nav class="nav-extended blue darken-1">
+
+        <div class="nav-wrapper">
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Login.html">Login</a></li>
+                <li><a href="Cadastro.html">Cadastre-se</a></li>
+            </ul>
+        </div>
+    </nav>
+
+<img src="Imagens/LogoSite.png" id="imgLogoSite">
 <section>
     <article>
 
@@ -57,6 +69,29 @@
     </article>
 </section>
 
+    <!--------------------------------------------------------------------------------->
+    
+    <footer class="page-footer blue darken-1 " style="position: relative; top: 100%;">
+        <img src="Imagens/logoCotuca.png" style="position: absolute; left: 1200px;">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h2 class="white-text" style="font-family:'Segoe Print' ">Economize</h2>
+                    <p class="grey-text text-lighten-4" style="font-size: 20px">Organizar mais, Gastar Menos</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">Contate-nos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

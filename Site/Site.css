@@ -1,9 +1,11 @@
 #menu ul {
-	padding:0px;
+	padding:10px;
 	margin:0px;
 	list-style:none;
     text-align: center;
-    background-color: rgb(227, 240, 227);
+	background-color: aliceblue;
+	font-family: candara;
+	font-size: 20;
 }
 
 #menu ul li { display: inline;}
@@ -13,7 +15,7 @@
 	display: inline-block;
  
 	/* visual do link */
-	background-color:rgb(227, 240, 227);
+	background-color:aliceblue;
 	color: #333;
 	text-decoration: none;
 	font-weight: bold;
@@ -23,13 +25,34 @@
 	background-color:black;
 	color: #00FFBF;
 	font-weight: bold;
+	border-radius: 20px;
+}
+
+#cadastroDoMenu
+{
+	text-decoration: none;
+	list-style: none;
+	background-color: rgba(255, 60, 0, 0.87);
+	color: black;
+	font-weight: bold;
+	border-radius: 30px;
+	padding: 10px 13px;
+    height: 50px;
+    width: 20px;
+}
+
+#menu ul a:hover
+{
+	background-color: rgba(255, 60, 0, 0.87);
+	color: black;
+	font-weight: bold;
 }
 
 header#pagina
 {
     height: 200px;
     text-align: center;
-    background: url("Imagens/FundoHeader.jpg");
+    
 }
 
 body
@@ -41,13 +64,13 @@ canvas#meuCanvas
 {
 	position: absolute;
 	top: 340px;
-	left: 50px;
+	left: 50px; 
 }
 
 #textoHome
 {
 	position: absolute;
-	top: 270px;
+	top: 310px;
 	left: 380px;
 	font-family: Engravers MT;
 	font-size: 25;
@@ -57,9 +80,9 @@ canvas#meuCanvas
 #cortandoGastos
 {
 	position: absolute;
-	top: 340px;
+	top: 370px;
 	left: 480px;
-	width: 590px; /*820*/
+	width: 590px; 
 	height: 350px;
 	border-radius: 22pt; 
 	background: url("Imagens/CortandoGastosTesoura.jpg") no-repeat;
@@ -77,7 +100,7 @@ button#botao
 	color: white;
 	border-color: rgb(161, 240, 240);
 	left: 550px;
-	top: 700px;
+	top: 750px;
 	width: 120px;
 	height: 30px;
 }
@@ -89,7 +112,7 @@ button#botao
 	color: white;
 	border-color: rgb(161, 240, 240);
 	left: 850px;
-	top: 700px;
+	top: 750px;
 	width: 120px;
 	height: 30px;
 }
@@ -130,6 +153,7 @@ button#botao
 #esqueciMinhaSenha
 {
 	text-decoration: none;
+	list-style: none;
 	color: blue;
 	font-family: candara;
 	position: absolute;
@@ -150,9 +174,9 @@ button#botao
 #computador
 {
 	position: absolute;
-	background: url("Imagens/Computador.png") no-repeat;
-	left: 500px;
-	top: 260px;
+	background: url("Imagens/ComputadorLogin.png") no-repeat;
+	left: 28%;
+	top: 32%;
 	width: 651px;
 	height: 637px;
 }
@@ -160,79 +184,27 @@ button#botao
 #computador2
 {
 	position: absolute;
-	background: url("Imagens/Computador2.png") no-repeat;
-	left: 490px;
-	top: 260px;
-	width: 1000px;
-	height: 1000px;
+	background: url("Imagens/ComputadorCadastro.png") no-repeat;
+	left: 390px;
+	top: 200px;
+	width: 723px;
+	height: 570px;
 }
 
-#gastosLazer {
-    font-size: 20px;
-    font-family: "Maiandra GD";
-    background-color: lightblue;
-    position: absolute;
-    border-width: 30px;
-    border-radius: 20px;
-    height: 300px;
-    width: 500px;
-    top: 310px;
-}
-
-#gastosAutomoveis {
-    font-size: 20px;
-    font-family: "Maiandra GD";
-    background-color: lightblue;
-    text-align:left;
-    border-width: 30px;
-    border-radius: 20px;
-    height: 300px;
-    width: 500px;
-    position: absolute;
-    left: 1000px;
-    top: 310px;
-    
-}
-
-#gastosDomesticos {
-    font-size: 20px;
-    font-family: "Maiandra GD";
-    background-color: lightblue;
-    position: absolute;
-    border-width: 30px;
-    border-radius: 20px;
-    height: 300px;
-    width: 500px;
-    top: 630px;
-}
-
-#gastosImpostosContas {
-    font-size: 20px;
-    font-family: "Maiandra GD";
-    background-color: lightblue;
-    border-width: 30px;
-    border-radius: 20px;
-    height: 300px;
-    width: 500px;
-    position: absolute;
-    left: 1000;
-    top:630px;
-}
-
-#gastosImovel {
-    font-size: 20px;
-    font-family: "Maiandra GD";
-    background-color: lightblue;
-    position: absolute;
-    border-width: 30px;
-    border-radius: 20px;
-    height: 300px;
-    width: 500px;
-    top: 960px;
-}
-
-#EmCima
+#logo
 {
-    text-align: center;
-    
+	background: url("Imagens/PorquinhoFofinho.png") no-repeat;
+	width: 200px;
+	height: 200px;
 }
+
+#imgLogoSite
+{
+    border-radius: 50px;
+    position: absolute;
+    border-style:hidden;
+    border-color: darkblue;
+    top: 5px;
+}
+
+

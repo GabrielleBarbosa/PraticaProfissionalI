@@ -1,91 +1,22 @@
-#menu ul {
-	padding:10px;
-	margin:0px;
-	list-style:none;
-    text-align: center;
-	background-color: aliceblue;
-	font-family: candara;
-	font-size: 20;
-}
-
-#menu ul li { display: inline;}
-
-#menu ul li a {
-	padding: 10px 32px;
-	display: inline-block;
- 
-	/* visual do link */
-	background-color:aliceblue;
-	color: #333;
-	text-decoration: none;
-	font-weight: bold;
-}
-
-#menu ul li a:hover {
-	background-color:black;
-	color: #00FFBF;
-	font-weight: bold;
-	border-radius: 20px;
-}
-
-#cadastroDoMenu
-{
-	text-decoration: none;
-	list-style: none;
-	background-color: rgba(255, 60, 0, 0.87);
-	color: black;
-	font-weight: bold;
-	border-radius: 30px;
-	padding: 10px 13px;
-    height: 50px;
-    width: 20px;
-}
-
-#menu ul a:hover
-{
-	background-color: rgba(255, 60, 0, 0.87);
-	color: black;
-	font-weight: bold;
-}
-
-header#pagina
-{
-    height: 200px;
-    text-align: center;
-    
-}
-
-body
-{
-    background-color: aliceblue;
-}
-
 canvas#meuCanvas
 {
 	position: absolute;
-	top: 340px;
+	top: 190px;
 	left: 50px; 
 }
 
 #textoHome
 {
-	position: absolute;
-	top: 310px;
-	left: 380px;
-	font-family: Engravers MT;
-	font-size: 25;
-	color: rgb(7, 75, 7);
+    font-family: Segoe Print;
+    font-size: 90px;
+    font-weight: bold;
 }
 
-#cortandoGastos
+#img1
 {
-	position: absolute;
-	top: 370px;
-	left: 480px;
-	width: 590px; 
-	height: 350px;
-	border-radius: 22pt; 
-	background: url("Imagens/CortandoGastosTesoura.jpg") no-repeat;
+    position: absolute;
+    top: 170px;
+    left: 900px;
 }
 
 button#botao 
@@ -138,37 +69,20 @@ button#botao
 	top: 475px; 
 }
 
-#botaoCadastro
-{
-	color: blue;
-	background-color: lightblue;
-	text-decoration: none;
-	position: absolute;
-	left: 800px;
-	top: 475px; 
-	font-size: 20;
-	font-family: candara;
-}
-
-#esqueciMinhaSenha
-{
-	text-decoration: none;
-	list-style: none;
-	color: blue;
-	font-family: candara;
-	position: absolute;
-	left: 46.5%;
-	top: 520px;
-}
-
 #formularioCadastro
 {
-	position: absolute;
+	position: relative;
 	left: 650px;
 	top: 365px;
 	list-style:none;
-	font-size: 22;
+	font-size: 40px;
 	font-family: candara;
+}
+
+label#cadastro
+{
+        font-family: candara;
+        font-size: 30px;
 }
 
 #computador
@@ -184,27 +98,61 @@ button#botao
 #computador2
 {
 	position: absolute;
-	background: url("Imagens/ComputadorCadastro.png") no-repeat;
+	background: url("Imagens/Computador1.png") no-repeat;
 	left: 390px;
-	top: 200px;
-	width: 723px;
-	height: 570px;
-}
-
-#logo
-{
-	background: url("Imagens/PorquinhoFofinho.png") no-repeat;
-	width: 200px;
-	height: 200px;
+	top: 300px;
+	width: 628px;
+	height: 628px;
 }
 
 #imgLogoSite
 {
-    border-radius: 50px;
     position: absolute;
     border-style:hidden;
     border-color: darkblue;
     top: 5px;
+}
+
+#menu
+{
+    position: relative;
+    margin-top: 60px;
+}
+
+#menu li a
+{
+    font-size: 20px;
+}
+
+#tamanho
+{
+	position: relative;
+	width: 590px;
+	top: 245px;
+	left: 410px;
+	color: black;
+}
+
+#botaoConfirme
+{
+	text-decoration: none;
+	position: relative;
+	left: 20px;
+	top: 220px; 
+	font-size: 20;
+	font-family: candara;
+}
+
+#esqueciMinhaSenha a
+{
+    text-decoration: none;
+    color: black;
+    opacity: 0.5;
+    font-size: 25px;
+	font-family: cursive;
+	position: relative;
+    left: 575px;
+    top: 290px;
 }
 
 

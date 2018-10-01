@@ -5,91 +5,127 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Seus Gastos</title>
     <link rel="stylesheet" href="Site.css" type="text/css" />
-    
+
    <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    
+
+
+			<script>
+				function efetuarCadastro()
+				{
+					document.getElementById("menu").innerHTML = ("<li><a href='Gastos.html'>Seus Gastos</a></li><li><a href='Home.html'>Home</a></li><li><a href='Login.html'>Login</a></li><li><a href='Cadastro.html' class='waves-effect waves-light btn'>Cadastre-se<i class='material-icons right'></i></a></li>");
+				}
+	        </script>
 </head>
 
 <body class="nav-extended teal accent-3">
 
-
-
+ <!--------------------------------------------------------------------------------->
 <nav class="nav-extended blue darken-1">
 
-        <div class="nav-wrapper">
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="Home.html">Home</a></li>
-                <li><a href="Login.html">Login</a></li>
-                <li><a href="Cadastro.html">Cadastre-se</a></li>
-            </ul>
-        </div>
-    </nav>
+	<div class="nav-wrapper" style="height: 130px;">
+		<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+		<ul id="menu" class="right hide-on-med-and-down">
+			<li><a href="Home.html">Home</a></li>
+			<li><a href="Login.html">Login</a></li>
+        	<li><a href="Cadastro.html" class="waves-effect waves-light btn">Cadastre-se<i class="material-icons right"></i></a></li>
+		</ul>
+	</div>
+
+</nav>
 
 <img src="Imagens/LogoSite.png" id="imgLogoSite">
-<section>
-    <article>
 
 <div id="computador2"></div>
 
-<form name="frmPrincipal" method="post" action="home.html"  id="formularioCadastro">
-   <table id="formatacaoLogin">
+<div id="tamanho">
+<div class="row">
+    <form class="col s12">
+      <div class="row">
 
-       <tr>
-            <td><label for="lb_Telefone">Telefone:</label></td>
-            <td><input type="tel" name="txt_Tel" pattern="^\d{2}-\d{5}-\d{4}$" required></td>
-       </tr>
-       
-       <tr>
-           <td>Email: </td>
-           <td><input type="email" name="txt_Email" required></td>
-       </tr>
-       
-       <tr>
-           <td>Data de Nascimento:</td>
-           <td><input type="date" name="txt_Data" required></td>
-       </tr>
-       
-       <tr>
-           <td>Senha:</td>
-           <td><input type="password" name="txt_Senha" required></td>
-       </tr>
+        <div class="input-field col s6">
+          <i class="material-icons prefix"><img src="Imagens/Nome_icon.png" style="opacity: 0.8;"></i>
+          <input id="first_name" type="text" class="validate">
+          <label for="first_name">Primeiro Nome</label>
+        </div>
 
-</table>
-</form>
-        <br>
+        <div class="input-field col s6">
+          <i class="material-icons prefix"><img src="Imagens/Nome_icon.png" style="opacity: 0.8;"></i>
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Sobrenome</label>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+      		  <div class="input-field col s6">
+				  <i class="material-icons prefix"><img src="Imagens/Telefone_icon.png" style="opacity: 0.8;"></i>
+				  <input id="icon_telephone" type="tel" class="validate">
+				  <label for="icon_telephone">Telephone</label>
+        	  </div>
+
+	          <div class="input-field col s6">
+				<i class="material-icons prefix"><img src="Imagens/Email_icon.png"></i>
+				<input id="email" type="email" class="validate">
+				<label for="email">Email</label>
+	          </div>
+      </div>
+
+      <div class="row">
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix"><img src="Imagens/Senha_icon.png"></i>
+          <input id="password" type="password" class="validate">
+          <label for="password">Senha</label>
+        </div>
+
+        <div class="input-field col s6">
+           <i class="material-icons prefix"><img src="Imagens/Senha_icon.png"></i>
+		   <input id="password" type="password" class="validate">
+		   <label for="password">Confirmar Senha</label>
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+  </div>
+
+
         <center>
-            <input type="submit" value="Efetuar Cadastro" id="botaoCadastro">
+            <img class="waves-effect waves-light btn" src="Imagens/Confirme_icon.png" id="botaoConfirme" style="opacity: 0.7;" onclick="efetuarCadastro();">
         </center>
 
-    </article>
-</section>
-
     <!--------------------------------------------------------------------------------->
-    
+
     <footer class="page-footer blue darken-1 " style="position: relative; top: 100%;">
-        <img src="Imagens/logoCotuca.png" style="position: absolute; left: 1200px;">
+    <img src="Imagens/logoCotuca.png" style="position: absolute; left: 1100px;">
         <div class="container">
+            
             <div class="row">
+                
                 <div class="col l6 s12">
                     <h2 class="white-text" style="font-family:'Segoe Print' ">Economize</h2>
-                    <p class="grey-text text-lighten-4" style="font-size: 20px">Organizar mais, Gastar Menos</p>
+                    <p class="grey-text text-lighten-4" style="font-size: 20px; font-family: cursive;">Organizar mais, Gastar Menos</p>
                 </div>
-                <div class="col l4 offset-l2 s12">
+                
+                <div class="col l6 s12">
                     <h5 class="white-text">Links</h5>
                     <ul>
                         <li><a class="grey-text text-lighten-3" href="#!">Contate-nos</a></li>
                     </ul>
                 </div>
+                
             </div>
+            
         </div>
+        
         <div class="footer-copyright">
-            <div class="container">
-            </div>
+            <div class="container"></div>
         </div>
     </footer>
 </body>

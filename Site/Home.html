@@ -4,27 +4,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Seus Gastos</title>
     <link rel="stylesheet" href="Site.css" type="text/css" />
-    
+
    <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
-        
-    
+
+
     </script>
 </head>
 <script type="text/javascript">
-    
-    
-    function AbrirLogin()
-    {
-        location.href="Login.html";
-    }
-    function AbrirCadastro()
-    {
-        location.href="Cadastro.html";
-    }
 
     var imgPorco = new Image();
     var imgMoeda = new Image();
@@ -33,7 +23,7 @@
     imgMoeda.src = "Imagens/Moeda.png";
     imgPorco.src = "Imagens/Porquinho.png";
 
-    var objCanvas=null; 
+    var objCanvas=null;
     var objContexto=null;
 
     var posicaoPorco = 240;
@@ -61,91 +51,78 @@
            paraCima = false;
         else if(posicaoMoeda == 10)
             paraCima = true;
-            
+
         if(paraCima)
            posicaoMoeda = posicaoMoeda - 1;
-        else 
+        else
            posicaoMoeda = posicaoMoeda + 1;
         AtualizarTela();
     }
 </script>
-<body onload="Iniciar();" class="#69f0ae green accent-2">
+<body class="nav-extended teal accent-3" onload="Iniciar();">
+
+<nav class="nav-extended blue darken-1">
+
+	<div class="nav-wrapper" style="height: 130px;">
+		<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+		<ul id="menu" class="right hide-on-med-and-down">
+			<li><a href="Home.html">Home</a></li>
+			<li><a href="Login.html">Login</a></li>
+        	<li><a href="Cadastro.html" class="waves-effect waves-light btn" >Cadastre-se<i class="material-icons right"></i></a></li>
+		</ul>
+	</div>
+
+</nav>
+
+<img src="Imagens/LogoSite.png" id="imgLogoSite">
+
+    <center>
+<div class="white-text" id="textoHome">
+<br><br>
+Controlar <br>
+seus gastos <br>
+nunca foi <br>
+tão <br>
+fácil!! <br>
     
-<!--
-<header id="pagina"></header>
-
-
-<nav id="menu">
-    <ul>
-		<li><a href="Home.html">Home</a></li>
-        <li><a href="Login.html">Login</a></li>
-        <a id="cadastroDoMenu" href="Cadastro.html">Cadastre-se</a>
-	</ul>
-</nav>-->
-
-
-<nav class="blue darken-1" class="nav-wrapper">
-    <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">Logo</a>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <ul class="right hide-on-med-and-down">
-        <li><a href="Home.html">Home</a></li>
-        <li><a href="Login.html">Login</a></li>
-        <li><a href="Cadastro.html" class="waves-effect waves-light btn">Cadastre-se<i class="material-icons right"></i></a></li>
-            
-        </ul>
-    </div>
-</nav>    
-
-<div id="textoHome">Controlar seus gastos nunca foi tão fácil!</div>
-
+</div>
+    </center>
+    
 <canvas id="meuCanvas" width="250" height="250"></canvas>
 
 <div id="imagemPorco"></div>
 
-<div id="cortandoGastos"></div>
+<img id="img1" src="Imagens/img1.png">
 
-<input type="button" value="Cadastre-se" id="cadastrar" onclick="AbrirCadastro();">
 
-<input type="button" value="Login" id="login" onclick="AbrirLogin();">
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 <!--------------------------------------------------------------------------------->
-    
+
     <footer class="page-footer blue darken-1 " style="position: relative; top: 100%;">
-        <img src="Imagens/logoCotuca.png" style="position: absolute; left: 1200px;">
+    <img src="Imagens/logoCotuca.png" style="position: absolute; left: 1100px;">
         <div class="container">
+            
             <div class="row">
+                
                 <div class="col l6 s12">
                     <h2 class="white-text" style="font-family:'Segoe Print' ">Economize</h2>
-                    <p class="grey-text text-lighten-4" style="font-size: 20px">Organizar mais, Gastar Menos</p>
+                    <p class="grey-text text-lighten-4" style="font-size: 20px; font-family: cursive;">Organizar mais, Gastar Menos</p>
                 </div>
-                <div class="col l4 offset-l2 s12">
+                
+                <div class="col l6 s12">
                     <h5 class="white-text">Links</h5>
                     <ul>
                         <li><a class="grey-text text-lighten-3" href="#!">Contate-nos</a></li>
                     </ul>
                 </div>
+                
             </div>
+            
         </div>
+        
         <div class="footer-copyright">
-            <div class="container">
-            </div>
+            <div class="container"></div>
         </div>
-         <div class="footer-copyright">
-            <div class="container">
-            © 2018 18200&18183
-            </div>
-          </div>
     </footer>
 
 </body>

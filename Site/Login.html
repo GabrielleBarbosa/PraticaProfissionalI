@@ -6,102 +6,101 @@
     <title>Seus Gastos</title>
     <link rel="stylesheet" href="Site.css" type="text/css" />
 
-    <!-- Compiled and minified CSS -->
+   <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+			<script>
+				function efetuarCadastro()
+				{
+					document.getElementById("menu").innerHTML = ("<li><a href='Gastos.html'>Seus Gastos</a></li><li><a href='Home.html'>Home</a></li><li><a href='Login.html'>Login</a></li><li><a href='Cadastro.html' class='waves-effect waves-light btn'>Cadastre-se<i class='material-icons right'></i></a></li>");
+				}
+	        </script>
 </head>
 
+<body class="nav-extended teal accent-4">
 
+ <!-- ----------------------------------------------------------------------------- -->
+<nav class="nav-extended blue darken-1">
 
-<script type="text/javascript">
-    function abrirCadastro() {
-        location.href = "Cadastro.html";
-    }
+	<div class="nav-wrapper" style="height: 130px;">
+		<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+		<ul id="menu" class="right hide-on-med-and-down">
+			<li><a href="Home.html">Home</a></li>
+			<li><a href="Login.html">Login</a></li>
+        	<li><a href="Cadastro.html" class="waves-effect waves-light btn">Cadastre-se<i class="material-icons right"></i></a></li>
+		</ul>
+	</div>
 
-    function abrirGastos() {
-        var menu = document.getElementById("seila");
-        menu.appendChild("<li><a href='Gastos.html'>Seus Gastos</a></li>");
-    }
+</nav>
 
-</script>
+<img src="Imagens/LogoSite.png" id="imgLogoSite">
 
+<div id="computador2"></div>
 
+<div id="tamanho">
+<div class="row">
+    <form class="col s12">
+      <div class="row">
+	          <div class="input-field col s12">
+				<i class="material-icons prefix"><img src="Imagens/Email_icon.png"></i>
+				<input id="email" type="email" class="validate">
+				<label for="email">Email</label>
+	          </div>
+      </div>
 
+      <div class="row">
 
-<body class="teal lighten-2">
-
-<!--    <header id="pagina"></header>-->
-
-<!--
-    <nav id="menu">
-        <ul id="seila">
-            <li><a href="Home.html">Home</a></li>
-            <li><a href="Login.html">Login</a></li>
-            <a id="cadastroDoMenu" href="Cadastro.html">Cadastre-se</a>
-        </ul>
-    </nav>
--->
-    <nav class="nav-extended blue darken-1">
-
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Logo</a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="Home.html">Home</a></li>
-                <li><a href="Login.html">Login</a></li>
-                <li><a href="Cadastro.html" class="waves-effect waves-light btn">Cadastre-se<i class="material-icons right"></i></a></li>
-            </ul>
+        <div class="input-field col s12">
+          <i class="material-icons prefix"><img src="Imagens/Senha_icon.png"></i>
+          <input id="password" type="password" class="validate">
+          <label for="password">Senha</label>
         </div>
-    </nav>
-    <div id="computador"></div>
-    <form id="formularioLogin" method="post">
-        <table>
-            <tr>
-                <td>Usuário:</td>
-                <td><input type="text" id="usuario"></td>
-            </tr>
-
-            <tr>
-                <td>Senha: </td>
-                <td><input type="password" id="senha"></td>
-            </tr>
-
-        </table>
+          
+      </div>
 
     </form>
+  </div>
+  </div>
 
-    <input type="submit" id="botaoLogin" onclick="abrirGastos();" value="Login">
-    <button id="botaoCadastro" onclick="abrirCadastro();">Cadastre-se</button>
 
-    <a id="esqueciMinhaSenha" href="#">Esqueci minha senha</a>
-
-</body>
-
+        <center>
+            <img class="waves-effect waves-light btn" src="Imagens/Confirme_icon.png" id="botaoConfirme" style="opacity: 0.7;" onclick="efetuarCadastro();">
+        </center>
     
-    
-    <!--------------------------------------------------------------------------------->
-    
+        <label id="esqueciMinhaSenha"><a  href="#">Esqueci minha senha</a></label>
+
+    <!-- ----------------------------------------------------------------------------- -->
+
     <footer class="page-footer blue darken-1 " style="position: relative; top: 100%;">
-        <img src="Imagens/logoCotuca.png" style="position: absolute; left: 1200px;">
+    <img src="Imagens/logoCotuca.png" style="position: absolute; left: 1100px;">
         <div class="container">
+            
             <div class="row">
+                
                 <div class="col l6 s12">
                     <h2 class="white-text" style="font-family:'Segoe Print' ">Economize</h2>
-                    <p class="grey-text text-lighten-4" style="font-size: 20px">Organizar mais, Gastar Menos</p>
+                    <p class="grey-text text-lighten-4" style="font-size: 20px; font-family: cursive;">Organizar mais, Gastar Menos</p>
                 </div>
-                <div class="col l4 offset-l2 s12">
+                
+                <div class="col l6 s12">
                     <h5 class="white-text">Links</h5>
                     <ul>
                         <li><a class="grey-text text-lighten-3" href="#!">Contate-nos</a></li>
                     </ul>
                 </div>
+                
             </div>
+            
         </div>
+        
         <div class="footer-copyright">
-            <div class="container">
-            </div>
+            <div class="container"></div>
         </div>
     </footer>
+</body>
+
 </html>

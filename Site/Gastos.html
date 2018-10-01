@@ -18,18 +18,41 @@
 
 
 
-<script type="text/javascript"></script>
-
-
-
+<script type="text/javascript">
+    
+    function carregarGastos(tipo)
+    {
+     
+        var dados = new XMLHttpRequest();
+        dados.onreadystatechange = function(){
+                document.getElementById("tabela").innerHTML = dados.responseText;
+                
+        };
+        if(tipo == "A" ){
+            dados.open("GET", "GastosPessoais.html", true);
+            dados.send();
+            } else if (tipo == "B") {
+                dados.open("GET", "GastosAutomoveis.html", true);
+                dados.send();
+            } else if (tipo == "C") {
+                dados.open("GET", "Contas.html", true);
+                dados.send();
+            }else if(tipo == "D"){
+                dados.open("GET","Imoveis.html",true)
+                dados.send();
+            }
+        
+    }
+    
+    
+    
+    </script>
 
 <body class="teal lighten-2">
 
     <nav class="nav-extended blue darken-1" style="height: 130px;">
 
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo" ></a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="Home.html">Home</a></li>
                 <li><a href="Login.html">Login</a></li>
@@ -38,40 +61,17 @@
         </div>
         <div class="nav-content" style="left: 100px; top 50px; position: relative">
             <ul class="tabs tabs-transparent">
-                <li class="tab"><a href="#test1">Gastos Pessoais</a></li>
-                <li class="tab"><a class="active" href="#test2">Gastos Automoveis</a></li>
-                <li class="tab"><a href="#test3">Contas</a></li>
-                <li class="tab"><a href="#test4">Imóveis</a></li>
+                <li class="tab" onclick="carregarGastos('A')" value="A"><a>Gastos Pessoais</a></li>
+                <li class="tab" onclick="carregarGastos('B')" value="B"><a class="tab">Gastos Automoveis</a></li>
+                <li class="tab" onclick="carregarGastos('C')" value="C"><a>Contas</a></li>
+                <li class="tab" onclick="carregarGastos('D')" value="D"><a>Imóveis</a></li>
             </ul>
         </div>
     </nav>
-
     <img src="Imagens/LogoSite.png" id="imgLogoSite">
     <!----------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-    <table class="centered highlight">
-        <thead>
-            <tr>
-                <th>Item</th>
-                <th>Preço</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <td>Conta de Luz</td>
-                <td>$0.87</td>
-            </tr>
-            <tr>
-                <td>Carro</td>
-                <td>$3.76</td>
-            </tr>
-            <tr>
-                <td>Parede Quebrada</td>
-                <td>$7.00</td>
-            </tr>
-        </tbody>
-    </table>
+    <table class="centered highlight" id="tabela"></table>
 
 
 

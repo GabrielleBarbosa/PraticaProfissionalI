@@ -7,45 +7,14 @@ canvas#meuCanvas
 
 #textoHome
 {
-    font-family: Segoe Print;
-    font-size: 90px;
-    font-weight: bold;
-}
-
-#img1
-{
-    position: absolute;
-    top: 170px;
-    left: 900px;
+	position: absolute;
+	top: 80%;
+	left: 20%;
 }
 
 button#botao 
 {
 	background-color: blue;
-}
-
-#cadastrar
-{
-	position: absolute;
-	background-color: rgb(14, 105, 60);
-	color: white;
-	border-color: rgb(161, 240, 240);
-	left: 550px;
-	top: 750px;
-	width: 120px;
-	height: 30px;
-}
-
-#login
-{
-	position: absolute;
-	background-color: rgb(14, 105, 60);
-	color: white;
-	border-color: rgb(161, 240, 240);
-	left: 850px;
-	top: 750px;
-	width: 120px;
-	height: 30px;
 }
 
 #formularioLogin 
@@ -81,8 +50,8 @@ button#botao
 
 label#cadastro
 {
-        font-family: candara;
-        font-size: 30px;
+	font-family: candara;
+	font-size: 30px;
 }
 
 #computador
@@ -137,7 +106,7 @@ label#cadastro
 {
 	text-decoration: none;
 	position: relative;
-	left: 20px;
+	left: 660px;
 	top: 220px; 
 	font-size: 20;
 	font-family: candara;
@@ -151,8 +120,8 @@ label#cadastro
     font-size: 25px;
 	font-family: cursive;
 	position: relative;
-    left: 575px;
-    top: 290px;
+    left: 505px;
+    top: 325px;
 }
 
 

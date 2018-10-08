@@ -13,17 +13,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 
-			<script>
-				function efetuarCadastro()
-				{
-					document.getElementById("menu").innerHTML = ("<li><a href='Gastos.html'>Seus Gastos</a></li><li><a href='Home.html'>Home</a></li><li><a href='Login.html'>Login</a></li><li><a href='Cadastro.html' class='waves-effect waves-light btn'>Cadastre-se<i class='material-icons right'></i></a></li>");
-				}
-	        </script>
+    <script>
+        function efetuarCadastro()
+        {
+            document.getElementById("menu").innerHTML = ("<li><a href='Gastos.html'>Seus Gastos</a></li><li><a href='Home.html'>Home</a></li><li><a href='Login.html'>Login</a></li><li><a href='Cadastro.html' class='waves-effect waves-light btn'>Cadastre-se</a></li>");
+        }
+    </script>
 </head>
 
-<body class="nav-extended teal accent-3">
+<body class="nav-extended  teal accent-3">
 
- <!--------------------------------------------------------------------------------->
+ <!-- ----------------------------------------------------------------------------- -->
 <nav class="nav-extended blue darken-1">
 
 	<div class="nav-wrapper" style="height: 130px;">
@@ -31,7 +31,7 @@
 		<ul id="menu" class="right hide-on-med-and-down">
 			<li><a href="Home.html">Home</a></li>
 			<li><a href="Login.html">Login</a></li>
-        	<li><a href="Cadastro.html" class="waves-effect waves-light btn">Cadastre-se<i class="material-icons right"></i></a></li>
+        	<li><a href="Cadastro.html" class="waves-effect waves-light btn">Cadastre-se</a></li>
 		</ul>
 	</div>
 
@@ -95,12 +95,9 @@
   </div>
   </div>
 
+    <img class="waves-effect waves-light btn" src="Imagens/Confirme_icon.png" id="botaoConfirme" style="opacity: 0.7;" onclick="efetuarCadastro();">
 
-        <center>
-            <img class="waves-effect waves-light btn" src="Imagens/Confirme_icon.png" id="botaoConfirme" style="opacity: 0.7;" onclick="efetuarCadastro();">
-        </center>
-
-    <!--------------------------------------------------------------------------------->
+    <!-- ----------------------------------------------------------------------------- -->
 
     <footer class="page-footer blue darken-1 " style="position: relative; top: 100%;">
     <img src="Imagens/logoCotuca.png" style="position: absolute; left: 1100px;">
@@ -117,7 +114,6 @@
                     <h5 class="white-text">Links</h5>
                     <ul>
                         <li><a class="grey-text text-lighten-3" href="#!">Contate-nos</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Sobre nós</a></li>
                     </ul>
                 </div>
                 

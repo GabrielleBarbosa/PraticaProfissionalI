@@ -1,7 +1,8 @@
 <html>
-
-<head>
-
+    <head>
+    
+    <title>Relatórios</title>
+    
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Seus Gastos</title>
@@ -12,65 +13,23 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-</head>
-
-
-
-
-<script type="text/javascript">
     
-    function carregarGastos(tipo)
-    {
+    </head>
+   <body class="teal lighten-2">
         
-        var dados = new XMLHttpRequest();
-        dados.onreadystatechange = function(){
-                document.getElementById("tabela").innerHTML = dados.responseText;
-                
-        };
-        if(tipo == "A" ){
-            dados.open("GET", "GastosPessoais.html", true);
-            dados.send();
-            } else if (tipo == "B") {
-                dados.open("GET", "GastosAutomoveis.html", true);
-                dados.send();
-            } else if (tipo == "C") {
-                dados.open("GET", "Contas.html", true);
-                dados.send();
-            }else if(tipo == "D"){
-                dados.open("GET","Imoveis.html",true)
-                dados.send();
-            }
-        
-    }
-    
-    
-    
-    </script>
-
-<body class="teal lighten-2">
-
-    <nav class="nav-extended blue darken-1" style="height: 130px;">
+        <nav class="nav-extended blue darken-1" style="height: 130px;">
 
         <div class="nav-wrapper">
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="Home.html">Home</a></li>
                 <li><a href="Login.html">Login</a></li>
                 <li><a href="Cadastro.html">Cadastre-se</a></li>
-                <li><a href="Relatorio.html">Relatórios</a></li>
-            </ul>
-        </div>
-        <div class="nav-content" style="left: 100px; top 50px; position: relative">
-            <ul class="tabs tabs-transparent">
-                <li class="tab" onclick="carregarGastos('A')" value="A"><a>Gastos Pessoais</a></li>
-                <li class="tab" onclick="carregarGastos('B')" value="B"><a class="tab">Gastos Automoveis</a></li>
-                <li class="tab" onclick="carregarGastos('C')" value="C"><a>Contas</a></li>
-                <li class="tab" onclick="carregarGastos('D')" value="D"><a>Imóveis</a></li>
             </ul>
         </div>
     </nav>
     <img src="Imagens/LogoSite.png" id="imgLogoSite">
-    <!----------------------------------------------------------------------------------------------------------------------------------------------------------------->
+       
+        <!----------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
     <table class="centered highlight" id="tabela">abcd</table>
 
@@ -85,7 +44,7 @@
 
     <!------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-    <footer class="page-footer blue darken-1 " style="position: relative; top: 110%;">
+        <footer class="page-footer blue darken-1 " style="position: relative; top: 110%;">
         <img src="Imagens/logoCotuca.png" style="position: absolute; left: 1200px;">
         <div class="container">
             <div class="row">
@@ -107,7 +66,7 @@
             </div>
         </div>
     </footer>
-
-</body>
-
+        
+    </body>
+    
 </html>

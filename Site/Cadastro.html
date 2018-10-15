@@ -12,12 +12,82 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="http://jqueryvalidation.org/files/dist/jquery.validate.js"></script>
+
 
     <script>
+        var texto = "";
         function efetuarCadastro()
         {
-            document.getElementById("menu").innerHTML = ("<li><a href='Gastos.html'>Seus Gastos</a></li><li><a href='Home.html'>Home</a></li><li><a href='Login.html'>Login</a></li><li><a href='Cadastro.html' class='waves-effect waves-light btn'>Cadastre-se</a></li>");
+            if(validarNome())
+               document.getElementById("menu").innerHTML = ("<li><a href='Gastos.html'>Seus Gastos</a></li><li><a href='Home.html'>Home</a></li><li><a href='Login.html'>Login</a></li><li><a href='Cadastro.html' class='waves-effect waves-light btn'>Cadastre-se</a></li>");
+            else 
+               alert(texto); 
         }
+
+        function validarSenha()
+        {
+            texto="";
+            var senha1 = $("#senha1").val();
+            var senha2 = $("#senha2").val();
+            if(senha1 === "" || senha2 === "")
+            {
+                senha1===""?$("#senha1").focus():$("#senha2").focus();
+                texto = "Digite os campos de senha";
+                return false;
+            }
+            else if(senha1 !== senha2)
+            {
+                $("#senha1").focus();
+                texto = "Os campos de senha não estão compatíveis";
+                return false;
+            }
+            return true;
+        }
+
+        function validarTelefone()
+        {
+            if($("#icon_telephone").validate())
+            {
+               texto += "\nDigite o telefone em um formato correto(99999999999)";
+               return false;
+            }
+            return true;
+        }
+
+        function validarNome()
+        {
+
+            if($("#first_name").validate())
+            {
+                texto += "\nDigite o seu nome";
+                return false;
+            }
+            return true;
+        }
+
+        function validarSobrenome()
+        {
+            if($("#last_name").validate())
+            {
+                return true;
+                texto += "\nDigite o seu sobrenome";
+            }
+            return false;
+        }
+
+        function validarEmail()
+        {
+            if($("#email").validate())
+            {
+                return false;
+                texto += "\nDigite o seu email corretamente";
+            }
+            return true;
+        }
+
     </script>
 </head>
 
@@ -48,13 +118,13 @@
 
         <div class="input-field col s6">
           <i class="material-icons prefix"><img src="Imagens/Nome_icon.png" style="opacity: 0.8;"></i>
-          <input id="first_name" type="text" class="validate">
+          <input id="first_name" type="text" class="validate" required>
           <label for="first_name">Primeiro Nome</label>
         </div>
 
         <div class="input-field col s6">
           <i class="material-icons prefix"><img src="Imagens/Nome_icon.png" style="opacity: 0.8;"></i>
-          <input id="last_name" type="text" class="validate">
+          <input id="last_name" type="text" class="validate" required>
           <label for="last_name">Sobrenome</label>
         </div>
 
@@ -64,13 +134,13 @@
 
       		  <div class="input-field col s6">
 				  <i class="material-icons prefix"><img src="Imagens/Telefone_icon.png" style="opacity: 0.8;"></i>
-				  <input id="icon_telephone" type="tel" class="validate">
-				  <label for="icon_telephone">Telephone</label>
+				  <input id="icon_telephone" type="tel" class="validate" pattern="^\d{2}?9?\d{8}$" required>
+				  <label for="icon_telephone">Telefone</label>
         	  </div>
 
 	          <div class="input-field col s6">
 				<i class="material-icons prefix"><img src="Imagens/Email_icon.png"></i>
-				<input id="email" type="email" class="validate">
+				<input id="email" type="email" class="validate" required>
 				<label for="email">Email</label>
 	          </div>
       </div>
@@ -79,13 +149,13 @@
 
         <div class="input-field col s6">
           <i class="material-icons prefix"><img src="Imagens/Senha_icon.png"></i>
-          <input id="password" type="password" class="validate">
+          <input id="senha1" type="password" class="validate" required>
           <label for="password">Senha</label>
         </div>
 
         <div class="input-field col s6">
            <i class="material-icons prefix"><img src="Imagens/Senha_icon.png"></i>
-		   <input id="password" type="password" class="validate">
+		   <input id="senha2" type="password" class="validate" required>
 		   <label for="password">Confirmar Senha</label>
         </div>
 
@@ -99,7 +169,7 @@
 
     <!-- ----------------------------------------------------------------------------- -->
 
-    <footer class="page-footer blue darken-1 " style="position: relative; top: 100%;">
+    <footer class="page-footer blue darken-1 " style="position: relative; top: 600px;">
     <img src="Imagens/logoCotuca.png" style="position: absolute; left: 1100px;">
         <div class="container">
             

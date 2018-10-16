@@ -60,22 +60,24 @@
         function validarNome()
         {
 
-            if($("#first_name").validate())
+            if($("#first_name").val() == "")
             {
                 texto += "\nDigite o seu nome";
                 return false;
             }
-            return true;
+            else
+                return true;
         }
 
         function validarSobrenome()
         {
-            if($("#last_name").validate())
+            if($("#last_name").val() == "")
             {
-                return true;
                 texto += "\nDigite o seu sobrenome";
+                return false;
             }
-            return false;
+            else
+                return true;
         }
 
         function validarEmail()
@@ -116,16 +118,22 @@
     <form class="col s12">
       <div class="row">
 
-        <div class="input-field col s6">
+        <div class="input-field col s4">
           <i class="material-icons prefix"><img src="Imagens/Nome_icon.png" style="opacity: 0.8;"></i>
           <input id="first_name" type="text" class="validate" required>
           <label for="first_name">Primeiro Nome</label>
         </div>
 
-        <div class="input-field col s6">
+        <div class="input-field col s4">
           <i class="material-icons prefix"><img src="Imagens/Nome_icon.png" style="opacity: 0.8;"></i>
           <input id="last_name" type="text" class="validate" required>
-          <label for="last_name">Sobrenome</label>
+          <label for="last_name">Último nome</label>
+        </div>
+
+        <div class="input-field col s4">
+            <i class="material-icons prefix"><img src="Imagens/Nome_icon.png" style="opacity: 0.8;"></i>
+            <input id="cpf" type="text" class="validate" pattern="^\d{3}.\d{3}.\d{3}-\d{2}$" required>
+            <label for="cpf">CPF</label>
         </div>
 
       </div>

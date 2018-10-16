@@ -1,0 +1,193 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Seus Gastos</title>
+    <link rel="stylesheet" href="Site.css" type="text/css" />
+
+   <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="http://jqueryvalidation.org/files/dist/jquery.validate.js"></script>
+
+
+    <script>
+        var texto = "";
+        function efetuarCadastro()
+        {
+            if(validarNome())
+               document.getElementById("menu").innerHTML = ("<li><a href='Gastos.html'>Seus Gastos</a></li><li><a href='Home.html'>Home</a></li><li><a href='Login.html'>Login</a></li><li><a href='Cadastro.html' class='waves-effect waves-light btn'>Cadastre-se</a></li>");
+            else 
+               alert(texto); 
+        }
+
+        function validarSenha()
+        {
+            texto="";
+            var senha1 = $("#senha").val();
+            var senha2 = $("#senha2").val();
+            if(senha1 === "" || senha2 === "")
+            {
+                senha1===""?$("#senha").focus():$("#senha2").focus();
+                texto = "Digite os campos de senha";
+                return false;
+            }
+            else if(senha1 !== senha2)
+            {
+                $("#senha1").focus();
+                texto = "Os campos de senha não estão compatíveis";
+                return false;
+            }
+            return true;
+        }
+
+        function validarTelefone()
+        {
+            if($("#tel").validate())
+            {
+               texto += "\nDigite o telefone em um formato correto(99999999999)";
+               return false;
+            }
+            return true;
+        }
+
+        function validarNome()
+        {
+
+            if($("#nome").val() == "")
+            {
+                texto += "\nDigite o seu nome";
+                return false;
+            }
+            else
+                return true;
+        }
+
+        function validarEmail()
+        {
+            if($("#email").validate())
+            {
+                return false;
+                texto += "\nDigite o seu email corretamente";
+            }
+            return true;
+        }
+
+    </script>
+</head>
+
+<body class="nav-extended  teal accent-3">
+
+ <!-- ----------------------------------------------------------------------------- -->
+<nav class="nav-extended blue darken-1">
+
+	<div class="nav-wrapper" style="height: 130px;">
+		<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+		<ul id="menu" class="right hide-on-med-and-down">
+			<li><a href="Home.html">Home</a></li>
+			<li><a href="Login.html">Login</a></li>
+        	<li><a href="Cadastro.html" class="waves-effect waves-light btn">Cadastre-se</a></li>
+		</ul>
+	</div>
+
+</nav>
+
+<img src="Imagens/LogoSite.png" id="imgLogoSite">
+
+<div id="computador2"></div>
+
+<div id="tamanho">
+<div class="row">
+    <form class="col s12" action="http://localhost:3000/Usuario" method="post">
+      <div class="row">
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix"><img src="Imagens/Nome_icon.png" style="opacity: 0.8;"></i>
+          <input name="nome" id="nome" type="text" class="validate" maxlength="50" required>
+          <label for="nome">Nome</label>
+        </div>
+
+        <div class="input-field col s6">
+            <i class="material-icons prefix"><img src="Imagens/Nome_icon.png" style="opacity: 0.8;"></i>
+            <input name="cpf" id="cpf" type="text" class="validate" pattern="^\d{3}.\d{3}.\d{3}-\d{2}$" required>
+            <label for="cpf">CPF</label>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+      		  <div class="input-field col s6">
+				  <i class="material-icons prefix"><img src="Imagens/Telefone_icon.png" style="opacity: 0.8;"></i>
+				  <input name="tel" id="tel" type="tel" class="validate" pattern="^\d{2}?9?\d{8}$" required>
+				  <label for="icon_telephone">Telefone</label>
+        	  </div>
+
+	          <div class="input-field col s6">
+				<i class="material-icons prefix"><img src="Imagens/Email_icon.png"></i>
+				<input name="email" id="email" type="email" class="validate" required>
+				<label for="email">Email</label>
+	          </div>
+      </div>
+
+      <div class="row">
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix"><img src="Imagens/Senha_icon.png"></i>
+          <input name="senha" id="senha" type="password" class="validate" required>
+          <label for="password">Senha</label>
+        </div>
+
+        <div class="input-field col s6">
+           <i class="material-icons prefix"><img src="Imagens/Senha_icon.png"></i>
+		   <input id="senha2" type="password" class="validate" required>
+		   <label for="password">Confirmar Senha</label>
+        </div>
+
+      </div>
+      
+    <!-- <input type="submit" name="submit" id="btnInclusao" value="  "  id="botaoConfirme" style="background: url('Imagens/Confirme_icon2.png') no-repeat;opacity: 0.7;"  class="waves-effect waves-light btn"> -->
+    
+    </form>
+  </div>
+  </div>
+
+    <img class="waves-effect waves-light btn" src="Imagens/Confirme_icon.png" id="botaoConfirme" style="opacity: 0.7;" onclick="efetuarCadastro();">
+
+    <!-- ----------------------------------------------------------------------------- -->
+
+    <footer class="page-footer blue darken-1 " style="position: relative; top: 600px;">
+    <img src="Imagens/logoCotuca.png" style="position: absolute; left: 1100px;">
+        <div class="container">
+            
+            <div class="row">
+                
+                <div class="col l6 s12">
+                    <h2 class="white-text" style="font-family:'Segoe Print' ">Economize</h2>
+                    <p class="grey-text text-lighten-4" style="font-size: 20px; font-family: cursive;">Organizar mais, Gastar Menos</p>
+                </div>
+                
+                <div class="col l6 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">Contate-nos</a></li>
+                    </ul>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        <div class="footer-copyright">
+            <div class="container"></div>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,11 +1,13 @@
 create table Usuario(
-codUsuario int primary key,
-dataNascimento datetime not null,
-endereco varchar(30) not null,
-CPF varchar(14) not null,
+codUsuario int identity(1,1) primary key,
+nome varchar(50) not null,
+CPF char(14) not null,
 telefone varchar(15) not null,
-email varchar(50) not null
+email varchar(50) not null,
+senha varchar(30) not null
 )
+
+select * from Usuario
 
 create table Acesso(
 idUsuario varchar(30) primary key,
@@ -15,47 +17,32 @@ dataAcesso datetime not null
 
 create table Gasto(
 codGasto int primary key,
-reparosCasa money,
-reparosVeiculo money,
-combustivel money,
-compraVeiculo money,
-compraImovel money,
-compras money,
-cinema money,
-contaAgua money,
-contaEnergia money, 
-impostos money
+nome varchar(100)not null,
+tipo varchar(50) not null
 )
 
-create table TiposDeGasto(
-codTiposDeGasto int primary key,
+create table GastoUsuario(
+codUsuario int not null,
+constraint fkCodUsuario foreign key(codUsuario) references Usuario(codUsuario),  
 codGasto int not null,
-constraint fkGasto foreign key(codGasto) references Gasto(codGasto),
-domestico money,
-automovel money,
-lazer money,
-imovel money,
-impostos money,
-contas money,
-total money
+constraint fkCodGasto foreign key (codGasto) references gasto(codGasto),
+valor money not null
 )
 
-create table Multas(
-codMulta int primary key,
-dataEnergia datetime not null,
-dataAgua datetime not null,
-dataImpostos datetime not null,
-veiculo money
-)
 
 create table SLP(
+codUsuario int not null,
+constraint fkCodUsuario foreign key(codUsuario) references Usuario(codUsuario),  
+codGasto int not null,
+constraint fkCodGasto foreign key (codGasto) references gasto(codGasto), 
 codSLP int primary key,
-situacao varchar(8),
+situacao varchar(10),
 valor money
 )
 
 create table Salario(
+codUsuario int not null,
+constraint fkCodUsuario foreign key(codUsuario) references Usuario(codUsuario),  
 codSalario int primary key,
 salario money
 )
-

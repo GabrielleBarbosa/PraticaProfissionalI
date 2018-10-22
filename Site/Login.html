@@ -12,13 +12,7 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-
-			<script>
-				function efetuarLogin()
-				{
-					document.getElementById("menu").innerHTML = ("<li><a href='Gastos.html'>Seus Gastos</a></li><li><a href='Home.html'>Home</a></li><li><a href='Login.html'>Login</a></li><li><a href='Cadastro.html' class='waves-effect waves-light btn'>Cadastre-se<i class='material-icons right'></i></a></li>");
-				}
-	        </script>
+    <script src="js/Login.js" type="text/javascript"></script>
 </head>
 
 <body class="nav-extended teal accent-3">
@@ -67,7 +61,7 @@
   </div>
 
 
-        <img class="waves-effect waves-light btn" src="Imagens/Confirme_icon.png" id="botaoConfirme" style="opacity: 0.7;" onclick="efetuarLogin();">
+        <img class="waves-effect waves-light btn" src="Imagens/Confirme_icon.png" id="botaoConfirme" onclick="efetuarLogin();">
     
         <label id="esqueciMinhaSenha"><a  href="#">Esqueci minha senha</a></label>
 

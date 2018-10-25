@@ -1,19 +1,30 @@
 //////////////////////////////////////////////////////////
-var texto = "";
-function efetuarCadastro()
+var texto="";
+function efetuarCadastro(form)
 {
-    if(validarSenha() && validarNome() && validarTelefone() && validarEmail())
+    var nome = $("#nome");
+    var tel = $("#tel");
+    var email = $("#email");
+    var cpf = $("#cpf");
+
+    var regExTel = /^(?:\+\d{2}\s?)??\(?\d{2}?\)?\s\d{4,5}-?\d{4}$/;
+    var regExCpf = /^\d{3}.\d{3}.\d{3}-\d{2}$/;
+    var regExEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    var validaEmail = regExEmail.test(email.val());
+    var validaTel = regExTel.test(tel.val());
+    var validaCpf = regExCpf.test(cpf.val());
+
+    if(validaSenha() && validaEmail && validaTel && validaCpf && nome.val() != "")
     {
-        cadastrar($("#formularioCadastro"));
+        //cadastrar($("#formularioCadastro"));
         document.getElementById("menu").innerHTML = ("<li><a href='Gastos.html'>Seus Gastos</a></li><li><a href='Home.html'>Home</a></li><li><a href='Login.html'>Login</a></li><li><a href='Cadastro.html' class='waves-effect waves-light btn'>Cadastre-se</a></li>");
     }
     else 
-       alert(texto); 
+       alert("Verifique se os campos estão preenchidos corretamente!"); 
 }
 
-function validarSenha()
+function validaSenha()
 {
-    texto="";
     var senha1 = $("#senha").val();
     var senha2 = $("#senha2").val();
     if(senha1 === "" || senha2 === "")
@@ -24,41 +35,9 @@ function validarSenha()
     }
     else if(senha1 !== senha2)
     {
-        $("#senha1").focus();
+        $("#senha").focus();
         texto = "Os campos de senha não estão compatíveis";
         return false;
-    }
-    return true;
-}
-
-function validarTelefone()
-{
-    if($("#tel").validate())
-    {
-       texto += "\nDigite o telefone em um formato correto(99999999999)";
-       return false;
-    }
-    return true;
-}
-
-function validarNome()
-{
-
-    if($("#nome").val() == "")
-    {
-        texto += "\nDigite o seu nome";
-        return false;
-    }
-    else
-        return true;
-}
-
-function validarEmail()
-{
-    if($("#email").validate())
-    {
-        return false;
-        texto += "\nDigite o seu email corretamente";
     }
     return true;
 }
@@ -68,7 +47,12 @@ cadastrar = function(form){
     $.post( "http://localhost:3000/Usuario/", form.serialize() ).done(function(data){
         if (!data.erro) {
             form.each(function(data){
-                //limpar formulário
+                $("#nome").val() = "";
+                $("#senha").val() = "";
+                $("#senha2").val() = "";
+                $("#tel").val() = "";
+                $("#email").val() = "";
+                $("#cpf").val() = "";
                 this.reset();
             });
         }

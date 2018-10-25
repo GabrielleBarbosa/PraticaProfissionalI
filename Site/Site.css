@@ -36,16 +36,7 @@ button#botao
 	font-family: candara;
 	left: 700px;
 	top: 475px; 
-}
-
-#formularioCadastro
-{
-	position: relative;
-	left: 650px;
-	top: 365px;
-	list-style:none;
-	font-size: 40px;
-	font-family: candara;
+	opacity: 0.7;
 }
 
 label#cadastro

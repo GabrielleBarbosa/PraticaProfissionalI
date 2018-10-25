@@ -7,7 +7,7 @@ function efetuarCadastro(form)
     var email = $("#email");
     var cpf = $("#cpf");
 
-    var regExTel = /^(?:\+\d{2}\s?)??\(?\d{2}?\)?\s\d{4,5}-?\d{4}$/;
+    var regExTel = /^(?:\+\d{2}\s?)??\(?\d{2}?\)?\s?\d{4,5}-?\d{4}$/;
     var regExCpf = /^\d{3}.\d{3}.\d{3}-\d{2}$/;
     var regExEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
     var validaEmail = regExEmail.test(email.val());
@@ -16,7 +16,8 @@ function efetuarCadastro(form)
 
     if(validaSenha() && validaEmail && validaTel && validaCpf && nome.val() != "")
     {
-        //cadastrar($("#formularioCadastro"));
+        cadastrar(form);
+        
         document.getElementById("menu").innerHTML = ("<li><a href='Gastos.html'>Seus Gastos</a></li><li><a href='Home.html'>Home</a></li><li><a href='Login.html'>Login</a></li><li><a href='Cadastro.html' class='waves-effect waves-light btn'>Cadastre-se</a></li>");
     }
     else 
@@ -44,7 +45,8 @@ function validaSenha()
 
 //////////////////////////////////////////////////////////////////////
 cadastrar = function(form){
-    $.post( "http://localhost:3000/Usuario/", form.serialize() ).done(function(data){
+    alert("a");
+    $.post( "http://localhost:3000/Usuario", form.serialize() ).done(function(data){
         if (!data.erro) {
             form.each(function(data){
                 $("#nome").val() = "";

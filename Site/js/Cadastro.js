@@ -17,8 +17,8 @@ function efetuarCadastro(form)
     if(validaSenha() && validaEmail && validaTel && validaCpf && nome.val() != "")
     {
         cadastrar(form);
-        
-        document.getElementById("menu").innerHTML = ("<li><a href='Gastos.html'>Seus Gastos</a></li><li><a href='Home.html'>Home</a></li><li><a href='Login.html'>Login</a></li><li><a href='Cadastro.html' class='waves-effect waves-light btn'>Cadastre-se</a></li>");
+        logado = true;
+        window.location.href = "Gastos.html";
     }
     else 
        alert("Verifique se os campos estão preenchidos corretamente!"); 
@@ -45,16 +45,9 @@ function validaSenha()
 
 //////////////////////////////////////////////////////////////////////
 cadastrar = function(form){
-    alert("a");
     $.post( "http://localhost:3000/Usuario", form.serialize() ).done(function(data){
         if (!data.erro) {
             form.each(function(data){
-                $("#nome").val() = "";
-                $("#senha").val() = "";
-                $("#senha2").val() = "";
-                $("#tel").val() = "";
-                $("#email").val() = "";
-                $("#cpf").val() = "";
                 this.reset();
             });
         }

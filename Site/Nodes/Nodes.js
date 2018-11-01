@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const porta = 3000; //porta padrão
 const sql = require('mssql');
 const conexaoStr = "Server=regulus;Database=PR118183;User Id=PR118183;Password=PR118183;";
+var email = "felipemelchior112@gmail.com";
+var codUsuario;
 
 //conexao com BD
 sql.connect(conexaoStr)
@@ -59,22 +61,33 @@ rota.get('/Usuario/:id?', (requisicao, resposta) => {
 
 
 
+
 //cadastrar
 rota.post('/Usuario', (requisicao, resposta) => {
     
     const cpf = requisicao.body.cpf.substring(0, 14);
     const nome = requisicao.body.nome.substring(0, 50);
     const tel = requisicao.body.tel.substring(0, 15);
-    const email = requisicao.body.email.substring(0, 50);
+    email = requisicao.body.email.substring(0, 50);
     const senha = requisicao.body.senha.substring(0, 15);
     
     execSQL
     (` 
-      INSERT INTO Usuario(nome,CPF,telefone,email,senha)  
-      VALUES('${nome}','${cpf}','${tel}', '${email}','${senha}') 
-      INSERT INTO Acesso(email,senha) VALUES('${email}','${senha}') 
-      `, resposta
-    );
+      INSERT INTO Usuario(nome,CPF,telefone,email,senha) 
+
+      VALUES(
+            '${nome}',
+            '${cpf}',
+            '${tel}',
+            '${email}',
+            '${senha}'
+            ) 
+      INSERT INTO Acesso(email,senha)
+      VALUES(
+            '${email}',
+            '${senha}'
+            ) 
+      `,resposta);
 
 })
 
@@ -88,7 +101,7 @@ rota.patch('/Usuario/:email', (requisicao, resposta) => {
     const nome = requisicao.body.nome.substring(0, 50);
     const cpf = requisicao.body.cpf.substring(0, 14);
     const tel = requisicao.body.tel.substring(0, 20);
-    const email = requisicao.body.email.substring(0, 50);
+    email = requisicao.body.email.substring(0, 50);
     const senha = requisicao.body.senha.substring(0, 15);
     
     execSQL(
@@ -103,14 +116,60 @@ rota.patch('/Usuario/:email', (requisicao, resposta) => {
 })
 
 
+
+
 //login
 
 rota.get('/Acesso/:email', (requisicao, resposta) => {
+    email=requisicao.params.email;
     let filtro = '';
     if (requisicao.params.email)
         filtro = ' WHERE email=' + requisicao.params.email;
+
+    execSQL(
+             'SELECT senha from Acesso' + filtro
+             , resposta);
+})
+
+
+
+
+
+//Inserir gastos
+
+rota.post('/Gasto', (requisicao, resposta) =>{
+    const tipoGasto = requisicao.body.tipoGasto.substring(0,50);
+    const nomeGasto = requisicao.body.nomeGasto.substring(0,50);
+    const valor = requisicao.body.valor.substring(0,10);
     
     execSQL(
-             `SELECT senha from Acesso` + filtro, resposta
-           );
+            `
+            INSERT INTO Gasto(nome,tipo)
+            VALUES('${nomeGasto}','${tipoGasto}')
+            exec InserirPreco_sp
+            @valor = ${valor},
+            @email = '${email}'
+            `,
+            resposta);
+})
+
+
+
+
+//AlterarGastos(especificamente, o valor)
+rota.patch('/Gasto/:nome', (requisicao, resposta) =>{
+    
+    const nome = requisicao.body.nome.substring(0,50);
+    const valor = requisicao.body.valor.substring(0,50);
+    const tipo = requisicao.body.tipo.substring(0,50);
+    execSQL(
+            `
+            exec AlterarGasto_sp
+            @nome = '${nome}',
+            @valor = '${valor}',
+            @tipo = '${tipo}',
+            @email = '${email}'
+            `,
+            resposta
+            );
 })

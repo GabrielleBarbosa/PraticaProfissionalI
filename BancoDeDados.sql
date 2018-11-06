@@ -32,7 +32,7 @@ select @senha=senha from inserted
 if not exists(select * from Acesso where email = @email)
 	insert into Usuario values (@nome, @cpf, @telefone, @email, @senha)
 else 
-	print 'Não foi possível adicionar'
+	print 'NÃ£o foi possÃ­vel adicionar'
 
 create table Gasto(
 codGasto int primary key,

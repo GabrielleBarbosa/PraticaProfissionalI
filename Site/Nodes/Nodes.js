@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const porta = 3000; //porta padrão
 const sql = require('mssql');
 const conexaoStr = "Server=regulus;Database=PR118183;User Id=PR118183;Password=PR118183;";
-var email = "felipemelchior112@gmail.com";
+var email = "robertinhovaragrande@gmail.com";
 var codUsuario;
 
 //conexao com BD
@@ -122,18 +122,13 @@ rota.patch('/Usuario/:email', (requisicao, resposta) => {
 
 rota.get('/Acesso/:email', (requisicao, resposta) => {
     email=requisicao.params.email;
-    let filtro = '';
-    if (requisicao.params.email)
-        filtro = ' WHERE email=' + requisicao.params.email;
+    
 
     execSQL(
-             'SELECT senha from Acesso' + filtro
-             , resposta);
+             `SELECT senha from Acesso where email = '${email}'`,
+             resposta
+            );
 })
-
-
-
-
 
 //Inserir gastos
 
@@ -143,14 +138,13 @@ rota.post('/Gasto', (requisicao, resposta) =>{
     const valor = requisicao.body.valor.substring(0,10);
     
     execSQL(
-            `
-            INSERT INTO Gasto(nome,tipo)
+            `INSERT INTO Gasto(nome,tipo)
             VALUES('${nomeGasto}','${tipoGasto}')
             exec InserirPreco_sp
             @valor = ${valor},
-            @email = '${email}'
-            `,
-            resposta);
+            @email = '${email}'`,
+            resposta
+           );
 })
 
 
@@ -160,16 +154,39 @@ rota.post('/Gasto', (requisicao, resposta) =>{
 rota.patch('/Gasto/:nome', (requisicao, resposta) =>{
     
     const nome = requisicao.body.nome.substring(0,50);
-    const valor = requisicao.body.valor.substring(0,50);
+    const valor =requisicao.body.valor.substring(0,50);
     const tipo = requisicao.body.tipo.substring(0,50);
     execSQL(
             `
             exec AlterarGasto_sp
             @nome = '${nome}',
-            @valor = '${valor}',
+            @valor = ${valor},
             @tipo = '${tipo}',
-            @email = '${email}'
-            `,
+            @email = '${email}'`,
             resposta
             );
+})
+
+
+
+   //mostrar nome e valor na tabela de gastos de um tipo específico
+rota.get('/Gasto/:tipo', (requisicao, resposta) => {
+    const tipo = requisicao.params.tipo;
+
+    execSQL(
+        `exec NomePreco_sp '${email}', '${tipo}'`, 
+        resposta
+    );
+})
+
+
+//INSERIR SALÁRIO
+
+rota.post('/Salarios',(requisicao, resposta) =>{
+    const salario = requsicao.body.salario.substring(0,20);
+    
+    execSQL(
+                `INSERT INTO Salarios values(${codUsuario},${salario})`,
+                resposta
+           );
 })

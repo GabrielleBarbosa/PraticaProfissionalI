@@ -23,7 +23,7 @@
 <body class="nav-extended  teal accent-3">
 
  <!-- ----------------------------------------------------------------------------- -->
-<nav class="nav-extended blue darken-1">
+<nav class="nav-extended blue darken-1" style="position: ;">
 
 	<div class="nav-wrapper" style="height: 130px;">
 		<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
@@ -34,10 +34,10 @@
         	<li><a href="Cadastro.html" class="waves-effect waves-light btn">Cadastre-se</a></li>
 		</ul>
 	</div>
-
+<img src="Imagens/LogoSite.png" id="imgLogoSite">
 </nav>
 
-<img src="Imagens/LogoSite.png" id="imgLogoSite">
+
 
 <div id="computador2"></div>
 
@@ -48,13 +48,13 @@
 
         <div class="input-field col s6">
           <i class="material-icons prefix"><img src="Imagens/Nome_icon.png" style="opacity: 0.8;"></i>
-          <input id="nome" type="text" class="validate" maxlength="50">
+          <input id="nome" type="text" class="validate" maxlength="50" name="nome">
           <label for="nome">Nome</label>
         </div>
 
         <div class="input-field col s6">
             <i class="material-icons prefix"><img src="Imagens/Nome_icon.png" style="opacity: 0.8;"></i>
-            <input id="cpf" type="text" class="validate" pattern="^\d{3}.\d{3}.\d{3}-\d{2}$">
+            <input id="cpf" type="text" class="validate" name="cpf" pattern="^\d{3}.\d{3}.\d{3}-\d{2}$">
             <label for="cpf">CPF</label>
         </div>
 
@@ -64,13 +64,13 @@
 
       		  <div class="input-field col s6">
 				  <i class="material-icons prefix"><img src="Imagens/Telefone_icon.png" style="opacity: 0.8;"></i>
-				  <input id="tel" type="tel" class="validate" pattern="^(?:\+\d{2}\s?)?\(?\d{2}\)?\s\d{4,5}-?\d{4}$">
+				  <input id="tel" type="tel" class="validate" name="tel"pattern="^(?:\+\d{2}\s?)?\(?\d{2}\)?\s?\d{4,5}-?\d{4}$">
 				  <label for="tel">Telefone</label>
         	  </div>
 
 	          <div class="input-field col s6">
 				<i class="material-icons prefix"><img src="Imagens/Email_icon.png"></i>
-				<input id="email" type="email" class="validate">
+				<input id="email" type="email" class="validate" name="email">
 				<label for="email">Email</label>
 	          </div>
       </div>
@@ -79,7 +79,7 @@
 
         <div class="input-field col s6">
           <i class="material-icons prefix"><img src="Imagens/Senha_icon.png"></i>
-          <input id="senha" type="password" class="validate">
+          <input id="senha" type="password" class="validate" name="senha">
           <label for="senha">Senha</label>
         </div>
 

@@ -7,85 +7,126 @@
     <title>Seus Gastos</title>
     <link rel="stylesheet" href="Site.css" type="text/css" />
 
-    <!-- Compiled and minified CSS -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-    <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="js/Gastos.js" type="text/javascript"></script>
 
 </head>
 
-
-
-
 <script type="text/javascript">
-    
-    function carregarGastos(tipo)
-    {
+
+    function inserirGastos(){
         
         var dados = new XMLHttpRequest();
         dados.onreadystatechange = function(){
-                document.getElementById("tabela").innerHTML = dados.responseText;
-                
+             document.getElementById("frm").innerHTML = dados.responseText;
         };
-        if(tipo == "A" ){
-            dados.open("GET", "GastosPessoais.html", true);
-            dados.send();
-            } else if (tipo == "B") {
-                dados.open("GET", "GastosAutomoveis.html", true);
-                dados.send();
-            } else if (tipo == "C") {
-                dados.open("GET", "Contas.html", true);
-                dados.send();
-            }else if(tipo == "D"){
-                dados.open("GET","Imoveis.html",true)
-                dados.send();
-            }
-        
+        dados.open("GET","Inserir.html",true);
+        dados.send();
     }
-    
-    
-    
-    </script>
 
-<body class="teal lighten-2">
+</script>
 
-    <nav class="nav-extended blue darken-1" style="height: 130px;">
+<body class="teal lighten-2" id="corpoPagina">
+    <nav class="nav-extended blue darken-1" style="height: 180px;position: fixed;z-index:9999">
 
         <div class="nav-wrapper">
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="Home.html">Home</a></li>
                 <li><a href="Login.html">Login</a></li>
-                <li><a href="Cadastro.html">Cadastre-se</a></li>
                 <li><a href="Relatorio.html">Relatórios</a></li>
+                <li><a href="Cadastro.html">Cadastre-se</a></li>
             </ul>
         </div>
-        <div class="nav-content" style="left: 100px; top 50px; position: relative">
+        <div class="nav-content" style="left: 100px; top: 50px; position: relative;">
             <ul class="tabs tabs-transparent">
-                <li class="tab" onclick="carregarGastos('A')" value="A"><a>Gastos Pessoais</a></li>
-                <li class="tab" onclick="carregarGastos('B')" value="B"><a class="tab">Gastos Automoveis</a></li>
-                <li class="tab" onclick="carregarGastos('C')" value="C"><a>Contas</a></li>
-                <li class="tab" onclick="carregarGastos('D')" value="D"><a>Imóveis</a></li>
+                <li class="tab" onclick="listarGastos('Pessoal');" ><a>Gastos Pessoais</a></li>
+                <li class="tab" onclick="listarGastos('Automovel');" ><a class="tab">Automóveis</a></li>
+                <li class="tab" onclick="listarGastos('Conta');" ><a>Contas</a></li>
+                <li class="tab" onclick="listarGastos('Imovel');" ><a>Imóveis</a></li>
+                <li class="tab" onclick="listarGastos('Outros Gastos');" ><a>Outros Gastos</a></li>
+                <a class="waves-effect waves-light btn-large" onclick="inserirGastos()">Inserir valores</a>
             </ul>
         </div>
+        
+             <a class="waves-effect waves-light btn-small" style="left:80%; border-radius: 20px; top: 30px; background-color: red;" onclick="">Inserir Salário</a>
+
+    
+     <img src="Imagens/LogoSite.png" id="imgLogoSite">
     </nav>
-    <img src="Imagens/LogoSite.png" id="imgLogoSite">
-    <!----------------------------------------------------------------------------------------------------------------------------------------------------------------->
+   
+    <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
+    
+    
 
-    <table class="centered highlight" id="tabela">abcd</table>
+    <table class="centered highlight" id="tabela" style="position: relative; top: 190px;">
+        <thead>
+            <tr>
+                <th>Gasto</th>
+                <th>Valor</th>
+                <th></th>
+            </tr>
+        </thead>
+        
+        <tbody id="valores"></tbody>
 
+    </table>
 
+    <form action="http://localhost:3000/Gasto" method="post" id="frm" >
+    </form>
 
+    <!-- Modal Inclusão -->
+    <div class="modal" id="modalInc">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Incluir Cliente</h2>
+            </div>
+            <div class="modal-body">
+                <form class="modal-form" action="" method="" id="formCadastro">
+                    <label>ID:</label>
+                    <input type="text" name="id"> <br>
+                    <label>Nome:</label>
+                    <input type="text" name="nome"> <br>
+                    <label>CPF: </label>
+                    <input type="text" name="cpf">  <br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" id="btnCadastrar" class="modal-link-rodape">CADASTRAR</a>
+                <a href="#!" class="modal-link-rodape" id="btnCancelar">CANCELAR / FECHAR</a>
+            </div>
+        </div>
+    </div> <!-- Fim Modal Inclusão -->
 
+    <!-- Modal ALteração -->
+    <div class="modal" id="modalAlt">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Alterar Dados do Cliente</h2>
+            </div>
+            <div class="modal-body">
+                <form class="modal-form" action="" method="" id="formAlterar">
+                    <label>Preço novo: </label>
+                    <input type="text" name="precoNovo"><br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" id="btnCadastrar" class="modal-link-rodape">ALTERAR</a>
+                <a href="#!" class="modal-link-rodape" id="btnCancelar">CANCELAR</a>
+            </div>
+        </div>
+    </div> <!-- Fim Modal ALteração -->        
 
+    <!-- --------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-
-
-
-
-    <!------------------------------------------------------------------------------------------------------------------------------------------------------->
-
-    <footer class="page-footer blue darken-1 " style="position: relative; top: 110%;">
+    <footer class="page-footer blue darken-1 " style="position: relative; top: 1000px;">
         <img src="Imagens/logoCotuca.png" style="position: absolute; left: 1200px;">
         <div class="container">
             <div class="row">
@@ -96,8 +137,8 @@
                 <div class="col l4 offset-l2 s12">
                     <h5 class="white-text">Links</h5>
                     <ul>
-                        <li><a class="grey-text text-lighten-3" href="#!">Contate-nos</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Sobre nós</a></li>
+                        <li><a class="grey-text text-lighten-3" href="Contato.html">Contate-nos</a></li>
+                        <li><a class="grey-text text-lighten-3" href="Sobre.html">Sobre nós</a></li>
                     </ul>
                 </div>
             </div>

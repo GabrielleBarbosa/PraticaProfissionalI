@@ -36,7 +36,6 @@ button#botao
 	font-family: candara;
 	left: 700px;
 	top: 475px; 
-	opacity: 0.7;
 }
 
 label#cadastro
@@ -70,7 +69,9 @@ label#cadastro
     position: absolute;
     border-style:hidden;
     border-color: darkblue;
-    top: 5px;
+    top:5px;
+    left:0px;
+    
 }
 
 #menu
@@ -99,6 +100,8 @@ label#cadastro
 	position: relative;
 	left: 660px;
 	top: 220px; 
+	font-size: 20;
+	font-family: candara;
 }
 
 #esqueciMinhaSenha a

@@ -20,21 +20,22 @@ function enviarEmail()
 
         xmlhttp.onreadystatechange=function()
         {
-            var senha =  JSON.parse(this.responseText);
-            if(senha[0] == "123")
+            
+            if(this.responseText != null)
             {
-                if($("#senha").val() == senha[0])
+                var senha =  JSON.parse(this.responseText);
+                if($("#senha").val() == senha[0].senha)
                     efetuarLogin();
                 else 
-                    alert("sua mãe");
+                    alert("Email ou senha incorretos");
             }
             else
                 alert("Email ou senha incorretos");
+
         }
         
         xmlhttp.open("GET", url,true);
         xmlhttp.send();
-        
     }
     else
         alert("Digite os dados corretamente");

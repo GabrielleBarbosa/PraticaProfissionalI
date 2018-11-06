@@ -1,38 +1,41 @@
-/////////////////////////////////////
-listarClientes = function(tbody) {
+var tipoAtual = "";
 
-    $("tbody").empty();
+/////////////////////////////////////
+listarGastos = function (tipo) {
+
+    tipoAtual = tipo;
+    $("#valores").empty();
 
     $.ajax({
-        url : "http://localhost:3000/Gastos"
+        url : "http://localhost:3000/Gasto/" + tipo
 
     }).done(function(dados){
 
         $.each(dados, function(key, val) {
             
             //variável tr para dar um append de linha na tabela
-            tr = $("<tr />");
+            tr = $("<tr/>");
 
             // --- criar botao ALTERAR que vai ser um link
             var btnAlterar = $("<a />").attr({
-                    title: "Alterar registro",
+                    title: "Alterar gasto",
                     href:  "#modalAlteracao"
             });
 
             icone = $("<img />").attr({ class: "botao",
-                                        title: "Alterar cliente",
-                                        src: "imagens/edit.png" });
+                                        title: "Alterar gasto",
+                                        src: "Imagens/edit.png" });
             btnAlterar.append(icone);
             // fim do botao alterar
 
             // --- criar botao EXCLUIR que vai ser um link
             var btnExcluir = $("<a />").attr({
-                                        title: "Excluir registro",
+                                        title: "Excluir gasto",
                                         href:  "#" });
 
             icone = $("<img />").attr({ class: "botao",
-                                        title: "Excluir cliente",
-                                        src: "imagens/delete.png" });
+                                        title: "Excluir gasto",
+                                        src: "Imagens/delete.png" });
             btnExcluir.append(icone);
             btnExcluir.click(function(){
                 excluir(val.ID);
@@ -44,11 +47,19 @@ listarClientes = function(tbody) {
             tdBotoes.append(btnAlterar);
             tdBotoes.append(btnExcluir);
 
-            tr.append(tdBotoes); 
-
             //colunas da tabela
-            tr.append($("<td />").text(val.nome));
-            tr.append($("<td />").text(val.valor));
+            if(val.nome == "Total")
+            {
+                tr.append($("<td style='color: red;' />").text(val.nome));
+                tr.append($("<td style='color: red;' />").text("R$ " + val.valor));
+            }
+            else
+            {
+                tr.append($("<td />").text(val.nome));
+                tr.append($("<td />").text("R$ " + val.valor));
+            }
+
+            tr.append(tdBotoes); 
 
             //adiciona a linha acima montada na tabela
             $("tbody").append(tr);
@@ -65,7 +76,7 @@ excluir = function(id){
                     type: 'DELETE'
                 }).done(function(){
                     //chamar listarItem
-                    listarClientes("tbody");
+                    listarClientes(tipoAtual);
 
                 }); //done
         }
@@ -85,7 +96,7 @@ cadastrar = function(form){
         alert(data.mensagem);
 
         //chamar listarItem
-        listarClientes("tbody");
+        listarClientes(tipoAtual);
     });
 };   
 

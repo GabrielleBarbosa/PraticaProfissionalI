@@ -1,0 +1,84 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 12/08/2015, 12:02:26
+    Author     : patricia
+*/
+
+* {
+    font-family: Gill, Helvetica, sans-serif;
+}
+
+/* Fonte Modal: www.w3schools.com/howto/howto_css_modals.asp */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 23%;
+    overflow: auto; /* Enable scroll if needed */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    border: 1px solid #888;
+    background color: white;
+}
+
+/* Modal Content */
+.modal-content {
+    color: #888;
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    width: 100%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    color: #888;
+}
+
+.modal-body {
+    padding: 2px 16px;
+}
+
+.modal-body label {
+        width: auto;
+        padding-right: 20px;
+}
+
+.modal-body br {
+        clear: left;
+}
+
+.modal-link-rodape {
+    color: #888;
+    padding: 5px;
+}
+
+.modal-link-rodape:hover,
+.modal-link-rodape:focus {
+    color: #ff6666;
+    background-color: white;
+    text-decoration: none;
+    cursor: pointer;
+    
+}

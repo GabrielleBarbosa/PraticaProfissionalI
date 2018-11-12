@@ -1,0 +1,116 @@
+canvas#meuCanvas
+{
+	position: absolute;
+	top: 190px;
+	left: 50px; 
+}
+
+#textoHome
+{
+	position: absolute;
+	top: 50%;
+	left: 20%;
+}
+
+button#botao 
+{
+	background-color: blue;
+}
+
+#formularioLogin 
+{
+	list-style:none;
+	position: absolute;
+	left: 43%;
+	top: 50%;
+	font-size: 22;
+	font-family: candara;
+}
+
+#botaoLogin
+{
+	position: absolute;
+	color: blue;
+	background-color: lightblue;
+	font-size: 20;
+	font-family: candara;
+	left: 700px;
+	top: 475px; 
+}
+
+label#cadastro
+{
+	font-family: candara;
+	font-size: 30px;
+}
+
+#computador
+{
+	position: absolute;
+	background: url("Imagens/ComputadorLogin.png") no-repeat;
+	left: 28%;
+	top: 32%;
+	width: 651px;
+	height: 637px;
+}
+
+#computador2
+{
+	position: absolute;
+	left: 390px;
+	top: 300px;
+}
+
+#imgLogoSite
+{
+    position: absolute;
+    border-style:hidden;
+    border-color: darkblue;
+    top:5px;
+    left:0px;
+    
+}
+
+#menu
+{
+    position: relative;
+    margin-top: 60px;
+}
+
+#menu li a
+{
+    font-size: 20px;
+}
+
+#tamanho
+{
+	position: relative;
+	width: 590px;
+	top: 245px;
+	left: 410px;
+	color: black;
+}
+
+#botaoConfirme
+{
+	text-decoration: none;
+	position: relative;
+	left: 660px;
+	top: 220px; 
+	font-size: 20;
+	font-family: candara;
+}
+
+#esqueciMinhaSenha a
+{
+    text-decoration: none;
+    color: black;
+    opacity: 0.5;
+    font-size: 25px;
+	font-family: cursive;
+	position: relative;
+    left: 505px;
+    top: 325px;
+}
+
+

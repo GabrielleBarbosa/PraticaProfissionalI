@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Seus Gastos</title>
-    <link rel="stylesheet" href="Site.css" type="text/css" />
+    <link rel="stylesheet" href="CSS/Site.css" type="text/css" />
+    <link rel="stylesheet" href="CSS/estilo.css" type="text/css" />
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -14,7 +15,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script src="js/Gastos.js" type="text/javascript"></script>
+    
 
 </head>
 
@@ -32,29 +33,27 @@
 
 </script>
 
-<body class="teal lighten-2" id="corpoPagina">
+<body class="teal lighten-2" id="corpoPagina" >
     <nav class="nav-extended blue darken-1" style="height: 180px;position: fixed;z-index:9999">
 
         <div class="nav-wrapper">
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="Home.html">Home</a></li>
                 <li><a href="Login.html">Login</a></li>
-                <li><a href="Relatorio.html">Relatórios</a></li>
                 <li><a href="Cadastro.html">Cadastre-se</a></li>
             </ul>
         </div>
         <div class="nav-content" style="left: 100px; top: 50px; position: relative;">
-            <ul class="tabs tabs-transparent">
+            <ul class="tabs tabs-transparent" id="gastos">
                 <li class="tab" onclick="listarGastos('Pessoal');" ><a>Gastos Pessoais</a></li>
                 <li class="tab" onclick="listarGastos('Automovel');" ><a class="tab">Automóveis</a></li>
                 <li class="tab" onclick="listarGastos('Conta');" ><a>Contas</a></li>
                 <li class="tab" onclick="listarGastos('Imovel');" ><a>Imóveis</a></li>
                 <li class="tab" onclick="listarGastos('Outros Gastos');" ><a>Outros Gastos</a></li>
-                <a class="waves-effect waves-light btn-large" onclick="inserirGastos()">Inserir valores</a>
             </ul>
         </div>
         
-             <a class="waves-effect waves-light btn-small" style="left:80%; border-radius: 20px; top: 30px; background-color: red;" onclick="">Inserir Salário</a>
+             <a class="waves-effect waves-light btn-small" style="left:80%; border-radius: 20px; top: 30px; background-color: #ef5350;" onclick="">Inserir Salário</a>
 
     
      <img src="Imagens/LogoSite.png" id="imgLogoSite">
@@ -77,49 +76,85 @@
 
     </table>
 
-    <form action="http://localhost:3000/Gasto" method="post" id="frm" >
-    </form>
+    <button class="waves-effect waves-light btn" id="btnInclusao"  style="position: relative; top: 400px; left: 40%">Incluir Gasto</button>
 
     <!-- Modal Inclusão -->
     <div class="modal" id="modalInc">
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close">&times;</span>
-                <h2>Incluir Cliente</h2>
+                <h2>Incluir Gasto</h2>
             </div>
             <div class="modal-body">
-                <form class="modal-form" action="" method="" id="formCadastro">
-                    <label>ID:</label>
-                    <input type="text" name="id"> <br>
-                    <label>Nome:</label>
-                    <input type="text" name="nome"> <br>
-                    <label>CPF: </label>
-                    <input type="text" name="cpf">  <br>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <a href="#!" id="btnCadastrar" class="modal-link-rodape">CADASTRAR</a>
-                <a href="#!" class="modal-link-rodape" id="btnCancelar">CANCELAR / FECHAR</a>
+                <div class="row">
+                    <form class="col s12" action="" method="" id="formInclusao"> 
+                        <div class="input-field col s12">
+                            <input type="text" name="nome" id="nome">
+                            <label for="nome">Nome do Gasto:</label>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <label for="valor">Valor: </label>
+                            <input type="text" name="valor" id="valor">  
+                        </div>
+                        
+                        <div class="input-field col s12"></div>
+                        
+                        <div class="input-field col s12">
+                            <div >
+                            <label>
+                                <input class="with-gap" id="tipo" name="tipo" type="radio" value="Imovel" checked />
+                                <span>Imóveis</span>
+                            </label>      
+                            <label>
+                                <input class="with-gap" id="tipo" name="tipo" type="radio"  />
+                                <span>Contas</span>
+                            </label>   
+                            <label>
+                                <input class="with-gap" id="tipo" name="tipo" type="radio"  />
+                                <span>Automóveis</span>
+                            </label>   
+                            <label> 
+                                <input class="with-gap" id="tipo" name="tipo" type="radio"  />
+                                <span>Gastos Pessoais</span>
+                            </label>  
+                            <label>
+                                <input class="with-gap" id="tipo" name="tipo" type="radio"  />
+                                <span>Outros Gastos</span>
+                            </label> 
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
             </div>
         </div>
+            <div class="modal-footer">
+                <a href="#!" id="btnIncluir" class="modal-link-rodape">INCLUIR</a>
+                <a href="#!" class="modal-link-rodape" id="btnCancelar">CANCELAR / FECHAR</a>
+            </div>
+        
     </div> <!-- Fim Modal Inclusão -->
-
+    
     <!-- Modal ALteração -->
     <div class="modal" id="modalAlt">
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close">&times;</span>
-                <h2>Alterar Dados do Cliente</h2>
+                <h2>Alterar Dados do Gasto</h2>
             </div>
             <div class="modal-body">
                 <form class="modal-form" action="" method="" id="formAlterar">
+                    <label name='nomeAlt'>Gasto: </label><br>
+                    <label name='tipoAlt'>Tipo: </label><br>
+                    <label name='valorAlt'>Valor Antigo: </label>
                     <label>Preço novo: </label>
-                    <input type="text" name="precoNovo"><br>
+                    <input type="text" name="preco"><br>
                 </form>
             </div>
             <div class="modal-footer">
-                <a href="#!" id="btnCadastrar" class="modal-link-rodape">ALTERAR</a>
-                <a href="#!" class="modal-link-rodape" id="btnCancelar">CANCELAR</a>
+                <a href="#!" id="btnAlteracao" class="modal-link-rodape">ALTERAR</a>
+                <a href="#!" class="modal-link-rodape" id="btnCancelar2">CANCELAR</a>
             </div>
         </div>
     </div> <!-- Fim Modal ALteração -->        
@@ -148,7 +183,15 @@
             </div>
         </div>
     </footer>
+    
+    <script src="js/Gastos.js" type="text/javascript"></script>
+    
+    <script src="js/materialize.js"></script>
 
 </body>
 
 </html>
+
+
+
+

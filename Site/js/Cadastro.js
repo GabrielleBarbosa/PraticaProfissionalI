@@ -17,8 +17,7 @@ function efetuarCadastro(form)
     if(validaSenha() && validaEmail && validaTel && validaCpf && nome.val() != "")
     {
         cadastrar(form);
-        logado = true;
-        window.location.href = "Gastos.html";
+        window.location.href = "CadastroEfetuado.html";
     }
     else 
        alert("Verifique se os campos estão preenchidos corretamente!"); 

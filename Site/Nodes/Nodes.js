@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const porta = 3000; //porta padrão
 const sql = require('mssql');
-const conexaoStr = "Server=regulus;Database=PR118183;User Id=PR118183;Password=PR118183;";
+const conexaoStr = "Server=regulus.cotuca.unicamp.br;Database=PR118183;User Id=PR118183;Password=PR118183;";
 var email = "felipemelchior112@gmail.com";
 var logado = false;
 
@@ -207,12 +207,11 @@ rota.delete('/GastoUsuario/:nome/:tipo',(requisicao, resposta) =>{
     
 }) 
 
-
-
-
-
 //PRA VER SE FEZ LOGIN
-rota.post('/logado',(requisicao,resposta) =>{
-    
-=
+rota.get('/Logado',(requisicao,resposta) =>{
+    execSQL(`print '${logado}'`, resposta);
+})
+
+rota.post('/Logado/:logado', (requisicao,resposta) =>{
+    logado = requisicao.params.logado;
 })

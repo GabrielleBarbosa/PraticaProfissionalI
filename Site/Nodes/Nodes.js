@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const porta = 3000; //porta padrão
 const sql = require('mssql');
 const conexaoStr = "Server=regulus;Database=PR118183;User Id=PR118183;Password=PR118183;";
-var email = "robertinhovaragrande@gmail.com";
-var codUsuario;
+var email = "felipemelchior112@gmail.com";
+var logado = false;
 
 //conexao com BD
 sql.connect(conexaoStr)
@@ -45,23 +45,6 @@ function execSQL(sql, resposta) {
 }
 
 
-
-//o simbolo ? indica que id na rota abaixo é opcional
-rota.get('/Usuario/:id?', (requisicao, resposta) => {
-    
-    let filtro = '';
-    if (requisicao.params.id)
-        filtro = ' WHERE codUsuario=' + parseInt(requisicao.params.id);
-    
-    execSQL
-    (
-        'SELECT * from Usuario' + filtro, resposta
-    );
-})
-
-
-
-
 //cadastrar
 rota.post('/Usuario', (requisicao, resposta) => {
     
@@ -88,7 +71,7 @@ rota.post('/Usuario', (requisicao, resposta) => {
             '${senha}'
             ) 
       `,resposta);
-
+    
 })
 
 
@@ -115,6 +98,16 @@ rota.patch('/Usuario/:email', (requisicao, resposta) => {
         resposta);
 })
 
+rota.get('/Usuario/',(requisicao, resposta) =>{
+    
+    execSQL(
+                `SELECT * FROM Usuario where email = '${email}'`,
+                resposta
+    
+            );
+})
+
+
 
 
 
@@ -128,20 +121,21 @@ rota.get('/Acesso/:email', (requisicao, resposta) => {
              `SELECT senha from Acesso where email = '${email}'`,
              resposta
             );
+    
 })
 
 //Inserir gastos
 
-rota.post('/Gasto', (requisicao, resposta) =>{
-    const tipoGasto = requisicao.body.tipoGasto.substring(0,50);
-    const nomeGasto = requisicao.body.nomeGasto.substring(0,50);
-    const valor = requisicao.body.valor.substring(0,10);
+rota.post('/Gasto/:tipo', (requisicao, resposta) =>{
+    const tipoGasto = requisicao.params.tipo;
+    const nomeGasto = requisicao.body.nome.substring(0,50);
+    const valor = parseFloat(requisicao.body.valor.substring(0,20)); 
     
     execSQL(
-            `INSERT INTO Gasto(nome,tipo)
-            VALUES('${nomeGasto}','${tipoGasto}')
-            exec InserirPreco_sp
+            `exec InserirGasto_sp
             @valor = ${valor},
+            @nome = '${nomeGasto}',
+            @tipo = '${tipoGasto}',
             @email = '${email}'`,
             resposta
            );
@@ -189,4 +183,36 @@ rota.post('/Salarios',(requisicao, resposta) =>{
                 `INSERT INTO Salarios values(${codUsuario},${salario})`,
                 resposta
            );
+})
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//APAGAR GASTOS
+
+
+rota.delete('/GastoUsuario/:nome/:tipo',(requisicao, resposta) =>{
+
+    const tipo = requisicao.params.tipo;
+    const nome = requisicao.params.nome;
+    
+    execSQL(
+                `
+                ExcluirGasto_sp
+                @nome = '${nome}',
+                @tipo = '${tipo}',
+                @email = '${email}'
+                `
+            );
+    
+}) 
+
+
+
+
+
+//PRA VER SE FEZ LOGIN
+rota.post('/logado',(requisicao,resposta) =>{
+    
+=
 })

@@ -55,46 +55,28 @@ salario money
 
 
 -------------------------------------------------------------------------------------------------------------------------------------
---proc para INSERIR PRECOS (REPENSAR)
+--proc para INSERIR GASTOS
 
-	alter proc InserirPreco_sp
+	alter proc InserirGasto_sp
 	@valor money = null,
-	@email varchar(50) = null
+	@email varchar(50) = null,
+	@nome varchar(50) = null,
+	@tipo varchar(20) = null
 	as
 	declare @codGasto int 
 	declare @codUsuario int
-	if(@valor is null)
-			print 'Valor não encontrado'
-	else
-	begin
-	    declare Cursor_Gasto Scroll Cursor for select codGasto from Gasto
-		Open Cursor_Gasto
-		fetch last from Cursor_Gasto into @codGasto
-		close Cursor_Gasto
-	    deallocate Cursor_Gasto
-		select @codUsuario=codUsuario from Usuario where email = @email
-		insert into GastoUsuario values(@codUsuario,@codGasto,@valor)
-	end
-
-	alter proc InserirPreco_sp
-	@valor money = null,
-	@email varchar(50) = null, 
-	@nomeGasto varchar(50) = null,
-	as
-	declare @codGasto int 
-	declare @codUsuario int
-	if(@valor is null)
-			print 'Valor não encontrado'
-	else
+	if(@valor is not null and @nome is not null and @tipo is not null)
 		begin
-			declare Cursor_Gasto Scroll Cursor for select codGasto from Gasto
-			Open Cursor_Gasto
-			fetch last from Cursor_Gasto into @codGasto
-			close Cursor_Gasto
-			deallocate Cursor_Gasto
-			select @codUsuario=codUsuario from Usuario where email = @email
-			insert into GastoUsuario values(@codUsuario,@codGasto,@valor)
-		end
+		if not exists(select * from Gasto where nome = @nome and tipo = @tipo)
+			insert into Gasto values (@nome, @tipo)
+
+		select @codGasto = codGasto from Gasto where nome = @nome and tipo = @tipo 
+		select @codUsuario = codUsuario from Usuario where email = @email
+
+		if not exists(select * from GastoUsuario where codGasto=@codGasto and codUsuario=@codUsuario)
+			insert into GastoUsuario values (@codUsuario, @codGasto, @valor)
+	end
+	
 	---------------------------------------------------------------------------------------------------------------------------------
 
 	--proc a para ALTERAR GASTOS
@@ -194,3 +176,30 @@ NomePreco_sp 'robertinhovaragrande@gmail.com', 'Imovel'
 		insert into Usuario values (@nome, @cpf, @telefone, @email, @senha)
 	else 
 		print 'Não foi possível adicionar'
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+ 
+ --deletar gastos
+	alter proc ExcluirGasto_sp
+	@nome varchar(50) = null,
+	@email varchar(50) = null,
+	@tipo varchar(20) = null
+	as
+	Begin
+		declare @codGasto int
+		declare @codUsuario int 
+
+		select @codGasto = codGasto from Gasto where nome = @nome and tipo = @tipo
+		select @codUsuario = codUsuario from Usuario where email = @email
+
+		delete from GastoUsuario where codGasto = @codGasto and codUsuario = @codUsuario
+	end
+
+
+
+	select * from Usuario
+	select * from GastoUsuario
+
+	exec NomePreco_sp
+	@email = 'felipemelchior112@gmail.com',
+	@tipo = 'Imovel'

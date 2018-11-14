@@ -33,7 +33,7 @@
 
 </script>
 
-<body class="teal lighten-2" id="corpoPagina" >
+<body class="teal lighten-2" id="corpoPagina" onload="listarGastos('Pessoal');">
     <nav class="nav-extended blue darken-1" style="height: 180px;position: fixed;z-index:9999">
 
         <div class="nav-wrapper">
@@ -43,8 +43,8 @@
                 <li><a href="Cadastro.html">Cadastre-se</a></li>
             </ul>
         </div>
-        <button class="btn-small" style="left:20%; border-radius: 20px; top: 0; background-color: #ef5350;" onclick="">Inserir Salário</button>
-
+        
+        <a class="waves-effect waves-light btn-small" style="left:10%; border-radius: 20px; top: 0; background-color: #ef5350;" onclick="">Inserir Salário</a>
         
         <div class="nav-content" style="left:1%; top:18%;position: relative;">
             <ul class="tabs tabs-transparent" id="gastos">
@@ -110,19 +110,19 @@
                                 <span>Imóveis</span>
                             </label>      
                             <label>
-                                <input class="with-gap" id="tipo" name="tipo" type="radio"  />
+                                <input class="with-gap" id="tipo" name="tipo" type="radio" value="Conta"/>
                                 <span>Contas</span>
                             </label>   
                             <label>
-                                <input class="with-gap" id="tipo" name="tipo" type="radio"  />
+                                <input class="with-gap" id="tipo" name="tipo" type="radio" value="Automovel"/>
                                 <span>Automóveis</span>
                             </label>   
                             <label> 
-                                <input class="with-gap" id="tipo" name="tipo" type="radio"  />
+                                <input class="with-gap" id="tipo" name="tipo" type="radio" value="Pessoal"/>
                                 <span>Gastos Pessoais</span>
                             </label>  
                             <label>
-                                <input class="with-gap" id="tipo" name="tipo" type="radio"  />
+                                <input class="with-gap" id="tipo" name="tipo" type="radio" value="Outros Gastos"/>
                                 <span>Outros Gastos</span>
                             </label> 
                             </div>
@@ -167,26 +167,32 @@
 
     <!-- --------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-    <footer class="page-footer blue darken-1 " style="position: relative; top: 1000px;">
-        <img src="Imagens/logoCotuca.png" style="position: absolute; left: 1200px;">
+<footer class="page-footer blue darken-1 " style="position: relative; top: 650px;">
+        <img src="Imagens/logoCotuca.png" style="position: absolute; left: 80%;">
+        <img src="Imagens/LogoSite.png" style="position: absolute; left: 66%; top: 15%;">
         <div class="container">
+            
             <div class="row">
+                
                 <div class="col l6 s12">
                     <h2 class="white-text" style="font-family:'Segoe Print' ">Economize</h2>
-                    <p class="grey-text text-lighten-4" style="font-size: 20px">Organizar mais, Gastar Menos</p>
+                    <p class="grey-text text-lighten-4" style="font-size: 20px; font-family: cursive;">Organizar mais, Gastar Menos</p>
                 </div>
-                <div class="col l4 offset-l2 s12">
+                
+                <div class="col l6 s12">
                     <h5 class="white-text">Links</h5>
                     <ul>
                         <li><a class="grey-text text-lighten-3" href="Contato.html">Contate-nos</a></li>
-                        <li><a class="grey-text text-lighten-3" href="Sobre.html">Sobre nós</a></li>
+                        <li><a class="grey-text text-lighten-3" href="Sobre.html">Sobre</a></li>
                     </ul>
                 </div>
+                
             </div>
+            
         </div>
+        
         <div class="footer-copyright">
-            <div class="container">
-            </div>
+            <div class="container"></div>
         </div>
     </footer>
     

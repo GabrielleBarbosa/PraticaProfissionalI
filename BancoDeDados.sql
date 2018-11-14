@@ -38,21 +38,11 @@ valor money not null
 
 create table SLP(
 codUsuario int not null,
-constraint fkCodUsuario foreign key(codUsuario) references Usuario(codUsuario),  
-codGasto int not null,
-constraint fkCodGasto foreign key (codGasto) references gasto(codGasto), 
-codSLP int primary key,
+constraint fkCodUsuarioSLP foreign key(codUsuario) references Usuario(codUsuario),  
 situacao varchar(10),
-valor money
-)
-
-create table Salario(
-codUsuario int not null,
-constraint fkCodUsuario foreign key(codUsuario) references Usuario(codUsuario),  
-codSalario int primary key,
+valorNegativo money,
 salario money
 )
-
 
 -------------------------------------------------------------------------------------------------------------------------------------
 --proc para INSERIR GASTOS
@@ -94,18 +84,6 @@ salario money
 		select @codGasto = codGasto from Gasto where nome = @nome and tipo = @tipo
 		Update GastoUsuario set valor = @valor where codUsuario = @codUsuario and codGasto = @codGasto 
 	end
-
-
-	--teste
-	
-	exec AlterarGasto_sp
-	@nome = 'Casa',
-	@valor = '30',
-	@tipo = 'Imóvel',
-	@email = 'felipemelchior112@gmail.com'
-
-	select * from Gasto
-	select * from GastoUsuario
 	---------------------------------------------------------------------------------------------------------------------------------
 	
 	--mostrar os itens e o preço
@@ -135,30 +113,12 @@ salario money
 	select * from #NomeValor
 	drop table #NomeValor
 
-
-sp_help Gasto
-sp_help Acesso
-
-select * from Gasto
-
-update Gasto set tipo = 'Imovel'
-
-select * from Usuario
-
-select senha from Acesso where email = '1@h.com'
-
-alter table Gasto
-alter column nome varchar(50)
-
-select * from Acesso
-
-NomePreco_sp 'robertinhovaragrande@gmail.com', 'Imovel'
-
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
     -- Não inserir usuário se email for repetido
+	-- Se inserir usuario inserir coluna no SLP ligada a seu codigo
 
-	create trigger UsuarioAcesso_tg on Usuario 
+	alter trigger UsuarioAcesso_tg on Usuario 
 	instead of insert
 	as 
 	declare @nome varchar(50)
@@ -166,6 +126,7 @@ NomePreco_sp 'robertinhovaragrande@gmail.com', 'Imovel'
 	declare @telefone varchar(20)
 	declare @email varchar(50)
 	declare @senha varchar(30)
+	declare @codUsuario int
 
 	select @nome=nome from inserted
 	select @cpf=cpf from inserted
@@ -173,7 +134,11 @@ NomePreco_sp 'robertinhovaragrande@gmail.com', 'Imovel'
 	select @email=email from inserted
 	select @senha=senha from inserted
 	if not exists(select * from Acesso where email = @email)
+	begin
 		insert into Usuario values (@nome, @cpf, @telefone, @email, @senha)
+		select @codUsuario=codUsuario from Usuario where email=@email
+		insert into SLP values(@codUsuario,'',0,0)
+	end
 	else 
 		print 'Não foi possível adicionar'
 
@@ -199,7 +164,56 @@ NomePreco_sp 'robertinhovaragrande@gmail.com', 'Imovel'
 
 	select * from Usuario
 	select * from GastoUsuario
+	select * from SLP
 
 	exec NomePreco_sp
 	@email = 'felipemelchior112@gmail.com',
 	@tipo = 'Imovel'
+
+	------------------------------------------------------------------------------------------------------------------------------------------
+
+	--Alterar valorNegativo do SLP sempre que houver alguma alteração em valores de GastoUsuario
+
+	create trigger Total_tg on GastoUsuario
+	instead of update, delete, insert
+	as 
+	declare @codUsuario int
+	declare @codGasto int 
+	declare @valorAnt money
+	declare @valorNovo money
+	declare @valorNegativo money
+	if exists(select valor from inserted) and exists (select valor from deleted)
+	begin 
+		select @valorAnt = valor from deleted
+		select @valorNovo = valor from inserted 
+		select @codGasto = codGasto from deleted
+		select @codUsuario = codUsuario from deleted
+
+		Update GastoUsuario set valor = @valorNovo where codUsuario = @codUsuario and codGasto = @codGasto
+
+		select @valorNegativo = valorNegativo from SLP where codUsuario = @codUsuario
+
+		set @valorNegativo = @valorNegativo - @valorAnt + @valorNovo
+
+		Update SLP set valorNegativo=@valorNegativo where codUsuario = @codUsuario
+	end
+	else if exists (select valor from inserted)
+	begin 
+		select @valorNovo = valor from inserted 
+		select @codGasto = codGasto from inserted 
+		select @codUsuario = codUsuario from inserted
+
+		insert into GastoUsuario values (@codUsuario, @codGasto, @valorNovo)
+
+		update SLP set valorNegativo += @valorNovo where codUsuario=@codUsuario
+	end
+	else
+	begin 
+		select @valorNovo = valor from deleted 
+		select @codGasto = codGasto from deleted 
+		select @codUsuario = codUsuario from deleted
+
+		delete from GastoUsuario where codUsuario = @codUsuario and codGasto = @codGasto
+
+		update SLP set valorNegativo -= @valorNovo where codUsuario = @codUsuario
+	end

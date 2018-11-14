@@ -41,3 +41,23 @@ function enviarEmail()
         alert("Digite os dados corretamente");
 }
 
+/////////////////////////////////////////////////////////////////////////
+var modal = document.getElementById("modalAviso");
+var span = document.getElementsByClassName("close")[0];
+
+abrirModal = function(texto){
+    $("h5").html(texto);
+    modal.style.display = "block";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal2) {
+        modal.style.display = "none";
+    }
+};
+
+span.onclick = function(){
+    modal.style.display = "none";
+}
+
+

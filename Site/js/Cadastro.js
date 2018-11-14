@@ -20,7 +20,7 @@ function efetuarCadastro(form)
         window.location.href = "CadastroEfetuado.html";
     }
     else 
-       alert("Verifique se os campos estão preenchidos corretamente!"); 
+       abrirModal();
 }
 
 function validaSenha()
@@ -30,13 +30,11 @@ function validaSenha()
     if(senha1 === "" || senha2 === "")
     {
         senha1===""?$("#senha").focus():$("#senha2").focus();
-        texto = "Digite os campos de senha";
         return false;
     }
     else if(senha1 !== senha2)
     {
         $("#senha").focus();
-        texto = "Os campos de senha não estão compatíveis";
         return false;
     }
     return true;
@@ -53,3 +51,23 @@ cadastrar = function(form){
         alert(data.mensagem);
     });
 };
+
+/////////////////////////////////////////////////////////////////////////
+var modal = document.getElementById("modalAviso");
+var span = document.getElementsByClassName("close")[0];
+
+abrirModal = function(){
+    modal.style.display = "block";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal2) {
+        modal.style.display = "none";
+    }
+};
+
+span.onclick = function(){
+    modal.style.display = "none";
+}
+
+

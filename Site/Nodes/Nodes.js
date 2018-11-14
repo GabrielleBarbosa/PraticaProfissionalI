@@ -44,18 +44,17 @@ function execSQL(sql, resposta) {
         .catch(erro => resposta.json(erro));
 }
 
-
 //cadastrar
 rota.post('/Usuario', (requisicao, resposta) => {
-    
+
     const cpf = requisicao.body.cpf.substring(0, 14);
     const nome = requisicao.body.nome.substring(0, 50);
     const tel = requisicao.body.tel.substring(0, 15);
     email = requisicao.body.email.substring(0, 50);
     const senha = requisicao.body.senha.substring(0, 15);
-    
+
     execSQL
-    (` 
+        (` 
       INSERT INTO Usuario(nome,CPF,telefone,email,senha) 
 
       VALUES(
@@ -70,23 +69,52 @@ rota.post('/Usuario', (requisicao, resposta) => {
             '${email}',
             '${senha}'
             ) 
-      `,resposta);
-    
+      `, resposta);
+
 })
 
 
+//Conferir Realização Cadastro
+rota.get('/Usuario/:email',(requisicao,resposta) =>{
+    
+    email = requisicao.params.email;
+    execSQL(`SELECT * FROM  Usuario where email = '${email}'`)
+})
 
+
+//login
+
+rota.get('/Acesso/:email', (requisicao, resposta) => {
+    email = requisicao.params.email;
+
+
+    execSQL(
+        `SELECT senha from Acesso where email = '${email}'`,
+        resposta
+    );
+
+})
+
+
+//PRA VER SE FEZ LOGIN
+rota.get('/Logado', (requisicao, resposta) => {
+    execSQL(`print '${logado}'`, resposta);
+})
+
+rota.post('/Logado/:logado', (requisicao, resposta) => {
+    logado = requisicao.params.logado;
+})
 
 
 //alterar informações de usuário
 rota.patch('/Usuario/:email', (requisicao, resposta) => {
-    
+
     const nome = requisicao.body.nome.substring(0, 50);
     const cpf = requisicao.body.cpf.substring(0, 14);
     const tel = requisicao.body.tel.substring(0, 20);
     email = requisicao.body.email.substring(0, 50);
     const senha = requisicao.body.senha.substring(0, 15);
-    
+
     execSQL(
         `UPDATE Usuario SET 
              nome='${nome}', 
@@ -98,58 +126,60 @@ rota.patch('/Usuario/:email', (requisicao, resposta) => {
         resposta);
 })
 
-rota.get('/Usuario/',(requisicao, resposta) =>{
-    
+rota.get('/Usuario/', (requisicao, resposta) => {
+
     execSQL(
-                `SELECT * FROM Usuario where email = '${email}'`,
-                resposta
-    
-            );
+        `SELECT * FROM Usuario where email = '${email}'`,
+        resposta
+
+    );
 })
 
 
-
-
-
-//login
-
-rota.get('/Acesso/:email', (requisicao, resposta) => {
-    email=requisicao.params.email;
-    
-
-    execSQL(
-             `SELECT senha from Acesso where email = '${email}'`,
-             resposta
-            );
-    
-})
 
 //Inserir gastos
 
-rota.post('/Gasto/:tipo', (requisicao, resposta) =>{
+rota.post('/Gasto/:tipo', (requisicao, resposta) => {
     const tipoGasto = requisicao.params.tipo;
-    const nomeGasto = requisicao.body.nome.substring(0,50);
-    const valor = parseFloat(requisicao.body.valor.substring(0,20)); 
-    
+    const nomeGasto = requisicao.body.nome.substring(0, 50);
+    const valor = parseFloat(requisicao.body.valor.substring(0, 20));
+
     execSQL(
-            `exec InserirGasto_sp
+        `exec InserirGasto_sp
             @valor = ${valor},
             @nome = '${nomeGasto}',
             @tipo = '${tipoGasto}',
             @email = '${email}'`,
-            resposta
-           );
+        resposta
+    );
+})
+
+//APAGAR GASTOS
+
+
+rota.delete('/GastoUsuario/:nome/:tipo', (requisicao, resposta) => {
+
+    const tipo = requisicao.params.tipo;
+    const nome = requisicao.params.nome;
+
+    execSQL(
+        `
+                ExcluirGasto_sp
+                @nome = '${nome}',
+                @tipo = '${tipo}',
+                @email = '${email}'
+                `
+    );
+
 })
 
 
-
-
 //AlterarGastos(especificamente, o valor)
-rota.patch('/Gasto/:nome', (requisicao, resposta) =>{
+rota.post('/Gasto/:nome/:tipo', (requisicao, resposta) =>{
     
-    const nome = requisicao.body.nome.substring(0,50);
-    const valor =requisicao.body.valor.substring(0,50);
-    const tipo = requisicao.body.tipo.substring(0,50);
+    const valor = parseFloat(requisicao.body.valorNovo.substring(0,50));
+    const nome = requisicao.params.nome.substring(0,50);
+    const tipo = requisicao.params.tipo.substring(0,20);
     execSQL(
             `
             exec AlterarGasto_sp
@@ -163,12 +193,12 @@ rota.patch('/Gasto/:nome', (requisicao, resposta) =>{
 
 
 
-   //mostrar nome e valor na tabela de gastos de um tipo específico
+//mostrar nome e valor na tabela de gastos de um tipo específico
 rota.get('/Gasto/:tipo', (requisicao, resposta) => {
     const tipo = requisicao.params.tipo;
 
     execSQL(
-        `exec NomePreco_sp '${email}', '${tipo}'`, 
+        `exec NomePreco_sp '${email}', '${tipo}'`,
         resposta
     );
 })
@@ -176,42 +206,15 @@ rota.get('/Gasto/:tipo', (requisicao, resposta) => {
 
 //INSERIR SALÁRIO
 
-rota.post('/Salarios',(requisicao, resposta) =>{
-    const salario = requsicao.body.salario.substring(0,20);
-    
+rota.post('/Salarios', (requisicao, resposta) => {
+    const salario = requsicao.body.salario.substring(0, 20);
+
     execSQL(
-                `INSERT INTO Salarios values(${codUsuario},${salario})`,
-                resposta
-           );
-})
-/////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-//APAGAR GASTOS
-
-
-rota.delete('/GastoUsuario/:nome/:tipo',(requisicao, resposta) =>{
-
-    const tipo = requisicao.params.tipo;
-    const nome = requisicao.params.nome;
-    
-    execSQL(
-                `
-                ExcluirGasto_sp
-                @nome = '${nome}',
-                @tipo = '${tipo}',
-                @email = '${email}'
-                `
-            );
-    
-}) 
-
-//PRA VER SE FEZ LOGIN
-rota.get('/Logado',(requisicao,resposta) =>{
-    execSQL(`print '${logado}'`, resposta);
+        `INSERT INTO Salarios values(${codUsuario},${salario})`,
+        resposta
+    );
 })
 
-rota.post('/Logado/:logado', (requisicao,resposta) =>{
-    logado = requisicao.params.logado;
-})
+
+
+

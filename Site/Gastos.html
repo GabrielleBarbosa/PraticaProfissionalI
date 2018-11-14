@@ -43,7 +43,10 @@
                 <li><a href="Cadastro.html">Cadastre-se</a></li>
             </ul>
         </div>
-        <div class="nav-content" style="left: 100px; top: 50px; position: relative;">
+        <button class="btn-small" style="left:20%; border-radius: 20px; top: 0; background-color: #ef5350;" onclick="">Inserir Salário</button>
+
+        
+        <div class="nav-content" style="left:1%; top:18%;position: relative;">
             <ul class="tabs tabs-transparent" id="gastos">
                 <li class="tab" onclick="listarGastos('Pessoal');" ><a>Gastos Pessoais</a></li>
                 <li class="tab" onclick="listarGastos('Automovel');" ><a class="tab">Automóveis</a></li>
@@ -53,7 +56,7 @@
             </ul>
         </div>
         
-             <a class="waves-effect waves-light btn-small" style="left:80%; border-radius: 20px; top: 30px; background-color: #ef5350;" onclick="">Inserir Salário</a>
+             
 
     
      <img src="Imagens/LogoSite.png" id="imgLogoSite">
@@ -76,7 +79,7 @@
 
     </table>
 
-    <button class="waves-effect waves-light btn" id="btnInclusao"  style="position: relative; top: 400px; left: 40%">Incluir Gasto</button>
+    <button class="btn-large" id="btnInclusao"  style="position: relative; top: 400px; left: 40%">Incluir Gasto</button>
 
     <!-- Modal Inclusão -->
     <div class="modal" id="modalInc">
@@ -144,12 +147,15 @@
                 <h2>Alterar Dados do Gasto</h2>
             </div>
             <div class="modal-body">
-                <form class="modal-form" action="" method="" id="formAlterar">
-                    <label name='nomeAlt'>Gasto: </label><br>
-                    <label name='tipoAlt'>Tipo: </label><br>
-                    <label name='valorAlt'>Valor Antigo: </label>
-                    <label>Preço novo: </label>
-                    <input type="text" name="preco"><br>
+                <form class="col s12" action="" method="" id="formAlteracao">
+                    <label name='nomeAlt' id="nomeAlt"></label><br>
+                    <label name='tipoAlt' id="tipoAlt"></label><br>
+                    <label name='valorAlt' id="valorAlt"></label>
+
+                    <div class="input-field col s12">
+                        <input type="text" name="valorNovo" id="valorNovo">
+                        <label for="valorNovo">Valor novo: </label>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">

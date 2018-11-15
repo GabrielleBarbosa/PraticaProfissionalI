@@ -233,7 +233,34 @@ btnAlteracao.onclick = function() {
         alert("Não foi possível alterar, verifique os dados! \nOBS: o valor deve ter duas casas decimais(99.99)");
 };
 
+/////////////////////////////////////////MODAL AVISO/////////////////////////////////////////////////////////////////////////////
+var modalAviso = document.getElementById("modalAviso");
+var span3 = document.getElementsByClassName("close")[2];
+var btnCancelar3 = document.getElementById("btnCancelar3");
+var btnDeslogar = document.getElementById("btnDeslogar");
+var pagina;
 
+abrirModalAviso = function(texto, texto2){
+    pagina = texto;
+    $("h5").html(texto2);
+    modalAviso.style.display = "block";
+}
 
+window.onclick = function(event) {
+    if (event.target == modal2) {
+        modalAviso.style.display = "none";
+    }
+};
 
+span3.onclick = function(){
+    modalAviso.style.display = "none";
+}
+
+btnDeslogar.onclick = function(){
+    location.href = pagina;
+}
+
+btnCancelar3.onclick = function(){
+    modalAviso.style.display = "none";
+}
 

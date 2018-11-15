@@ -27,10 +27,10 @@ function enviarEmail()
                 if($("#senha").val() == senha[0].senha)
                     efetuarLogin();
                 else 
-                    alert("Email ou senha incorretos");
+                    abrirModal("Email ou senha incorretos");
             }
             else
-                alert("Email ou senha incorretos");
+                abrirModal("Email ou senha incorretos");
 
         }
         
@@ -38,7 +38,7 @@ function enviarEmail()
         xmlhttp.send();
     }
     else
-        alert("Digite os dados corretamente");
+        abrirModal("Digite os dados corretamente");
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ abrirModal = function(texto){
 }
 
 window.onclick = function(event) {
-    if (event.target == modal2) {
+    if (event.target == modal) {
         modal.style.display = "none";
     }
 };

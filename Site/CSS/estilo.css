@@ -1,22 +1,10 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 12/08/2015, 12:02:26
-    Author     : patricia
-*/
-
-* {
-    font-family: Gill, Helvetica, sans-serif;
-}
-
 /* Fonte Modal: www.w3schools.com/howto/howto_css_modals.asp */
+
+/*******************************Modais Gastos*******************************************/
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 9999; /* Sit on top */
     padding-top: 100px; /* Location of the box */
     left: 0;
     top: 23%;
@@ -29,7 +17,6 @@ and open the template in the editor.
 /* Modal Content */
 .modal-content {
     color: #888;
-    position: relative;
     background-color: #fefefe;
     margin: auto;
     padding: 0;
@@ -44,8 +31,7 @@ and open the template in the editor.
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.close:hover{
     color: #000;
     text-decoration: none;
     cursor: pointer;
@@ -74,11 +60,33 @@ and open the template in the editor.
     padding: 5px;
 }
 
-.modal-link-rodape:hover,
-.modal-link-rodape:focus {
+.modal-link-rodape:hover{
     color: #ff6666;
     background-color: white;
     text-decoration: none;
     cursor: pointer;
-    
+}
+
+/**********************************Modais Login/Cadastro*************************************************/
+
+#modalAviso
+{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 9999; /* Sit on top */
+    left: -10%;
+    top: 23%;
+    overflow: auto; /* Enable scroll if needed */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    border: 2px solid #888;
+    background color: white;
+}
+
+#headerModalAviso {
+    padding: 2px 16px;
+    color: mediumpurple;
+}
+
+#footerModalAviso{
+    height: 100%;
 }

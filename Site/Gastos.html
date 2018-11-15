@@ -39,8 +39,8 @@
         <div class="nav-wrapper">
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="Home.html">Home</a></li>
-                <li><a href="Login.html">Login</a></li>
-                <li><a href="Cadastro.html">Cadastre-se</a></li>
+                <li><a onclick="abrirModalAviso('Login.html','Para ir ao login é necessário deslogar');">Login</a></li>
+                <li><a onclick="abrirModalAviso('Cadastro.html','Para ir ao cadastro é necessário deslogar');">Cadastre-se</a></li>
             </ul>
         </div>
         
@@ -165,6 +165,23 @@
         </div>
     </div> <!-- Fim Modal ALteração -->        
 
+    <!-- -----------------Modal----------------- -->
+    <div class="modal" id="modalAviso">
+        <div class="modal-content">
+            <div class="modal-header" id="headerModalAviso">
+                <span class="close">&times;</span>
+                <h3><i>Seus gastos</i></h3>
+            </div>
+            <div class="modal-body">
+                <h5></h5>
+            </div>
+            <div class="modal-footer" id="footerModalAviso">
+                <h6>Deseja deslogar?</h6>
+                <button id="btnDeslogar" class="small btn">Deslogar</button>
+                <button id="btnCancelar3" class="small btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
     <!-- --------------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 <footer class="page-footer blue darken-1 " style="position: relative; top: 650px;">

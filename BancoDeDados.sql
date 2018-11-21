@@ -8,6 +8,8 @@ senha varchar(30) not null
 )
 
 select * from Usuario
+SELECT senha from Acesso where email = '1@2.com'
+select * from Acesso
 
 drop table Usuario
 insert into Acesso values('vinschers@gmail.com','felipao')
@@ -15,9 +17,10 @@ insert into Acesso values('vinschers@gmail.com','felipao')
 create table Acesso(
 email varchar(50) primary key,
 senha varchar(30) not null,
+logado char(1)
 )
 
-drop table Acesso
+drop table Usuario
 select * from Acesso
 
 create table Gasto(
@@ -40,12 +43,13 @@ create table SLP(
 codUsuario int not null,
 constraint fkCodUsuarioSLP foreign key(codUsuario) references Usuario(codUsuario),  
 situacao varchar(10),
-valorNegativo money,
+valorNegativo money, --gastos
 salario money
 )
 
 -------------------------------------------------------------------------------------------------------------------------------------
 --proc para INSERIR GASTOS
+
 
 	alter proc InserirGasto_sp
 	@valor money = null,
@@ -118,7 +122,7 @@ salario money
     -- Não inserir usuário se email for repetido
 	-- Se inserir usuario inserir coluna no SLP ligada a seu codigo
 
-	alter trigger UsuarioAcesso_tg on Usuario 
+	create trigger UsuarioAcesso_tg on Usuario 
 	instead of insert
 	as 
 	declare @nome varchar(50)
@@ -138,6 +142,7 @@ salario money
 		insert into Usuario values (@nome, @cpf, @telefone, @email, @senha)
 		select @codUsuario=codUsuario from Usuario where email=@email
 		insert into SLP values(@codUsuario,'',0,0)
+		insert into Acesso values (@email,@senha,'s')
 	end
 	else 
 		print 'Não foi possível adicionar'
@@ -202,7 +207,7 @@ salario money
 		select @valorNovo = valor from inserted 
 		select @codGasto = codGasto from inserted 
 		select @codUsuario = codUsuario from inserted
-
+	
 		insert into GastoUsuario values (@codUsuario, @codGasto, @valorNovo)
 
 		update SLP set valorNegativo += @valorNovo where codUsuario=@codUsuario
@@ -217,3 +222,12 @@ salario money
 
 		update SLP set valorNegativo -= @valorNovo where codUsuario = @codUsuario
 	end
+
+	select * from SLP
+	update SLP set salario=null
+
+
+
+	select * from SLP
+	select * from Gasto
+	select * from GastoUsuario

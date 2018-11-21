@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const porta = 3000; //porta padrão
 const sql = require('mssql');
 const conexaoStr = "Server=regulus.cotuca.unicamp.br;Database=PR118183;User Id=PR118183;Password=PR118183;";
-var email = "felipemelchior112@gmail.com";
+var email = "1@2.com";
 var logado = false;
 
 //conexao com BD
@@ -64,15 +64,9 @@ rota.post('/Usuario', (requisicao, resposta) => {
             '${email}',
             '${senha}'
             ) 
-      INSERT INTO Acesso(email,senha)
-      VALUES(
-            '${email}',
-            '${senha}'
-            ) 
       `, resposta);
 
 })
-
 
 //Conferir Realização Cadastro
 rota.get('/Usuario/:email',(requisicao,resposta) =>{
@@ -86,7 +80,6 @@ rota.get('/Usuario/:email',(requisicao,resposta) =>{
 
 rota.get('/Acesso/:email', (requisicao, resposta) => {
     email = requisicao.params.email;
-
 
     execSQL(
         `SELECT senha from Acesso where email = '${email}'`,
@@ -206,13 +199,25 @@ rota.get('/Gasto/:tipo', (requisicao, resposta) => {
 
 //INSERIR SALÁRIO
 
-rota.post('/Salarios', (requisicao, resposta) => {
-    const salario = requsicao.body.salario.substring(0, 20);
+rota.post('/SLP', (requisicao, resposta) => {
+    const salario = parseFloat(requisicao.body.salario.substring(0, 20));
 
     execSQL(
-        `INSERT INTO Salarios values(${codUsuario},${salario})`,
-        resposta
-    );
+            `update SLP set salario = ${salario} where codUsuario in(select codUsuario from Usuario where email='${email}')`,
+            resposta
+            );
+})
+
+
+
+
+//VERIFICAR SE SALARIO É NULL
+
+rota.get('/SLP',(requisicao,resposta) =>{
+    execSQL(
+            `SELECT salario,valorNegativo from SLP where codUsuario in(select codUsuario from Usuario where email='${email}')`,
+            resposta
+            );    
 })
 
 

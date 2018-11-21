@@ -4,7 +4,7 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Seus Gastos</title>
+    <title>Economize</title>
     <link rel="stylesheet" href="CSS/Site.css" type="text/css" />
     <link rel="stylesheet" href="CSS/estilo.css" type="text/css" />
 
@@ -33,8 +33,8 @@
 
 </script>
 
-<body class="teal lighten-2" id="corpoPagina" onload="listarGastos('Pessoal');">
-    <nav class="nav-extended blue darken-1" style="height: 180px;position: fixed;z-index:9999">
+<body class="teal lighten-2" id="corpoPagina" onload="listarGastos('Pessoal'); verificarSalario();">
+    <nav class="nav-extended blue darken-1" id="menuGastos">
 
         <div class="nav-wrapper">
             <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -44,9 +44,13 @@
             </ul>
         </div>
         
-        <a class="waves-effect waves-light btn-small" style="left:10%; border-radius: 20px; top: 0; background-color: #ef5350;" onclick="">Inserir Salário</a>
+        <a class="btn-small" onclick="abrirModalSalario('inserir');" id="btnInsercaoSalario">Inserir Salário</a>
         
-        <div class="nav-content" style="left:1%; top:18%;position: relative;">
+        <a class="btn-small" onclick="abrirModalSalario('alterar');" id="btnAlteracaoSalario">Alterar Salário</a>
+        
+        <a class="btn-small" onclick="abrirModalSituacao();" id="btnSituacao">Situação</a>
+        
+        <div class="nav-content" id="menuTipoGastos">
             <ul class="tabs tabs-transparent" id="gastos">
                 <li class="tab" onclick="listarGastos('Pessoal');" ><a>Gastos Pessoais</a></li>
                 <li class="tab" onclick="listarGastos('Automovel');" ><a class="tab">Automóveis</a></li>
@@ -165,7 +169,7 @@
         </div>
     </div> <!-- Fim Modal ALteração -->        
 
-    <!-- -----------------Modal----------------- -->
+    <!-- -----------------Modal Aviso----------------- -->
     <div class="modal" id="modalAviso">
         <div class="modal-content">
             <div class="modal-header" id="headerModalAviso">
@@ -177,12 +181,59 @@
             </div>
             <div class="modal-footer" id="footerModalAviso">
                 <h6>Deseja deslogar?</h6>
-                <button id="btnDeslogar" class="small btn">Deslogar</button>
-                <button id="btnCancelar3" class="small btn">Cancelar</button>
+                <button id="btnDeslogar" class="btn-small">Deslogar</button>
+                <button id="btnCancelar3" class="btn-small">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    
+ <!---------------------- Modal Inserção Salário  ----------------------- -->
+    
+    <div class="modal" id="modalSalario">
+        <div class="modal-content">
+            <div class="modal-header" id="headerInserirSalario">
+                <span class="close">&times;</span>
+                <h3><i id="h3Salario"></i></h3>
+            </div>
+            <div class="modal-body">
+                <h7></h7>
+                <form class="col s12" id="frmInserirSalario">
+                    <div class="input-field col s12">
+                        <label for="salario">Salário:</label>
+                        <input type="text" id="salario" name="salario">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" id="footerInserirSalario">
+                <button id="btnSalario" class="small btn">Efetuar</button>
+                <button id="btnCancelar4" class="small btn">Cancelar</button>
             </div>
         </div>
     </div>
     <!-- --------------------------------------------------------------------------------------------------------------------------------------------------- -->
+    
+<!--------------------------------------- Modal Situacao  --------------------------------------------------------------------------------------------------------------------- -->
+    
+    <div class="modal" id="modalSituacao">
+        <div class="modal-content">
+            <div class="modal-header" id="headerModalSituacao">
+                <span class="close">&times;</span>
+                <h3><i id="h3Situacao"></i></h3>
+            </div>
+            <div class="modal-body">
+                <h7></h7>
+                <form id="frmModalSituacao">
+                        <h4>Seu Saldo:</h4>
+                        <label id="labelSituacao"></label>
+                </form>
+            </div>
+            <div class="modal-footer" id="footerModalSituacao">
+            </div>
+        </div>
+    </div>
+    
+<!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------    -->
+    
 
 <footer class="page-footer blue darken-1 " style="position: relative; top: 650px;">
         <img src="Imagens/logoCotuca.png" style="position: absolute; left: 80%;">

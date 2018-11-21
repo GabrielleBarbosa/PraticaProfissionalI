@@ -16,11 +16,36 @@ function efetuarCadastro(form)
 
     if(validaSenha() && validaEmail && validaTel && validaCpf && nome.val() != "")
     {
-        cadastrar(form);
-        window.location.href = "CadastroEfetuado.html";
+        if(verificarEmail(email.val()));
+        {
+            cadastrar(form);
+            //window.location.href = "CadastroEfetuado.html";
+        }
     }
     else 
-       abrirModal();
+       abrirModal("Digite os campos corretamente");
+}
+
+verificarEmail = function(email){
+    
+    var xmlhttp = new XMLHttpRequest();
+    var url = "http://localhost:3000/Acesso/" + email;
+
+    xmlhttp.onreadystatechange=function()
+    {
+        var s = JSON.stringify(this.responseText);
+        alert(s);
+        if(s != "")
+        {
+            abrirModal("Email já está cadastrado no sistema");
+            return false;
+        }
+        else 
+            return true;
+    }
+
+    xmlhttp.open("GET", url,true);
+    xmlhttp.send();
 }
 
 function validaSenha()
@@ -40,7 +65,7 @@ function validaSenha()
     return true;
 }
 
-//////////////////////////////////////////////////////////////////////
+/////////////////////////////CADASTRO DO USUÁRIO/////////////////////////////////////////
 cadastrar = function(form){
     $.post( "http://localhost:3000/Usuario", form.serialize() ).done(function(data){
         if (!data.erro) {
@@ -52,16 +77,17 @@ cadastrar = function(form){
     });
 };
 
-/////////////////////////////////////////////////////////////////////////
+/////////////////////////////MODAL AVISO////////////////////////////////////////////
 var modal = document.getElementById("modalAviso");
 var span = document.getElementsByClassName("close")[0];
 
-abrirModal = function(){
+abrirModal = function(texto){
+    $("h5").html(texto);
     modal.style.display = "block";
 }
 
 window.onclick = function(event) {
-    if (event.target == modal2) {
+    if (event.target == modal) {
         modal.style.display = "none";
     }
 };

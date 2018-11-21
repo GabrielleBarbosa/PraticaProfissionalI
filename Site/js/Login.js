@@ -23,8 +23,9 @@ function enviarEmail()
             
             if(this.responseText != null)
             {
-                var senha =  JSON.parse(this.responseText);
-                if($("#senha").val() == senha[0].senha)
+                var senha =  JSON.stringify(this.responseText);
+                alert(senha);
+                if($("#senha").val() == senha)
                     efetuarLogin();
                 else 
                     abrirModal("Email ou senha incorretos");

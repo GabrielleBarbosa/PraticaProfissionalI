@@ -1,4 +1,6 @@
-var tipoAtual = "";
+var tipoAtual = "";  //tipo de gasto que a pessoa está
+var salario;
+var valorNegativo;   // o total de todos os gastos
 
 /////////////////////////////////////
 listarGastos = function (tipo) {
@@ -76,9 +78,39 @@ listarGastos = function (tipo) {
         });
     }); //ajax
         
-};   
+}; 
 
-/////////////////////////////////////
+/////////////////////////VERIFICAR SALARIO//////////////////////////////////////////
+function verificarSalario()
+{
+    var xmlhttp = new XMLHttpRequest();
+    var url = "http://localhost:3000/SLP/";
+
+    xmlhttp.onreadystatechange=function()
+    {
+        var s =  JSON.parse(this.responseText);
+        salario = s[0].salario;
+        valorNegativo = s[0].valorNegativo;
+        
+        if(salario != null)
+        {
+            $("#btnInsercaoSalario").hide();
+            $("#btnSituacao").show();
+            $("#btnAlteracaoSalario").show();
+        }
+        else
+        {
+            $("#btnSituacao").hide();
+            $("#btnAlteracaoSalario").hide();
+            $("#btnInsercaoSalario").show();
+        }
+    }
+
+    xmlhttp.open("GET", url,true);
+    xmlhttp.send();
+}
+
+/////////////////////////////////////EXCLUIR GASTOS/////////////////////////////////////////////
 excluir = function(nome){ 
     if(confirm("Tem certeza que deseja excluir?")){
             $.ajax({
@@ -93,7 +125,7 @@ excluir = function(nome){
     listarGastos(tipoAtual);
 };
     
-/////////////////////////////////////
+/////////////////////////////////////INCLUIR GASTOS////////////////////////////////////////////////
 incluir = function(form, tipo){
     $.post( "http://localhost:3000/Gasto/" + tipo, form.serialize() ).done(function(data){
         if (!data.erro) {
@@ -110,7 +142,7 @@ incluir = function(form, tipo){
     $("#modalAlt").closeModal();
     listarGastos(tipoAtual);
 };   
-///////////////////////////////////
+///////////////////////////////////ALTERAR GASTOS/////////////////////////////////////////////
 alterar = function(form, nome){
      $.post( "http://localhost:3000/Gasto/" + nome + "/" + tipoAtual, form.serialize() ).done(function(data){
         if (!data.erro) {
@@ -127,6 +159,24 @@ alterar = function(form, nome){
     $("#modalAlt").closeModal();
     listarGastos(tipoAtual);
 };
+
+//////////////////ALTERA E INSERE SALARIO////////////////////////////////////////
+salarioIA = function(form){
+    $.post("http://localhost:3000/SLP/",
+    form.serialize()).done(function(data){
+        if(!data.erro) {
+            form.each(function(){
+                    this.reset();
+            });
+        }
+        alert(data.mensagem);
+    });
+    form.each(function(){
+            this.reset();
+    });
+    $("#modalInserirSalario").closeModal();
+    verificarSalario();
+}
 
 /////////////////////////////////////////MODAL INCLUSAO//////////////////////////////////////////////////////
 // Get the modal
@@ -247,7 +297,7 @@ abrirModalAviso = function(texto, texto2){
 }
 
 window.onclick = function(event) {
-    if (event.target == modal2) {
+    if (event.target == modalAviso) {
         modalAviso.style.display = "none";
     }
 };
@@ -262,5 +312,74 @@ btnDeslogar.onclick = function(){
 
 btnCancelar3.onclick = function(){
     modalAviso.style.display = "none";
+}
+
+
+//////////////////////////////////MODAL SALARIO/////////////////////////////////////////////////////////////////////////
+
+var modalSalario = document.getElementById("modalSalario");
+var span4 = document.getElementsByClassName("close")[3];
+var btnCancelar4 = document.getElementById("btnCancelar4");
+var btnSalario = document.getElementById("btnSalario");
+
+
+abrirModalSalario = function(texto){
+    if(texto == "inserir")
+    {
+        $("#h3Salario").html("Insira seu salário");
+        $("h5").html("");
+    }
+    else
+    {
+        $("#h3Salario").html("Altere seu salário");
+        $("h7").html("Salário antigo:" + salario);
+    }
+    
+    modalSalario.style.display = "block";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal2) {
+        modalSalario.style.display = "none";
+    }
+};
+
+span4.onclick = function(){
+    modalSalario.style.display = "none";
+}
+
+btnSalario.onclick = function(){
+    salarioIA($("#frmInserirSalario"));
+}
+
+btnCancelar4.onclick = function(){
+    modalSalario.style.display = "none";
+}
+//////////////////////////////////MODAL SITUACAO////////////////////////////////////////////////////////////////////////
+
+var modalSituacao = document.getElementById("modalSituacao");
+var span5 = document.getElementsByClassName("close")[4];
+
+
+abrirModalSituacao = function(){
+    var slp = salario-valorNegativo;
+    alert(valorNegativo);
+    alert(salario);
+    if(slp< 0)
+        $("#labelSituacao").html("Sua situação financeira não está boa, você possui um saldo negativo de <br>"+slp);
+    else
+        $("#labelSituacao").html("Por enquanto você possui dinheiro sobrando! <br>" +slp)
+;    
+    modalSituacao.style.display = "block";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal2) {
+        modalSituacao.style.display = "none";
+    }
+};
+
+span5.onclick = function(){
+    modalSituacao.style.display = "none";
 }
 

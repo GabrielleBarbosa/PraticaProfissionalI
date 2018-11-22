@@ -5,7 +5,6 @@ const porta = 3000; //porta padrão
 const sql = require('mssql');
 const conexaoStr = "Server=regulus.cotuca.unicamp.br;Database=PR118183;User Id=PR118183;Password=PR118183;";
 var email = "1@2.com";
-var logado = false;
 
 //conexao com BD
 sql.connect(conexaoStr)
@@ -161,7 +160,8 @@ rota.delete('/GastoUsuario/:nome/:tipo', (requisicao, resposta) => {
                 @nome = '${nome}',
                 @tipo = '${tipo}',
                 @email = '${email}'
-                `
+                `,
+        resposta
     );
 
 })

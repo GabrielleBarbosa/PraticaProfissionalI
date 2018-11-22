@@ -154,3 +154,10 @@ label#cadastro
     top:38%;
     position: relative;
 }
+
+#textoSobre
+{
+    position: absolute;
+    top: 40%;
+	left: 10%;
+}

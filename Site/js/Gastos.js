@@ -89,10 +89,11 @@ function verificarSalario()
     xmlhttp.onreadystatechange=function()
     {
         var s =  JSON.parse(this.responseText);
-        salario = s[0].salario;
-        valorNegativo = s[0].valorNegativo;
+        salario = parseFloat(s[0].salario);
+        valorNegativo = parseFloat(s[0].valorNegativo);
         
-        if(salario != null)
+        print(salario);
+        if(salario != 0)
         {
             $("#btnInsercaoSalario").hide();
             $("#btnSituacao").show();
@@ -327,7 +328,7 @@ abrirModalSalario = function(texto){
     if(texto == "inserir")
     {
         $("#h3Salario").html("Insira seu salário");
-        $("h5").html("");
+        $("h7").html("");
     }
     else
     {

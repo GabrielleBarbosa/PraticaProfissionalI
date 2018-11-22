@@ -16,37 +16,46 @@ function efetuarCadastro(form)
 
     if(validaSenha() && validaEmail && validaTel && validaCpf && nome.val() != "")
     {
-        if(verificarEmail(email.val()));
-        {
-            cadastrar(form);
-            //window.location.href = "CadastroEfetuado.html";
-        }
+        verificarEmail(email.val(), form);
     }
     else 
-       abrirModal("Digite os campos corretamente");
+       abrirModal("Verifique se os campos estão preenchidos corretamente!");
 }
 
-verificarEmail = function(email){
+/////////////////////////////////////////////////////////////
+
+verificarEmail = function(email, form){
     
     var xmlhttp = new XMLHttpRequest();
-    var url = "http://localhost:3000/Acesso/" + email;
-
+    var url = "http://localhost:3000/Acesso/"+ email;
+    var cont = 0; 
     xmlhttp.onreadystatechange=function()
     {
-        var s = JSON.stringify(this.responseText);
-        alert(s);
-        if(s != "")
+        var a = JSON.stringify(this.responseText);
+        alert(a);
+        cont++;
+        
+        if (cont > 2)
         {
-            abrirModal("Email já está cadastrado no sistema");
-            return false;
+            if(a != '""')
+            {
+                abrirModal("Email já consta no registro");
+            }
+            else
+            {
+                alert("aaaaaaaaaaa");
+                cadastrar(form);
+                window.location.href = "CadastroEfetuado.html";
+            }
         }
-        else 
-            return true;
+            
     }
 
     xmlhttp.open("GET", url,true);
     xmlhttp.send();
 }
+
+/////////////////////////////////////////////////////////////
 
 function validaSenha()
 {
@@ -65,7 +74,7 @@ function validaSenha()
     return true;
 }
 
-/////////////////////////////CADASTRO DO USUÁRIO/////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 cadastrar = function(form){
     $.post( "http://localhost:3000/Usuario", form.serialize() ).done(function(data){
         if (!data.erro) {
@@ -77,7 +86,7 @@ cadastrar = function(form){
     });
 };
 
-/////////////////////////////MODAL AVISO////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 var modal = document.getElementById("modalAviso");
 var span = document.getElementsByClassName("close")[0];
 

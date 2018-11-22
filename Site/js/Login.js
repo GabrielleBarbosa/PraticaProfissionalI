@@ -17,21 +17,26 @@ function enviarEmail()
     {
         var xmlhttp = new XMLHttpRequest();
         var url = "http://localhost:3000/Acesso/"+ email;
-
+        var cont = 0;
         xmlhttp.onreadystatechange=function()
         {
-            
-            if(this.responseText != null)
+            var s = JSON.stringify(this.responseText);
+            alert(s);
+            cont++;
+                
+            if(cont > 2)
             {
-                var senha =  JSON.stringify(this.responseText);
-                alert(senha);
-                if($("#senha").val() == senha)
-                    efetuarLogin();
-                else 
+                if(s != '""')
+                {
+                    var senha =  JSON.parse(this.responseText);
+                    if($("#senha").val() == senha[0].senha)
+                        efetuarLogin();
+                    else 
+                        abrirModal("Email ou senha incorretos");
+                }
+                else
                     abrirModal("Email ou senha incorretos");
             }
-            else
-                abrirModal("Email ou senha incorretos");
 
         }
         

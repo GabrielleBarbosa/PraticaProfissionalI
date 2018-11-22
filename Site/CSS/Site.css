@@ -114,3 +114,43 @@ label#cadastro
 }
 
 
+#btnInsercaoSalario
+{
+    border-radius: 20px;
+    top: 40%;
+    left: 10%;
+    background-color: #ef5350;
+    position: absolute;
+}
+
+#btnAlteracaoSalario
+{
+    border-radius: 20px;
+    top: 40%;
+    left: 10%;
+    background-color: #ef5350;
+    position: absolute;
+}
+
+#btnSituacao
+{
+    border-radius: 20px;
+    top: 40%;
+    left: 20%;
+    background-color: #ef5350;
+    position: absolute;
+}
+
+#menuGastos
+{
+    height: 180px;
+    position: fixed;
+    z-index:9999;
+}
+
+#menuTipoGastos
+{
+    left:1%; 
+    top:38%;
+    position: relative;
+}

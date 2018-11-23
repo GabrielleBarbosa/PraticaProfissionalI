@@ -121,7 +121,7 @@ function verificarSalario()
 excluir = function(nome){ 
     if(confirm("Tem certeza que deseja excluir?")){
             $.ajax({
-                url: "http://localhost:3000/Gasto/"+nome+"/"+tipoAtual,
+                url: "http://localhost:3000/GastoUsuario/"+nome+"/"+tipoAtual,
                 type: 'DELETE'
             }).done(function(){
                 //chamar listarItem

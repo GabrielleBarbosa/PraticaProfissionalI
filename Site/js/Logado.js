@@ -9,13 +9,12 @@ function verificarLog()
     {
         var logado = JSON.stringify(this.responseText);
         cont++;
-        alert(logado);
 
         if(cont > 2)
         {
             var logado = JSON.parse(this.responseText);
             if(logado[0].logado == "s")
-                document.getElementById("menu").innerHTML = "<li><a href='Gastos.html' style='background-color: #2ECCFA; border-radius: 100px;'>Seus Gastos</a></li><li><a href='Home.html'>Home</a></li><li><a onclick='mudarSituacao(\'n\')'>Deslogar</a></li>";
+                document.getElementById("menu").innerHTML = "<li><a href='Gastos.html' style='background-color: #2ECCFA; border-radius: 100px;'>Seus Gastos</a></li><li><a href='Home.html'>Home</a></li><li><a onclick='mudarSituacao(\"n\"); redirecionar(\"Home.html\")'>Deslogar</a></li>";
             else if(logado[0].logado == "n")
                 document.getElementById("menu").innerHTML = "<li><a href='Home.html'>Home</a></li><li><a href='Login.html'>Login</a></li><li><a href='Cadastro.html' class='waves-effect waves-light btn' >Cadastre-se</a></li>";
         }
@@ -37,7 +36,6 @@ function verificarLogGastos()
     {
         var logado = JSON.stringify(this.responseText);
         cont++;
-        alert(logado);
 
         if(cont > 2)
         {
@@ -58,6 +56,11 @@ function mudarSituacao(logado)
                 url: "http://localhost:3000/Acesso/"+logado,
                 type: 'POST'
             }).done(function(){
-                location.href = "Home.html";
+        
             }); 
+}
+
+function redirecionar(pagina)
+{
+    window.location.href = pagina;
 }

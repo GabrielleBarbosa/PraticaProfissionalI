@@ -314,6 +314,7 @@ span3.onclick = function(){
 }
 
 btnDeslogar.onclick = function(){
+    mudarSituacao("n");
     location.href = pagina;
 }
 

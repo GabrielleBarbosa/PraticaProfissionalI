@@ -29,7 +29,7 @@ function verificarLogGastos()
 {
     var xmlhttp = new XMLHttpRequest();
 
-    var url = "http://localhost:3000/Acesso/logado";
+    var url = "http://localhost:3000/Logado";
 
     var cont = 0;
     xmlhttp.onreadystatechange=function()
@@ -40,12 +40,23 @@ function verificarLogGastos()
 
         if(cont > 2)
         {
-            if(logado == "n")
-                location.href = "Home.html";
+            var logado = JSON.parse(this.responseText);
+            if(logado[0].logado == "n")
+                window.location.href = "Home.html";
         }
 
     }
 
     xmlhttp.open("GET", url,true);
     xmlhttp.send();
+}
+
+function mudarSituacao(logado)
+{
+    $.ajax({
+                url: "http://localhost:3000/Acesso/"+logado,
+                type: 'POST'
+            }).done(function(){
+                location.href = "Home.html"
+            }); 
 }

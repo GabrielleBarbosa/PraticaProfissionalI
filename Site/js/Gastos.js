@@ -85,25 +85,31 @@ function verificarSalario()
 {
     var xmlhttp = new XMLHttpRequest();
     var url = "http://localhost:3000/SLP/";
-
+    
+    var cont = 0;
     xmlhttp.onreadystatechange=function()
     {
-        var s =  JSON.parse(this.responseText);
-        salario = parseFloat(s[0].salario);
-        valorNegativo = parseFloat(s[0].valorNegativo);
+        var s =  JSON.stringify(this.responseText);
+        cont++;
         
-        //print(salario);
-        if(salario != 0)
+        if(cont > 2)
         {
-            $("#btnInsercaoSalario").hide();
-            $("#btnSituacao").show();
-            $("#btnAlteracaoSalario").show();
-        }
-        else
-        {
-            $("#btnSituacao").hide();
-            $("#btnAlteracaoSalario").hide();
-            $("#btnInsercaoSalario").show();
+            var s =  JSON.parse(this.responseText);
+            salario = parseFloat(s[0].salario);
+            valorNegativo = parseFloat(s[0].valorNegativo);
+
+            if(salario != 0)
+            {
+                $("#btnInsercaoSalario").hide();
+                $("#btnSituacao").show();
+                $("#btnAlteracaoSalario").show();
+            }
+            else
+            {
+                $("#btnSituacao").hide();
+                $("#btnAlteracaoSalario").hide();
+                $("#btnInsercaoSalario").show();
+            }
         }
     }
 

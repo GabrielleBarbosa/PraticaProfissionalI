@@ -220,6 +220,26 @@ rota.get('/SLP',(requisicao,resposta) =>{
             );    
 })
 
+//MUDAR O STATUS DO ACESSO PARA LOGADO OU DESLOGADO
+
+rota.post('/Acesso/:logado',(requisicao, resposta)=>{
+    const logado = requisicao.params.logado.substring(0,1);
+    
+    execSQL(
+                `update Acesso set logado='${logado}' where email='${email}'`,
+                resposta
+            );
+})
+
+//VERIFICAR SE STATUS É LOGADO
+
+rota.get('/Acesso/logado',(requisicao, resposta)=>{
+    execSQL(
+                `select logado from Acesso where email='${email}'`,
+                resposta
+            );
+})
+
 
 
 

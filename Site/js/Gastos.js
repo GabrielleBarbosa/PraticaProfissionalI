@@ -92,7 +92,7 @@ function verificarSalario()
         salario = parseFloat(s[0].salario);
         valorNegativo = parseFloat(s[0].valorNegativo);
         
-        print(salario);
+        //print(salario);
         if(salario != 0)
         {
             $("#btnInsercaoSalario").hide();
@@ -364,18 +364,18 @@ var span5 = document.getElementsByClassName("close")[4];
 
 abrirModalSituacao = function(){
     var slp = salario-valorNegativo;
-    alert(valorNegativo);
-    alert(salario);
+    $("#h5TotalDosGastos").html(valorNegativo);
+    
     if(slp< 0)
-        $("#labelSituacao").html("Sua situação financeira não está boa, você possui um saldo negativo de <br>"+slp);
+        $("#h5Situacao").html("Sua situação financeira não está boa, você possui um saldo negativo. <br>Saldo: "+slp);
     else
-        $("#labelSituacao").html("Por enquanto você possui dinheiro sobrando! <br>" +slp)
-;    
+        $("#h5Situacao").html("Por enquanto você possui dinheiro sobrando! <br>Saldo: " +slp); 
+    
     modalSituacao.style.display = "block";
 }
 
 window.onclick = function(event) {
-    if (event.target == modal2) {
+    if (event.target == modalSituacao) {
         modalSituacao.style.display = "none";
     }
 };

@@ -7,29 +7,17 @@ email varchar(50) not null,
 senha varchar(30) not null
 )
 
-select * from Usuario
-SELECT senha from Acesso where email = '1@2.com'
-select * from Acesso
-
-drop table Usuario
-insert into Acesso values('vinschers@gmail.com','felipao')
-
 create table Acesso(
 email varchar(50) primary key,
 senha varchar(30) not null,
 logado char(1)
 )
 
-drop table Usuario
-select * from Acesso
-
 create table Gasto(
 codGasto int identity(1,1) primary key,
 nome varchar(50)not null,
 tipo varchar(20) not null
 )
-
-select * from Gasto
 
 create table GastoUsuario(
 codUsuario int not null,

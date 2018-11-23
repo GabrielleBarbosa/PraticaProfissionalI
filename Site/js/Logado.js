@@ -2,7 +2,7 @@ function verificarLog()
 {
     var xmlhttp = new XMLHttpRequest();
 
-    var url = "http://localhost:3000/Acesso/logado";
+    var url = "http://localhost:3000/Logado";
 
     var cont = 0;
     xmlhttp.onreadystatechange=function()
@@ -13,9 +13,10 @@ function verificarLog()
 
         if(cont > 2)
         {
-            if(logado == "s")
-                document.getElementById("menu").innerHTML = "<li><a href='Gastos.html'>Seus Gastos</a></li><li><a href='Home.html'>Home</a></li><li><a href='Login.html'>Login</a></li><li><a href='Cadastro.html' class='waves-effect waves-light btn' >Cadastre-se</a></li>";
-            else if(logado == "n")
+            var logado = JSON.parse(this.responseText);
+            if(logado[0].logado == "s")
+                document.getElementById("menu").innerHTML = "<li><a href='Gastos.html'>Seus Gastos</a></li><li><a href='Home.html'>Home</a></li><li><a onclick='mudarSituacao(\'n\')'>Deslogar</a></li>;
+            else if(logado[0].logado == "n")
                 document.getElementById("menu").innerHTML = "<li><a href='Home.html'>Home</a></li><li><a href='Login.html'>Login</a></li><li><a href='Cadastro.html' class='waves-effect waves-light btn' >Cadastre-se</a></li>";
         }
 

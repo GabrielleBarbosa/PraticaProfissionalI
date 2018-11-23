@@ -7,6 +7,9 @@ email varchar(50) not null,
 senha varchar(30) not null
 )
 
+insert into Acesso values ('gabi', 'dkjn', 'n')
+	insert into Usuario values('felipe melchior de britto', '528.094.498-05', '19998445620','felipemelchior112@gmail.com', 'F3l1p3l3o')
+
 create table Acesso(
 email varchar(50) primary key,
 senha varchar(30) not null,
@@ -32,7 +35,8 @@ codUsuario int not null,
 constraint fkCodUsuarioSLP foreign key(codUsuario) references Usuario(codUsuario),  
 situacao varchar(10),
 valorNegativo money, --gastos
-salario money
+salario money,
+totalDinheiroGuardado money
 )
 
 -------------------------------------------------------------------------------------------------------------------------------------
@@ -110,7 +114,7 @@ salario money
     -- Não inserir usuário se email for repetido
 	-- Se inserir usuario inserir coluna no SLP ligada a seu codigo
 
-	create trigger UsuarioAcesso_tg on Usuario 
+	alter trigger UsuarioAcesso_tg on Usuario 
 	instead of insert
 	as 
 	declare @nome varchar(50)
@@ -129,7 +133,7 @@ salario money
 	begin
 		insert into Usuario values (@nome, @cpf, @telefone, @email, @senha)
 		select @codUsuario=codUsuario from Usuario where email=@email
-		insert into SLP values(@codUsuario,'',0,0)
+		insert into SLP values(@codUsuario,'',0,0,0)
 		insert into Acesso values (@email,@senha,'s')
 	end
 	else 
@@ -219,3 +223,5 @@ salario money
 	select * from SLP
 	select * from Gasto
 	select * from GastoUsuario
+	select * from Usuario
+

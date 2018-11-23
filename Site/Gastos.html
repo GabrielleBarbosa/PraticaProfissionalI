@@ -19,20 +19,6 @@
 
 </head>
 
-<script type="text/javascript">
-
-    function inserirGastos(){
-        
-        var dados = new XMLHttpRequest();
-        dados.onreadystatechange = function(){
-             document.getElementById("frm").innerHTML = dados.responseText;
-        };
-        dados.open("GET","Inserir.html",true);
-        dados.send();
-    }
-
-</script>
-
 <body class="teal lighten-2" id="corpoPagina" onload="verificarLogGastos(); listarGastos('Pessoal'); verificarSalario();">
     <nav class="nav-extended blue darken-1" id="menuGastos">
 

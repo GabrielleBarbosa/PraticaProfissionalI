@@ -88,6 +88,16 @@ rota.get('/Acesso/:email', (requisicao, resposta) => {
 })
 
 
+//PRA VER SE FEZ LOGIN
+rota.get('/Logado', (requisicao, resposta) => {
+    execSQL(`print '${logado}'`, resposta);
+})
+
+rota.post('/Logado/:logado', (requisicao, resposta) => {
+    logado = requisicao.params.logado;
+})
+
+
 //alterar informações de usuário
 rota.patch('/Usuario/:email', (requisicao, resposta) => {
 
@@ -201,7 +211,7 @@ rota.post('/SLP', (requisicao, resposta) => {
 
 
 
-//VERIFICAR SE SALARIO É 0
+//VERIFICAR SE SALARIO É NULL
 
 rota.get('/SLP',(requisicao,resposta) =>{
     execSQL(
@@ -223,7 +233,7 @@ rota.post('/Acesso/:logado',(requisicao, resposta)=>{
 
 //VERIFICAR SE STATUS É LOGADO
 
-rota.get('/Logado',(requisicao, resposta)=>{
+rota.get('/Acesso/logado',(requisicao, resposta)=>{
     execSQL(
                 `select logado from Acesso where email='${email}'`,
                 resposta

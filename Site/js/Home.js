@@ -1,4 +1,3 @@
-
     var imgPorco = new Image();
     var imgMoeda = new Image();
     var imgFundo = new Image();

@@ -2,6 +2,21 @@ var tipoAtual = "";  //tipo de gasto que a pessoa está
 var salario;
 var valorNegativo;   // o total de todos os gastos
 /////////////////////////////////////
+
+
+
+
+function pegarDataAtual(){
+   data = new Date();
+   document.getElementById('data').value = data.getDay()+'/'+data.getMonth()+'/'+data.getFullYear();
+    alert(data);
+}
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////
 listarGastos = function (tipo) {
 
     tipoAtual = tipo;
@@ -129,7 +144,6 @@ excluir = function(nome){
             }); //done
     }
     listarGastos(tipoAtual);
-    verificarGastos();
     verificarSalario();
 
 };
@@ -190,44 +204,43 @@ salarioIA = function(form){
 }
 
 /////////////////////////////////////////MODAL INCLUSAO//////////////////////////////////////////////////////
-// Get the modal
+// pega o modal
 var modal = document.getElementById('modalInc');
 
-// Get the button that opens the modal
+//pega o botao que abre o modal
 var btnInclusao = document.getElementById("btnInclusao");
 
-// Get the <span> element that closes the modal
+// pega o span('x' que fecha o modal)
 var span = document.getElementsByClassName("close")[0];
 
-// Get the link CANCELAR
+// pega o link CANCELAR
 var btnCancelar = document.getElementById("btnCancelar");
 
 var btnCadastrar = document.getElementById("btnIncluir");
 
-// When the user clicks on the button, open the modal 
+//quando clicar no botão, o modal abre
 btnInclusao.onclick = function() {
     modal.style.display = "block";
     
 };
 
-// When the user clicks on <span> (x), close the modal
+//quando o usuário clicar no 'x', o modal fecha
 span.onclick = function() {
     modal.style.display = "none";
 };
 
-// When the user clicks on <span> (x), close the modal
+//quando o usuário clicar no botão cancelar, o modal fecha
 btnCancelar.onclick = function() {
     modal.style.display = "none";
 };
 
-// When the user clicks anywhere outside of the modal, close it
+//quando o usuário clicar fora do modal, ele fecha
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
 };
 
-// When the user clicks on the button, open the modal 
 btnCadastrar.onclick = function() {
     var regExValor = /^[0-9]*\.[0-9]{2}$/;
     var validaValor = regExValor.test($("#valor").val());
@@ -338,12 +351,13 @@ var btnSalario = document.getElementById("btnSalario");
 abrirModalSalario = function(texto){
     if(texto == "inserir")
     {
-        $("#h3Salario").html("Insira seu salário");
+        $("#h3Salario").html("Insira seu salário/Adicione dinheiro ao caixa");
         $("h7").html("");
     }
     else
     {
-        $("#h3Salario").html("Altere seu salário");
+        $("#h3Salario").html("Altere seu salário/Adicione dinheiro ao caixa");
+        $("#h3Salario").html("Altere seu salário/Adicione dinheiro ao caixa");
         $("h7").html("Salário antigo:" + salario);
     }
     

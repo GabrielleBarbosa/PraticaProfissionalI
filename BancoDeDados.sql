@@ -225,3 +225,27 @@ totalDinheiroGuardado money
 	select * from GastoUsuario
 	select * from Usuario
 
+	---------------------------------------------------------------------------------------------------
+
+	--Stored Procedured para realziar inserções no campo totalDinheiroGuardado da tabela SLP
+	--criado no dia 25/11/2018
+	select * from SLP
+
+
+	create proc GuardarDinheiroNoCaixa_sp
+	@email varchar(50) = null,
+	@caixa money = null
+	as
+	declare @codUsuario int 
+	declare @total int
+	if(@email is null or @caixa is null)
+		print'COLOQUE O EMAIL DO USUÁRIO'
+	else
+		Begin
+			select @codUsuario = codUsuario from Usuario where email = @email
+			select @total = totalDinheiroGuardado
+			update SLP set totalDinheiroGuardado = @caixa where codUsuario = @codUsuario
+		End
+
+
+		select * from SLP

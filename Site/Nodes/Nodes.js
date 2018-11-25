@@ -242,4 +242,19 @@ rota.get('/Acesso/logado',(requisicao, resposta)=>{
 
 
 
+//ADICIONAR DINHEIRO AO CAIXA DO USUÁRIO
+
+rota.post('/SLP/',(requisicao,resposta)=>{
+    const caixa  = requisicao.body.dinheiro;
+   execSQL(
+            `
+                GuardarDinheiroNoCaixa_sp
+                @email = '${email}',
+                @caixa = ${caixa}
+                
+            `  
+          );
+})
+
+
 

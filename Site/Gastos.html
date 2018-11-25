@@ -19,7 +19,7 @@
 
 </head>
 
-<body class="teal lighten-2" id="corpoPagina" onload="verificarLogGastos(); listarGastos('Pessoal'); verificarSalario();">
+<body class="teal lighten-2" id="corpoPagina" onload="verificarLogGastos(); listarGastos('Pessoal'); verificarSalario();pegarDataAtual(); ">
     <nav class="nav-extended blue darken-1" id="menuGastos">
 
         <div class="nav-wrapper">
@@ -34,7 +34,7 @@
         
         <a class="btn-small" onclick="abrirModalSalario('alterar');" id="btnAlteracaoSalario">Alterar Salário</a>
         
-        <a class="btn-small" onclick="abrirModalSituacao();" id="btnSituacao">Situação</a>
+        <a class="btn-small" onclick="abrirModalSituacao();verificarSalario();" id="btnSituacao">Situação</a>
         
         <div class="nav-content" id="menuTipoGastos">
             <ul class="tabs tabs-transparent" id="gastos">
@@ -185,8 +185,12 @@
                 <h7></h7>
                 <form class="col s12" id="frmInserirSalario">
                     <div class="input-field col s12">
-                        <label for="salario">Salário:</label>
+                        <label for='salario'>Salário:</label>
                         <input type="text" id="salario" name="salario">
+                    </div>
+                    <div class="input-field col s12">
+                        <label for='dinheiro'>Adicionar Dinheiro ao caixa:</label>
+                        <input type="text" id="dinheiro" name="dinheiro">
                     </div>
                 </form>
             </div>

@@ -1,7 +1,6 @@
 var tipoAtual = "";  //tipo de gasto que a pessoa está
 var salario;
 var valorNegativo;   // o total de todos os gastos
-
 /////////////////////////////////////
 listarGastos = function (tipo) {
 
@@ -130,6 +129,9 @@ excluir = function(nome){
             }); //done
     }
     listarGastos(tipoAtual);
+    verificarGastos();
+    verificarSalario();
+
 };
     
 /////////////////////////////////////INCLUIR GASTOS////////////////////////////////////////////////
@@ -148,6 +150,7 @@ incluir = function(form, tipo){
     });
     $("#modalAlt").closeModal();
     listarGastos(tipoAtual);
+    verificarSalario();
 };   
 ///////////////////////////////////ALTERAR GASTOS/////////////////////////////////////////////
 alterar = function(form, nome){
@@ -165,6 +168,7 @@ alterar = function(form, nome){
     });
     $("#modalAlt").closeModal();
     listarGastos(tipoAtual);
+    verificarSalario();
 };
 
 //////////////////ALTERA E INSERE SALARIO////////////////////////////////////////

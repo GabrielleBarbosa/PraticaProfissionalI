@@ -49,7 +49,6 @@ function verificarLogGastos()
     xmlhttp.open("GET", url,true);
     xmlhttp.send();
 }
-
 function mudarSituacao(logado)
 {
     $.ajax({

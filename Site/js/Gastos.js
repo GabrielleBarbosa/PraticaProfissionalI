@@ -1,6 +1,7 @@
 var tipoAtual = "";  //tipo de gasto que a pessoa está
 var salario;
 var valorNegativo;   // o total de todos os gastos
+var valorGuardado;
 /////////////////////////////////////
 
 
@@ -57,7 +58,21 @@ listarGastos = function (tipo) {
                                         src: "Imagens/delete.png" });
             btnExcluir.append(icone);
             btnExcluir.click(function(){
-                excluir(val.nome);
+                abrirModalExclusao(val.nome);
+            });
+            // fim do botao excluir
+            
+            // --- criar botao EXCLUIR que vai ser um link
+            var btnConfirma = $("<a />").attr({
+                                        title: "Confirmar pagamento",
+                                        href:  "#" });
+
+            icone = $("<img />").attr({ class: "botao",
+                                        title: "Confirmar pagamento",
+                                        src: "Imagens/confirmaPagamento_icon.png" });
+            btnConfirma.append(icone);
+            btnConfirma.click(function(){
+                confirmarPagamento(val.nome);
             });
             // fim do botao excluir
 
@@ -65,6 +80,7 @@ listarGastos = function (tipo) {
 
             tdBotoes.append(btnAlterar);
             tdBotoes.append(btnExcluir);
+            tdBotoes.append(btnConfirma);
             
             //colunas da tabela
             if(val.nome == "Total")
@@ -94,8 +110,8 @@ listarGastos = function (tipo) {
         
 }; 
 
-/////////////////////////VERIFICAR SALARIO//////////////////////////////////////////
-function verificarSalario()
+/////////////////////////ATUALIZAR VALORES//////////////////////////////////////////
+function atualizarValores()
 {
     var xmlhttp = new XMLHttpRequest();
     var url = "http://localhost:3000/SLP/";
@@ -111,19 +127,7 @@ function verificarSalario()
             var s =  JSON.parse(this.responseText);
             salario = parseFloat(s[0].salario);
             valorNegativo = parseFloat(s[0].valorNegativo);
-
-            if(salario != 0)
-            {
-                $("#btnInsercaoSalario").hide();
-                $("#btnSituacao").show();
-                $("#btnAlteracaoSalario").show();
-            }
-            else
-            {
-                $("#btnSituacao").hide();
-                $("#btnAlteracaoSalario").hide();
-                $("#btnInsercaoSalario").show();
-            }
+            valorGuardado = parseFloat(s[0].totalDinheiroGuardado);
         }
     }
 
@@ -133,7 +137,6 @@ function verificarSalario()
 
 /////////////////////////////////////EXCLUIR GASTOS/////////////////////////////////////////////
 excluir = function(nome){ 
-    if(confirm("Tem certeza que deseja excluir?")){
             $.ajax({
                 url: "http://localhost:3000/GastoUsuario/"+nome+"/"+tipoAtual,
                 type: 'DELETE'
@@ -142,10 +145,9 @@ excluir = function(nome){
                 listarGastos(tipoAtual);
 
             }); //done
-    }
     listarGastos(tipoAtual);
-    verificarSalario();
-
+    atualizarValores();
+    modalExclusao.close();
 };
     
 /////////////////////////////////////INCLUIR GASTOS////////////////////////////////////////////////
@@ -164,8 +166,9 @@ incluir = function(form, tipo){
     });
     $("#modalAlt").closeModal();
     listarGastos(tipoAtual);
-    verificarSalario();
+    atualizarValores();
 };   
+
 ///////////////////////////////////ALTERAR GASTOS/////////////////////////////////////////////
 alterar = function(form, nome){
      $.post( "http://localhost:3000/Gasto/" + nome + "/" + tipoAtual, form.serialize() ).done(function(data){
@@ -182,7 +185,7 @@ alterar = function(form, nome){
     });
     $("#modalAlt").closeModal();
     listarGastos(tipoAtual);
-    verificarSalario();
+    atualizarValores();
 };
 
 //////////////////ALTERA E INSERE SALARIO////////////////////////////////////////
@@ -200,7 +203,7 @@ salarioIA = function(form){
             this.reset();
     });
     $("#modalInserirSalario").closeModal();
-    verificarSalario();
+    atualizarValores();
 }
 
 /////////////////////////////////////////MODAL INCLUSAO//////////////////////////////////////////////////////
@@ -307,9 +310,34 @@ btnAlteracao.onclick = function() {
         alert("Não foi possível alterar, verifique os dados! \nOBS: o valor deve ter duas casas decimais(99.99)");
 };
 
+//////////////////////////////////MODAL EXCLUSAO///////////////////////////////////////////////////////////////////////////
+
+var modalExclusao = document.getElementById("modalExclusao");
+var span6 = document.getElementsByClassName("close")[2];
+var btnCancelar5 = document.getElementById("btnCancelar5");
+var btnExclusao = document.getElementById("btnExclusao");
+var nome = "";
+
+abrirModalExclusao = function(n){
+    nome = n;
+    modalExclusao.style.display = "block";
+}
+
+span6.onclick = function(){
+    modalExclusao.style.display = "none";
+}
+
+btnExclusao.onclick = function(){
+    excluir(nome)
+}
+
+btnCancelar5.onclick = function(){
+    modalExclusao.style.display = "none";
+}
+
 /////////////////////////////////////////MODAL AVISO/////////////////////////////////////////////////////////////////////////////
 var modalAviso = document.getElementById("modalAviso");
-var span3 = document.getElementsByClassName("close")[2];
+var span3 = document.getElementsByClassName("close")[3];
 var btnCancelar3 = document.getElementById("btnCancelar3");
 var btnDeslogar = document.getElementById("btnDeslogar");
 var pagina;
@@ -319,13 +347,6 @@ abrirModalAviso = function(texto, texto2){
     $("h5").html(texto2);
     modalAviso.style.display = "block";
 }
-
-window.onclick = function(event) {
-    if (event.target == modalAviso) {
-        modalAviso.style.display = "none";
-    }
-};
-
 span3.onclick = function(){
     modalAviso.style.display = "none";
 }
@@ -340,61 +361,63 @@ btnCancelar3.onclick = function(){
 }
 
 
-//////////////////////////////////MODAL SALARIO/////////////////////////////////////////////////////////////////////////
+//////////////////////////////////MODAL INSERIR GANHOS/////////////////////////////////////////////////////////////////////////
 
-var modalSalario = document.getElementById("modalSalario");
-var span4 = document.getElementsByClassName("close")[3];
+var modalGanhos = document.getElementById("modalGanhos");
+var span4 = document.getElementsByClassName("close")[4];
 var btnCancelar4 = document.getElementById("btnCancelar4");
-var btnSalario = document.getElementById("btnSalario");
+var btnGanhos = document.getElementById("btnGanhos");
 
 
 abrirModalSalario = function(texto){
-    if(texto == "inserir")
-    {
-        $("#h3Salario").html("Insira seu salário/Adicione dinheiro ao caixa");
-        $("h7").html("");
-    }
-    else
-    {
-        $("#h3Salario").html("Altere seu salário/Adicione dinheiro ao caixa");
-        $("#h3Salario").html("Altere seu salário/Adicione dinheiro ao caixa");
-        $("h7").html("Salário antigo:" + salario);
-    }
     
-    modalSalario.style.display = "block";
+    $("#h3Salario").html("Adicione seu salário/Adicione dinheiro ao caixa");
+    $("h7").html("Último salário recebido:" + salario);
+    
+    
+    modalGanhos.style.display = "block";
 }
-
-window.onclick = function(event) {
-    if (event.target == modal2) {
-        modalSalario.style.display = "none";
-    }
-};
 
 span4.onclick = function(){
-    modalSalario.style.display = "none";
+    modalGanhos.style.display = "none";
 }
 
-btnSalario.onclick = function(){
-    salarioIA($("#frmInserirSalario"));
+btnGanhos.onclick = function(){
+    var regExValor = /^[0-9]*\.[0-9]{2}$/;
+    var validaValorSalario = regExValor.test($("#salario").val());
+    var validaValorGanho = regExValor.test($("#dinheiro").val());
+    
+    if(!validaValorSalario && !validaValorGanho)
+        alert("Não foi possível alterar, verifique os dados! \n\nOBS: Pelo menos um dos valores deve estar preenchido e ter duas casas decimais(99.99)");
+    else
+    {
+        if(validaValorSalario)
+            salarioIA($("#frmInserirSalario"));
+        if(validValorGanho)
+            alert("aaaaaaaaaaaaaa");
+    }
 }
 
 btnCancelar4.onclick = function(){
-    modalSalario.style.display = "none";
+    modalGanhos.style.display = "none";
 }
 //////////////////////////////////MODAL SITUACAO////////////////////////////////////////////////////////////////////////
 
 var modalSituacao = document.getElementById("modalSituacao");
-var span5 = document.getElementsByClassName("close")[4];
+var span5 = document.getElementsByClassName("close")[5];
 
 
 abrirModalSituacao = function(){
     var slp = salario-valorNegativo;
-    $("#h5TotalDosGastos").html(valorNegativo);
     
     if(slp< 0)
-        $("#h5Situacao").html("Sua situação financeira não está boa, você possui um saldo negativo. <br>Saldo: "+slp);
+        $("#h4Situacao").html("Sua situação financeira não está boa, você possui um saldo negativo.");
     else
-        $("#h5Situacao").html("Por enquanto você possui dinheiro sobrando! <br>Saldo: " +slp); 
+        $("#h4Situacao").html("Por enquanto você possui dinheiro sobrando!"); 
+    
+    $("#h5TotalDosGastos").html("Total dos Gastos: " + valorNegativo);
+    $("#h5TotalGuardado").html("Total Guardado: " + valorGuardado);
+    $("#h5Saldo").html("Saldo: " +slp);
     
     modalSituacao.style.display = "block";
 }

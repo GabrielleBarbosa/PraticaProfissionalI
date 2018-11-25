@@ -19,7 +19,7 @@
 
 </head>
 
-<body class="teal lighten-2" id="corpoPagina" onload="verificarLogGastos(); listarGastos('Pessoal'); verificarSalario();pegarDataAtual(); ">
+<body class="teal lighten-2" id="corpoPagina" onload="verificarLogGastos(); listarGastos('Pessoal'); atualizarValores();">
     <nav class="nav-extended blue darken-1" id="menuGastos">
 
         <div class="nav-wrapper">
@@ -30,9 +30,7 @@
             </ul>
         </div>
         
-        <a class="btn-small" onclick="abrirModalSalario('inserir');" id="btnInsercaoSalario">Inserir Salário</a>
-        
-        <a class="btn-small" onclick="abrirModalSalario('alterar');" id="btnAlteracaoSalario">Alterar Salário</a>
+        <a class="btn-small" onclick="abrirModalSalario();" id="btnAlteracaoSalario">Dinheiro guardado</a>
         
         <a class="btn-small" onclick="abrirModalSituacao();verificarSalario();" id="btnSituacao">Situação</a>
         
@@ -71,7 +69,8 @@
 
     <button class="btn-large" id="btnInclusao"  style="position: relative; top: 400px; left: 40%">Incluir Gasto</button>
 
-    <!-- Modal Inclusão -->
+        
+<!----------------------------------- Modal Inclusão--------------------------------------------------------------------------------------------------------------------------------------------    -->
     <div class="modal" id="modalInc">
         <div class="modal-content">
             <div class="modal-header">
@@ -127,9 +126,10 @@
                 <a href="#!" class="modal-link-rodape" id="btnCancelar">CANCELAR / FECHAR</a>
             </div>
         
-    </div> <!-- Fim Modal Inclusão -->
+    </div> 
     
-    <!-- Modal ALteração -->
+        
+<!----------------------------------- Modal Alteração--------------------------------------------------------------------------------------------------------------------------------------------    -->
     <div class="modal" id="modalAlt">
         <div class="modal-content">
             <div class="modal-header">
@@ -153,9 +153,28 @@
                 <a href="#!" class="modal-link-rodape" id="btnCancelar2">CANCELAR</a>
             </div>
         </div>
-    </div> <!-- Fim Modal ALteração -->        
+    </div>        
+    
+<!----------------------------------- Modal Exclusão--------------------------------------------------------------------------------------------------------------------------------------------    -->
 
-    <!-- -----------------Modal Aviso----------------- -->
+    <div class="modal" id="modalExclusao">
+        <div class="modal-content">
+            <div class="modal-header" id="headerModalAviso">
+                <span class="close">&times;</span>
+                <h3><i>Excluir Gasto</i></h3>
+            </div>
+            <div class="modal-body">
+                <h5>Ao excluir o gasto, o valor não será contabilizado, ou seja, será como se este nunca tivesse existido!</h5>
+            </div>
+            <div class="modal-footer" id="footerModalAviso">
+                <h6>Tem certeza que deseja excluir?</h6>
+                <button id="btnExclusao" class="btn-small">Excluir Gasto</button>
+                <button id="btnCancelar5" class="btn-small">Cancelar</button>
+            </div>
+        </div>
+    </div>
+        
+<!----------------------------------- Modal aviso--------------------------------------------------------------------------------------------------------------------------------------------    -->
     <div class="modal" id="modalAviso">
         <div class="modal-content">
             <div class="modal-header" id="headerModalAviso">
@@ -172,12 +191,12 @@
             </div>
         </div>
     </div>
+        
+<!----------------------------------- Modal Inserção ganhos--------------------------------------------------------------------------------------------------------------------------------------------    -->
     
- <!---------------------- Modal Inserção Salário  ----------------------- -->
-    
-    <div class="modal" id="modalSalario">
+    <div class="modal" id="modalGanhos">
         <div class="modal-content">
-            <div class="modal-header" id="headerInserirSalario">
+            <div class="modal-header" id="headerModalAviso">
                 <span class="close">&times;</span>
                 <h3><i id="h3Salario"></i></h3>
             </div>
@@ -185,7 +204,7 @@
                 <h7></h7>
                 <form class="col s12" id="frmInserirSalario">
                     <div class="input-field col s12">
-                        <label for='salario'>Salário:</label>
+                        <label for='salario'>Adicionar salário recebido:</label>
                         <input type="text" id="salario" name="salario">
                     </div>
                     <div class="input-field col s12">
@@ -195,7 +214,7 @@
                 </form>
             </div>
             <div class="modal-footer" id="footerInserirSalario">
-                <button id="btnSalario" class="small btn">Efetuar</button>
+                <button id="btnGanhos" class="small btn">Efetuar</button>
                 <button id="btnCancelar4" class="small btn">Cancelar</button>
             </div>
         </div>
@@ -206,22 +225,23 @@
     
     <div class="modal" id="modalSituacao">
         <div class="modal-content">
-            <div class="modal-header" id="headerModalSituacao">
+            <div class="modal-header" id="headerModalAviso">
                 <span class="close">&times;</span>
-                <h3><i id="h3Situacao"></i></h3>
+                <h3><i id="h3Situacao">Seu Saldo:</i></h3>
             </div>
             <div class="modal-body">
                 <form id="frmModalSituacao">
-                        <h4>Total dos Gastos:</h4>
+                        <h4 id="h4Situacao"></h4>
                         <h5 id="h5TotalDosGastos"></h5>
-                        <h4>Seu Saldo:</h4>
-                        <h5 id="h5Situacao"></h5>
+                        <h5 id="h5TotalGuardado"></h5>
+                        <h5 id="h5Saldo"></h5>
                 </form>
             </div>
             <div class="modal-footer" id="footerModalSituacao">
             </div>
         </div>
     </div>
+    
     
 <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------    -->
     

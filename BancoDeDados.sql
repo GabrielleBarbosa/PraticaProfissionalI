@@ -273,3 +273,29 @@ totalDinheiroGuardado money
 	update slp set valorNegativo = 0, totalDinheiroGuardado = 0, salario = 0
 
 	confirmarpagamento_sp 'oi', 'Imovel', 'gabrielle.gabi.barbosa@gmail.com'
+
+
+
+
+	create proc AlterarDados_sp
+@nome varchar(50),
+@tel varchar(15),
+@emailNovo varchar(50),
+@senha varchar(20),
+@emailAntigo varchar(50)
+as
+Begin
+	update usuario set 
+	nome = @nome,
+	telefone = @tel,
+	email = @emailNovo,
+	senha = @senha 
+	where
+	email = @emailAntigo
+
+	update Acesso set
+	email  =@emailNovo,
+	senha = @senha
+	where
+	email = @emailAntigo
+End

@@ -249,3 +249,27 @@ totalDinheiroGuardado money
 
 
 		select * from SLP
+
+
+
+
+
+	---------------------------hoje----------------------------------------------------
+	alter proc confirmarPagamento_sp 
+	@nomeGasto varchar(50) = null,
+	@tipoGasto varchar(20) = null,
+	@emailUsuario varchar(50) = null
+	as 
+	if(@nomeGasto is not null and @tipoGasto is not null and @emailUsuario is not null)
+	begin
+		declare @valor money
+		select @valor = valor from GastoUsuario where codUsuario in(select codUsuario from Usuario where email=@emailUsuario) and codGasto in(select codGasto from Gasto where tipo = @tipoGasto and nome = @nomeGasto)
+		print @valor
+		exec ExcluirGasto_sp @email=@emailUsuario, @tipo = @tipoGasto, @nome = @nomeGasto
+		update slp set totalDinheiroGuardado -= @valor where codUsuario in(select codUsuario from Usuario where email=@emailUsuario)
+	end
+
+	select * from slp where codUsuario=26
+	update slp set valorNegativo = 0, totalDinheiroGuardado = 0, salario = 0
+
+	confirmarpagamento_sp 'oi', 'Imovel', 'gabrielle.gabi.barbosa@gmail.com'

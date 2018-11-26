@@ -88,6 +88,16 @@ rota.get('/Acesso/:email', (requisicao, resposta) => {
 })
 
 
+//PRA VER SE FEZ LOGIN
+rota.get('/Logado', (requisicao, resposta) => {
+    execSQL(`print '${logado}'`, resposta);
+})
+
+rota.post('/Logado/:logado', (requisicao, resposta) => {
+    logado = requisicao.params.logado;
+})
+
+
 //alterar informações de usuário
 rota.patch('/Usuario/:email', (requisicao, resposta) => {
 
@@ -205,7 +215,7 @@ rota.post('/SLP', (requisicao, resposta) => {
 
 rota.get('/SLP',(requisicao,resposta) =>{
     execSQL(
-            `SELECT salario,valorNegativo,totalDinheiroGuardado from SLP where codUsuario in(select codUsuario from Usuario where email='${email}')`,
+            `SELECT salario,valorNegativo from SLP where codUsuario in(select codUsuario from Usuario where email='${email}')`,
             resposta
             );    
 })
@@ -223,7 +233,7 @@ rota.post('/Acesso/:logado',(requisicao, resposta)=>{
 
 //VERIFICAR SE STATUS É LOGADO
 
-rota.get('/Logado',(requisicao, resposta)=>{
+rota.get('/Acesso/logado',(requisicao, resposta)=>{
     execSQL(
                 `select logado from Acesso where email='${email}'`,
                 resposta
@@ -232,33 +242,4 @@ rota.get('/Logado',(requisicao, resposta)=>{
 
 
 
-//ADICIONAR DINHEIRO AO CAIXA DO USUÁRIO
-
-rota.post('/SLP/:caixa',(requisicao,resposta)=>{
-    const caixa  = requisicao.params.caixa;
-   execSQL(
-            `
-                GuardarDinheiroNoCaixa_sp
-                @email = '${email}',
-                @caixa = ${caixa}
-                
-            `, 
-            resposta
-          );
-})
-
-//CONFIRMAR O PAGAMENTO DE UM GASTO
-
-rota.post('/SLP/:nome/:tipo', (requisicao, resposta)=>{
-    const nome = requisicao.params.nome;
-    const tipo = requisicao.params.tipo;
-    
-    execSQL(
-                `exec confirmarPagamento_sp 
-                @nomeGasto='${nome}',
-                @tipoGasto='${tipo}',
-                @emailUsuario='${email}'`,
-                resposta
-           )
-})
 

@@ -51,7 +51,7 @@ var modal = document.getElementById("modalAviso");
 var span = document.getElementsByClassName("close")[0];
 
 abrirModal = function(texto){
-    $("h5").html(texto);
+    $("#h5ModalAviso").html(texto);
     modal.style.display = "block";
 }
 

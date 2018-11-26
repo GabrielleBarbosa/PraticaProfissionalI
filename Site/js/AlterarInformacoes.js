@@ -26,66 +26,59 @@ function efetuarAlteracoes(form)
 
 /////////////////////////////////////////////////////////////
 
-verificarEmailAntigo = function(form){
-    
-    var xmlhttp = new XMLHttpRequest();
-    var url = "http://localhost:3000/Acesso/"+ email.val();
-    var cont = 0; 
-    xmlhttp.onreadystatechange=function()
-    {
-        var a = JSON.stringify(this.responseText);
-        cont++;
-        
-        if (cont > 2)
-        {
-            if(a != '""')
-            {
-                var a = JSON.parse(this.responseText);
-                senhaAntiga = a[0].senha;
-                verificarEmailNovo();
-            }
-            else
-            {
-                abrirModal("Email antigo não consta no registro");
-            }
-        }
-            
-    }
+var s = "";
+verificarEmailAntigo = function(form)
+{
+    $.ajax({
+        url : "http://localhost:3000/Acesso/"+ email.val()
 
-    xmlhttp.open("GET", url,true);
-    xmlhttp.send();
+    }).done(function(dados){
+        $.each(dados, function(key, val){
+            s += val.senha;
+            return false;
+        })
+        
+        alert(s);
+        if(s != "")
+        {
+            senhaAntiga = s;
+            verificarEmailNovo();
+        }
+        else 
+            abrirModal("Email antigo não consta no registro");
+    });
+    
 }
 
 function verificarEmailNovo()
 {
-    var xmlhttp = new XMLHttpRequest();
-    var url = "http://localhost:3000/Acesso/"+ emailNovo.val();
-    alert(emailNovo.val());
-    var cont = 0; 
-    xmlhttp.onreadystatechange=function()
-    {
-        var a = JSON.stringify(this.responseText);
-        alert(senhaAntiga);
-        if(a != '""')
+    $.ajax({
+        url : "http://localhost:3000/Acesso/"+ emailNovo.val()
+
+    }).done(function(dados){
+        $.each(dados, function(key, val){
+            
+            s += val.senha;
+            return false;
+        })
+            
+        if(s != "" && email.val() != emailNovo.val())
         {
+            s="";
             abrirModal("Email novo já consta no registro de outra conta");
         }
         else
         {
             if(senhaAntiga == $("#senha1").val())
-                {
-                     alterar($("#formularioAlt"));
-                }
-            else 
+                alterar($("#formularioAlt"));
+            else
                abrirModal("Senha não compatível com o email antigo fornecido");
         }
-        
-            
-    }
-    xmlhttp.open("GET", url,true);
-    xmlhttp.send();
-}
 
+    });
+    
+}
+      
 /////////////////////////////////////////////////////////////
 
 function validaSenha()
@@ -113,12 +106,14 @@ function validaSenha()
 
 //////////////////////////////////////////////////////////////////////
 alterar = function(form){
+    alert("aaaaa");
     $.post( "http://localhost:3000/UsuarioAlterar", form.serialize() ).done(function(data){
         if (!data.erro) {
-            //window.location.href = "AlteracaoEfetuada.html";
+            window.location.href = "AlteracaoEfetuada.html";
         }
         alert(data.mensagem);
     });
+    window.location.href = "AlteracaoEfetuada.html";
 };
 
 /////////////////////////////////////////////////////////////////////////

@@ -103,7 +103,7 @@ rota.post('/UsuarioAlterar', (requisicao, resposta) => {
              @tel='${tel}',
              @emailNovo='${emailNovo}',
              @senha='${senha}',
-             @emailAntigo=${emailAntigo}
+             @emailAntigo='${emailAntigo}'
         `,
         resposta);
     

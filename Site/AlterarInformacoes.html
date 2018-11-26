@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Seus Gastos</title>
+    <title>Economize</title>
     <link rel="stylesheet" href="CSS/Site.css" type="text/css" />
     <link rel="stylesheet" href="CSS/estilo.css" type="text/css" />
 
@@ -17,6 +17,7 @@
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="http://jqueryvalidation.org/files/dist/jquery.validate.js"></script>
     
+    <script src="js/Logado.js"></script>
 </head>
 
 <body class="nav-extended  teal accent-3">
@@ -27,9 +28,9 @@
 	<div class="nav-wrapper" style="height: 130px;">
 		<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 		<ul id="menu" class="right hide-on-med-and-down">
+            <li><a href="Gastos.html" style="background-color: #2ECCFA; border-radius: 100px;">Seus Gastos</a></li>
 			<li><a href="Home.html">Home</a></li>
-			<li><a href="Login.html">Login</a></li>
-        	<li><a href="Cadastro.html" class="waves-effect waves-light btn">Cadastre-se</a></li>
+            <li><a href="" onclick="mudarSituacao('n'); redirecionar('Home.html');">Deslogar</a></li>
 		</ul>
 	</div>
 <img src="Imagens/LogoSite.png" id="imgLogoSite">
@@ -124,18 +125,19 @@
             
             <div class="row">
                 
-                <div class="col l6 s12">
+                <div class="col l6 s10">
                     <h2 class="white-text" style="font-family:'Segoe Print' ">Economize</h2>
                     <p class="grey-text text-lighten-4" style="font-size: 20px; font-family: cursive;">Organizar mais, Gastar Menos</p>
                 </div>
                 
-                <div class="col l6 s12">
+                <div class="col l6 s10">
                     <h5 class="white-text">Links</h5>
                     <ul>
                         <li><a class="grey-text text-lighten-3" href="Contato.html">Contate-nos</a></li>
                         <li><a class="grey-text text-lighten-3" href="Sobre.html">Sobre</a></li>
                     </ul>
                 </div>
+                <div class="col l6 s2"></div>
                 
             </div>
             

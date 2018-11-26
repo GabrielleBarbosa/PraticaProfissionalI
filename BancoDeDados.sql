@@ -232,30 +232,28 @@ totalDinheiroGuardado money
 	select * from SLP
 
 
-	create proc GuardarDinheiroNoCaixa_sp
+	alter proc GuardarDinheiroNoCaixa_sp
 	@email varchar(50) = null,
 	@caixa money = null
 	as
 	declare @codUsuario int 
-	declare @total int
 	if(@email is null or @caixa is null)
 		print'COLOQUE O EMAIL DO USUÁRIO'
 	else
 		Begin
 			select @codUsuario = codUsuario from Usuario where email = @email
-			select @total = totalDinheiroGuardado
-			update SLP set totalDinheiroGuardado = @caixa where codUsuario = @codUsuario
+			update SLP set totalDinheiroGuardado += @caixa where codUsuario = @codUsuario
 		End
 
-
+		guardarDinheironocaixa_sp @email='gabrielle.gabi.barbosa@gmail.com', @caixa=15.00
 		select * from SLP
 
+	---------------------------------------------------------------------------------------------------
 
-
-
-
-	---------------------------hoje----------------------------------------------------
-	alter proc confirmarPagamento_sp 
+	-- Stored procedure para manter gasto no valor negativo do slp mesmo após excluí-lo
+	-- quando deletar e chamar a trigger que tiraria esse gasto do valor negativo, ele estará duplicado e ela só apagará o valor adicionado e não ele proprio
+    
+    alter proc confirmarPagamento_sp 
 	@nomeGasto varchar(50) = null,
 	@tipoGasto varchar(20) = null,
 	@emailUsuario varchar(50) = null
@@ -264,7 +262,7 @@ totalDinheiroGuardado money
 	begin
 		declare @valor money
 		select @valor = valor from GastoUsuario where codUsuario in(select codUsuario from Usuario where email=@emailUsuario) and codGasto in(select codGasto from Gasto where tipo = @tipoGasto and nome = @nomeGasto)
-		print @valor
+        
 		exec ExcluirGasto_sp @email=@emailUsuario, @tipo = @tipoGasto, @nome = @nomeGasto
 		update slp set totalDinheiroGuardado -= @valor where codUsuario in(select codUsuario from Usuario where email=@emailUsuario)
 	end
@@ -276,26 +274,26 @@ totalDinheiroGuardado money
 
 
 
-
+    -- Procedure destinada a alterar os dados da conta de um usuário
 	create proc AlterarDados_sp
-@nome varchar(50),
-@tel varchar(15),
-@emailNovo varchar(50),
-@senha varchar(20),
-@emailAntigo varchar(50)
-as
-Begin
-	update usuario set 
-	nome = @nome,
-	telefone = @tel,
-	email = @emailNovo,
-	senha = @senha 
-	where
-	email = @emailAntigo
+    @nome varchar(50),
+    @tel varchar(15),
+    @emailNovo varchar(50),
+    @senha varchar(20),
+    @emailAntigo varchar(50)
+    as
+    Begin
+        update usuario set 
+        nome = @nome,
+        telefone = @tel,
+        email = @emailNovo,
+        senha = @senha 
+        where
+        email = @emailAntigo
 
-	update Acesso set
-	email  =@emailNovo,
-	senha = @senha
-	where
-	email = @emailAntigo
-End
+        update Acesso set
+        email  =@emailNovo,
+        senha = @senha
+        where
+        email = @emailAntigo
+    End

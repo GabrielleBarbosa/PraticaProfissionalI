@@ -89,12 +89,13 @@ rota.get('/Acesso/:email', (requisicao, resposta) => {
 
 
 //alterar informações de usuário
-rota.patch('/Usuario/:email', (requisicao, resposta) => {
+rota.patch('/UsuarioAlterar', (requisicao, resposta) => {
 
     const nome = requisicao.body.nome.substring(0, 50);
     const cpf = requisicao.body.cpf.substring(0, 14);
     const tel = requisicao.body.tel.substring(0, 20);
-    email = requisicao.body.email.substring(0, 50);
+    const emailAntigo = requisicao.body.email.substring(0, 50);
+    const emailNovo = requisicao.body.emailNovo.substring(0,50);
     const senha = requisicao.body.senha.substring(0, 15);
 
     execSQL(
@@ -102,9 +103,13 @@ rota.patch('/Usuario/:email', (requisicao, resposta) => {
              nome='${nome}', 
              CPF='${cpf}',
              telefone='${tel}',
-             email='${email}',
+             email='${emailNovo}',
              senha='${senha}' 
-             WHERE email=${email}`,
+             WHERE email=${emailAntigo}
+        UPDATE Acesso SET 
+            email='${emailNovo}',
+            senha='${senha}'
+        WHERE email='${emailAntigo}'`,
         resposta);
 })
 

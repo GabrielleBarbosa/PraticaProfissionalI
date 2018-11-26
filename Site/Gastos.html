@@ -30,9 +30,9 @@
             </ul>
         </div>
         
-        <a class="btn-small" onclick="abrirModalSalario();" id="btnAlteracaoSalario">Dinheiro guardado</a>
+        <a class="btn-small" onclick="atualizarValores();abrirModalSalario();" id="btnAlteracaoSalario">Dinheiro guardado</a>
         
-        <a class="btn-small" onclick="abrirModalSituacao();verificarSalario();" id="btnSituacao">Situação</a>
+        <a class="btn-small" onclick="atualizarValores();abrirModalSituacao();" id="btnSituacao">Situação</a>
         
         <div class="nav-content" id="menuTipoGastos">
             <ul class="tabs tabs-transparent" id="gastos">
@@ -44,8 +44,6 @@
             </ul>
         </div>
         
-             
-
     
      <img src="Imagens/LogoSite.png" id="imgLogoSite">
     </nav>
@@ -242,6 +240,22 @@
         </div>
     </div>
     
+    <!----------------------------------- Modal Confirma--------------------------------------------------------------------------------------------------------------------------------------------    -->
+    <div class="modal" id="modalConfirma">
+        <div class="modal-content">
+            <div class="modal-header" id="headerAviso">
+                <span class="close">&times;</span>
+                <h3>Confirma Pagamento</h3>
+            </div>
+            <div class="modal-body">
+                <h5>Ao confirmar o pagamento de um gasto, este não aparecerá mais na lista de seus gastos, mas será contabilizado na conta de seu saldo!</h5>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" id="btnConfirmaPagamento" class="modal-link-rodape">EFETUAR</a>
+                <a href="#!" class="modal-link-rodape" id="btnCancelar6">CANCELAR</a>
+            </div>
+        </div>
+    </div>
     
 <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------    -->
     

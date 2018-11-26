@@ -21,7 +21,6 @@ function enviarEmail()
         xmlhttp.onreadystatechange=function()
         {
             var s = JSON.stringify(this.responseText);
-            alert(s);
             cont++;
                 
             if(cont > 2)

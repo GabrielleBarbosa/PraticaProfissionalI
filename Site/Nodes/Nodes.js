@@ -234,17 +234,31 @@ rota.get('/Logado',(requisicao, resposta)=>{
 
 //ADICIONAR DINHEIRO AO CAIXA DO USUÁRIO
 
-rota.post('/SLP/',(requisicao,resposta)=>{
-    const caixa  = requisicao.body.dinheiro;
+rota.post('/SLP/:caixa',(requisicao,resposta)=>{
+    const caixa  = requisicao.params.caixa;
    execSQL(
             `
                 GuardarDinheiroNoCaixa_sp
                 @email = '${email}',
                 @caixa = ${caixa}
                 
-            `  
+            `, 
+            resposta
           );
 })
 
+//CONFIRMAR O PAGAMENTO DE UM GASTO
 
+rota.post('/SLP/:nome/:tipo', (requisicao, resposta)=>{
+    const nome = requisicao.params.nome;
+    const tipo = requisicao.params.tipo;
+    
+    execSQL(
+                `exec confirmarPagamento_sp 
+                @nomeGasto='${nome}',
+                @tipoGasto='${tipo}',
+                @emailUsuario='${email}'`,
+                resposta
+           )
+})
 

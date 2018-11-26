@@ -2,20 +2,7 @@ var tipoAtual = "";  //tipo de gasto que a pessoa está
 var salario;
 var valorNegativo;   // o total de todos os gastos
 var valorGuardado;
-/////////////////////////////////////
-
-
-
-
-function pegarDataAtual(){
-   data = new Date();
-   document.getElementById('data').value = data.getDay()+'/'+data.getMonth()+'/'+data.getFullYear();
-    alert(data);
-}
-
-
-
-
+var nome = "";
 
 //////////////////////////////////////////////////////////////////////////////
 listarGastos = function (tipo) {
@@ -62,7 +49,7 @@ listarGastos = function (tipo) {
             });
             // fim do botao excluir
             
-            // --- criar botao EXCLUIR que vai ser um link
+            // --- botao Confirma 
             var btnConfirma = $("<a />").attr({
                                         title: "Confirmar pagamento",
                                         href:  "#" });
@@ -72,9 +59,9 @@ listarGastos = function (tipo) {
                                         src: "Imagens/confirmaPagamento_icon.png" });
             btnConfirma.append(icone);
             btnConfirma.click(function(){
-                confirmarPagamento(val.nome);
+                abrirModalConfirma(val.nome);
             });
-            // fim do botao excluir
+            // fim do botao confirma
 
             tdBotoes = $("<td />");
 
@@ -135,6 +122,20 @@ function atualizarValores()
     xmlhttp.send();
 }
 
+/////////////////////////////////////ADICIONAR AO CAIXA(DINHEIRO GUARDADO)/////////////////////////////////////////////
+adicionarAoCaixa = function(caixa){ 
+        $.ajax({
+            url: "http://localhost:3000/SLP/"+caixa,
+            type: 'POST'
+        }).done(function(){
+            //chamar listarItem
+            listarGastos(tipoAtual);
+
+        }); //done
+    listarGastos(tipoAtual);
+    atualizarValores();
+};
+
 /////////////////////////////////////EXCLUIR GASTOS/////////////////////////////////////////////
 excluir = function(nome){ 
             $.ajax({
@@ -147,7 +148,7 @@ excluir = function(nome){
             }); //done
     listarGastos(tipoAtual);
     atualizarValores();
-    modalExclusao.close();
+    modalExclusao.style.display = "none";
 };
     
 /////////////////////////////////////INCLUIR GASTOS////////////////////////////////////////////////
@@ -164,7 +165,7 @@ incluir = function(form, tipo){
     form.each(function(){
             this.reset();
     });
-    $("#modalAlt").closeModal();
+    modalInclusao.style.display = "none";
     listarGastos(tipoAtual);
     atualizarValores();
 };   
@@ -183,13 +184,13 @@ alterar = function(form, nome){
     form.each(function(){
             this.reset();
     });
-    $("#modalAlt").closeModal();
+    modalAlteracao.style.display = "none";
     listarGastos(tipoAtual);
     atualizarValores();
 };
 
 //////////////////ALTERA E INSERE SALARIO////////////////////////////////////////
-salarioIA = function(form){
+salarioIA = function(form, salario){
     $.post("http://localhost:3000/SLP/",
     form.serialize()).done(function(data){
         if(!data.erro) {
@@ -202,13 +203,26 @@ salarioIA = function(form){
     form.each(function(){
             this.reset();
     });
-    $("#modalInserirSalario").closeModal();
+    adicionarAoCaixa(salario);
+    modalGanhos.style.display = "none";
     atualizarValores();
 }
-
+/////////////////////////////////////////CONFIRMA PAGAMENTO////////////////////////////////////////////////////
+confirmarPagamento = function(nome){ 
+            $.ajax({
+                url: "http://localhost:3000/SLP/"+nome+"/"+tipoAtual,
+                type: 'POST'
+            }).done(function(){
+                //chamar listarItem
+                listarGastos(tipoAtual);
+            }); //done
+    listarGastos(tipoAtual);
+    atualizarValores();
+    modalConfirma.style.display = "none";
+};
 /////////////////////////////////////////MODAL INCLUSAO//////////////////////////////////////////////////////
 // pega o modal
-var modal = document.getElementById('modalInc');
+var modalInclusao = document.getElementById('modalInc');
 
 //pega o botao que abre o modal
 var btnInclusao = document.getElementById("btnInclusao");
@@ -223,25 +237,18 @@ var btnCadastrar = document.getElementById("btnIncluir");
 
 //quando clicar no botão, o modal abre
 btnInclusao.onclick = function() {
-    modal.style.display = "block";
+    modalInclusao.style.display = "block";
     
 };
 
 //quando o usuário clicar no 'x', o modal fecha
 span.onclick = function() {
-    modal.style.display = "none";
+    modalInclusao.style.display = "none";
 };
 
 //quando o usuário clicar no botão cancelar, o modal fecha
 btnCancelar.onclick = function() {
-    modal.style.display = "none";
-};
-
-//quando o usuário clicar fora do modal, ele fecha
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
+    modalInclusao.style.display = "none";
 };
 
 btnCadastrar.onclick = function() {
@@ -260,7 +267,7 @@ btnCadastrar.onclick = function() {
 
 /////////////////////////////////////////MODAL ALTERAÇÃO//////////////////////////////////////////////////////
 // Get the modal
-var modal2 = document.getElementById('modalAlt');
+var modalAlteracao = document.getElementById('modalAlt');
 
 // Get the <span> element that closes the modal
 var span2 = document.getElementsByClassName("close")[1];
@@ -278,7 +285,7 @@ abrirModal = function(n, v) {
     $("#nomeAlt").text("Gasto: " + n);
     $("#tipoAlt").text("Tipo: " + tipoAtual);
     $("#valorAlt").text("ValorAntigo: " + v);
-    modal2.style.display = "block";
+    modalAlteracao.style.display = "block";
 };
 
 // When the user clicks on <span> (x), close the modal
@@ -289,14 +296,7 @@ span2.onclick = function() {
 
 // When the user clicks on <span> (x), close the modal
 btnCancelar2.onclick = function() {
-    modal2.style.display = "none";
-};
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal2) {
-        modal2.style.display = "none";
-    }
+    modalAlteracao.style.display = "none";
 };
 
 // When the user clicks on the button, open the modal 
@@ -316,7 +316,6 @@ var modalExclusao = document.getElementById("modalExclusao");
 var span6 = document.getElementsByClassName("close")[2];
 var btnCancelar5 = document.getElementById("btnCancelar5");
 var btnExclusao = document.getElementById("btnExclusao");
-var nome = "";
 
 abrirModalExclusao = function(n){
     nome = n;
@@ -391,16 +390,24 @@ btnGanhos.onclick = function(){
         alert("Não foi possível alterar, verifique os dados! \n\nOBS: Pelo menos um dos valores deve estar preenchido e ter duas casas decimais(99.99)");
     else
     {
+        var salario = $("#salario").val();
+        var dinheiro = $("#dinheiro").val();
+        
         if(validaValorSalario)
-            salarioIA($("#frmInserirSalario"));
-        if(validValorGanho)
-            alert("aaaaaaaaaaaaaa");
+            salarioIA($("#frmInserirSalario"), salario);
+        if(validaValorGanho)
+            adicionarAoCaixa(dinheiro);
+        
+        $("#frmModalSituacao").each = function(){
+            this.reset();
+        }
     }
 }
 
 btnCancelar4.onclick = function(){
     modalGanhos.style.display = "none";
 }
+
 //////////////////////////////////MODAL SITUACAO////////////////////////////////////////////////////////////////////////
 
 var modalSituacao = document.getElementById("modalSituacao");
@@ -408,7 +415,7 @@ var span5 = document.getElementsByClassName("close")[5];
 
 
 abrirModalSituacao = function(){
-    var slp = salario-valorNegativo;
+    var slp = valorGuardado-valorNegativo;
     
     if(slp< 0)
         $("#h4Situacao").html("Sua situação financeira não está boa, você possui um saldo negativo.");
@@ -422,13 +429,32 @@ abrirModalSituacao = function(){
     modalSituacao.style.display = "block";
 }
 
-window.onclick = function(event) {
-    if (event.target == modalSituacao) {
-        modalSituacao.style.display = "none";
-    }
-};
-
 span5.onclick = function(){
     modalSituacao.style.display = "none";
+}
+
+//////////////////////////////////MODAL CONFIRMA PAGAMENTO////////////////////////////////////////////////////////////////////////
+
+var modalConfirma = document.getElementById("modalConfirma");
+var btnConfirmaPagamento = document.getElementById("btnConfirmaPagamento");
+var btnCancelar6 = document.getElementById("btnCancelar6");
+var span6 = document.getElementsByClassName("close")[6];
+
+abrirModalConfirma = function(n){
+    nome = n;
+    alert(nome);
+    modalConfirma.style.display = "block";
+}
+
+btnConfirmaPagamento.onclick = function(){
+    confirmarPagamento(nome);
+}
+
+span6.onclick = function(){
+    modalConfirma.style.display = "none";
+}
+
+btnCancelar6.onclick = function(){
+    modalConfirma.style.display = "none";
 }
 

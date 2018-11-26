@@ -18,7 +18,7 @@ function efetuarAlteracoes(form)
 
     if(validaSenha() && validaEmail && validaTel && nome.val() != "")
     {
-        verificarEmailAntigo(email.val(),form);
+        verificarEmailAntigo(form);
     }
     else 
        abrirModal("Verifique se os campos estão preenchidos corretamente!");
@@ -26,10 +26,10 @@ function efetuarAlteracoes(form)
 
 /////////////////////////////////////////////////////////////
 
-verificarEmailAntigo = function(email, form){
+verificarEmailAntigo = function(form){
     
     var xmlhttp = new XMLHttpRequest();
-    var url = "http://localhost:3000/Acesso/"+ email;
+    var url = "http://localhost:3000/Acesso/"+ email.val();
     var cont = 0; 
     xmlhttp.onreadystatechange=function()
     {
@@ -60,29 +60,26 @@ function verificarEmailNovo()
 {
     var xmlhttp = new XMLHttpRequest();
     var url = "http://localhost:3000/Acesso/"+ emailNovo.val();
+    alert(emailNovo.val());
     var cont = 0; 
     xmlhttp.onreadystatechange=function()
     {
         var a = JSON.stringify(this.responseText);
-        cont++;
-        
-        if (cont > 2)
+        alert(senhaAntiga);
+        if(a != '""')
         {
-            if(a != '""')
-            {
-                abrirModal("Email novo já consta no registro de outra conta");
-            }
-            else
-            {
-                if(senhaAntiga == $("#senha1").val())
-                    {
-                         alterar($("#formularioAlt"));
-                         //window.location.href = "AlteracaoEfetuada.html";
-                    }
-                    else 
-                        abrirModal("Senha não compatível com o email antigo fornecido");
-            }
+            abrirModal("Email novo já consta no registro de outra conta");
         }
+        else
+        {
+            if(senhaAntiga == $("#senha1").val())
+                {
+                     alterar($("#formularioAlt"));
+                }
+            else 
+               abrirModal("Senha não compatível com o email antigo fornecido");
+        }
+        
             
     }
     xmlhttp.open("GET", url,true);
@@ -116,12 +113,9 @@ function validaSenha()
 
 //////////////////////////////////////////////////////////////////////
 alterar = function(form){
-    alert("aaaaaaaaaaaaaa");
     $.post( "http://localhost:3000/UsuarioAlterar", form.serialize() ).done(function(data){
         if (!data.erro) {
-            form.each(function(data){
-                this.reset();
-            });
+            //window.location.href = "AlteracaoEfetuada.html";
         }
         alert(data.mensagem);
     });

@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const porta = 3000; //porta padrão
 const sql = require('mssql');
 const conexaoStr = "Server=regulus.cotuca.unicamp.br;Database=PR118183;User Id=PR118183;Password=PR118183;";
-var email = "1@2.com";
+var email = "";
 
 //conexao com BD
 sql.connect(conexaoStr)
@@ -89,28 +89,25 @@ rota.get('/Acesso/:email', (requisicao, resposta) => {
 
 
 //alterar informações de usuário
-rota.patch('/UsuarioAlterar', (requisicao, resposta) => {
+rota.post('/UsuarioAlterar', (requisicao, resposta) => {
 
     const nome = requisicao.body.nome.substring(0, 50);
-    const cpf = requisicao.body.cpf.substring(0, 14);
     const tel = requisicao.body.tel.substring(0, 20);
     const emailAntigo = requisicao.body.email.substring(0, 50);
     const emailNovo = requisicao.body.emailNovo.substring(0,50);
     const senha = requisicao.body.senha.substring(0, 15);
 
     execSQL(
-        `UPDATE Usuario SET 
-             nome='${nome}', 
-             CPF='${cpf}',
-             telefone='${tel}',
-             email='${emailNovo}',
-             senha='${senha}' 
-             WHERE email=${emailAntigo}
-        UPDATE Acesso SET 
-            email='${emailNovo}',
-            senha='${senha}'
-        WHERE email='${emailAntigo}'`,
+        `exec AlterarDados_sp 
+             @nome='${nome}',
+             @tel='${tel}',
+             @emailNovo='${emailNovo}',
+             @senha='${senha}',
+             @emailAntigo=${emailAntigo}
+        `,
         resposta);
+    
+    console.log("vsf");
 })
 
 rota.get('/Usuario/', (requisicao, resposta) => {

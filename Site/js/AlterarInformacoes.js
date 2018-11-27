@@ -102,7 +102,6 @@ function validaSenha()
 
 //////////////////////////////////////////////////////////////////////
 alterar = function(form){
-    alert("aaaaa");
     $.post( "http://localhost:3000/UsuarioAlterar", form.serialize() ).done(function(data){
         if (!data.erro) {
             window.location.href = "AlteracaoEfetuada.html";

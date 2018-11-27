@@ -257,7 +257,7 @@ btnCadastrar.onclick = function() {
     
     var tipo = $("input[name='tipo']:checked").val();
 
-    alert(tipo);
+    
     
     if(validaValor && $("#nome").val() != "")
         incluir($("#formInclusao"), tipo);

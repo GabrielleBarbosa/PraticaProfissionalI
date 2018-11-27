@@ -106,8 +106,6 @@ rota.post('/UsuarioAlterar', (requisicao, resposta) => {
              @emailAntigo='${emailAntigo}'
         `,
         resposta);
-    
-    console.log("vsf");
 })
 
 rota.get('/Usuario/', (requisicao, resposta) => {

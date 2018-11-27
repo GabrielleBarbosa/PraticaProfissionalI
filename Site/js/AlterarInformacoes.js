@@ -42,6 +42,7 @@ verificarEmailAntigo = function(form)
         if(s != "")
         {
             senhaAntiga = s;
+            s="";
             verificarEmailNovo();
         }
         else 

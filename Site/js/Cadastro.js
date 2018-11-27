@@ -32,7 +32,6 @@ verificarEmail = function(email, form){
     xmlhttp.onreadystatechange=function()
     {
         var a = JSON.stringify(this.responseText);
-        alert(a);
         cont++;
         
         if (cont > 2)
@@ -43,7 +42,6 @@ verificarEmail = function(email, form){
             }
             else
             {
-                alert("aaaaaaaaaaa");
                 cadastrar(form);
                 window.location.href = "CadastroEfetuado.html";
             }

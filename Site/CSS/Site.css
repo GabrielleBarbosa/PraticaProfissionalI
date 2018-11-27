@@ -101,6 +101,26 @@ label#cadastro
 	font-family: candara;
 }
 
+
+#alterar
+{
+	position: relative;
+	width: 590px;
+	top: 365px;
+	left: 410px;
+	color: black;
+}
+
+#botaoConfirmeAlterar
+{
+	text-decoration: none;
+	position: relative;
+	left: 660px;
+	top: 350px; 
+	font-size: 20;
+	font-family: candara;
+}
+
 #esqueciMinhaSenha a
 {
     text-decoration: none;

@@ -23,11 +23,11 @@
 <body class="nav-extended  teal accent-3">
 
  <!-- ----------------------------------------------------------------------------- -->
-<nav class="nav-extended blue darken-1">
+<nav class="nav-extended blue darken-1" style="position:fixed; z-index:9999;">
 
 	<div class="nav-wrapper" style="height: 130px;">
 		<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-		<ul id="menu" class="right hide-on-med-and-down">
+		<ul id="menu" class="right hide-on-med-and-down" >
             <li><a href="Gastos.html" style="background-color: #2ECCFA; border-radius: 100px;">Seus Gastos</a></li>
 			<li><a href="Home.html">Home</a></li>
             <li><a href="" onclick="mudarSituacao('n'); redirecionar('Home.html');">Deslogar</a></li>
@@ -36,10 +36,10 @@
 <img src="Imagens/LogoSite.png" id="imgLogoSite">
 </nav>
 
-
+<img src="Imagens/TextoAlterarInformacoes.png" style="position: absolute; left: 500px; top:140px;">
 <img src="Imagens/Computador1.png" id="computador2">
 
-<div id="tamanho">
+<div id="alterar">
 <div class="row">
     <form class="col s12" id="formularioAlt">
       <div class="row">
@@ -99,7 +99,7 @@
   </div>
   </div>
 
-    <img class="waves-effect waves-light btn" src="Imagens/Confirme_icon.png" id="botaoConfirme" style="opacity: 0.7;" onclick="efetuarAlteracoes($('#formularioAlt'));">
+    <img class="waves-effect waves-light btn" src="Imagens/Confirme_icon.png" id="botaoConfirmeAlterar" style="opacity: 0.7;" onclick="efetuarAlteracoes($('#formularioAlt'));">
 
     
     <!-- -----------------Modal----------------- -->

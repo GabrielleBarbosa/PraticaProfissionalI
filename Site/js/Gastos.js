@@ -128,10 +128,8 @@ adicionarAoCaixa = function(caixa){
             url: "http://localhost:3000/SLP/"+caixa,
             type: 'POST'
         }).done(function(){
-            //chamar listarItem
             listarGastos(tipoAtual);
-
-        }); //done
+        }); 
     listarGastos(tipoAtual);
     atualizarValores();
 };
@@ -256,8 +254,6 @@ btnCadastrar.onclick = function() {
     var validaValor = regExValor.test($("#valor").val());
     
     var tipo = $("input[name='tipo']:checked").val();
-
-    
     
     if(validaValor && $("#nome").val() != "")
         incluir($("#formInclusao"), tipo);
@@ -394,11 +390,11 @@ btnGanhos.onclick = function(){
         var dinheiro = $("#dinheiro").val();
         
         if(validaValorSalario)
-            salarioIA($("#frmInserirSalario"), salario);
+            salarioIA($("#frmInserirGanhos"), salario);
         if(validaValorGanho)
             adicionarAoCaixa(dinheiro);
         
-        $("#frmModalSituacao").each = function(){
+        $("#frmInserirGanhos").each = function(){
             this.reset();
         }
     }
@@ -442,7 +438,6 @@ var span6 = document.getElementsByClassName("close")[6];
 
 abrirModalConfirma = function(n){
     nome = n;
-    alert(nome);
     modalConfirma.style.display = "block";
 }
 

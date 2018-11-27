@@ -20,7 +20,7 @@ function efetuarAlteracoes(form)
     {
         verificarEmailAntigo(form);
     }
-    else 
+    else
        abrirModal("Verifique se os campos estão preenchidos corretamente!");
 }
 
@@ -38,7 +38,7 @@ verificarEmailAntigo = function(form)
             return false;
         })
         
-        alert(s);
+        console.log(s);
         if(s != "")
         {
             senhaAntiga = s;
@@ -61,7 +61,8 @@ function verificarEmailNovo()
             s += val.senha;
             return false;
         })
-            
+        
+        console.log(s);
         if(s != "" && email.val() != emailNovo.val())
         {
             s="";
@@ -92,11 +93,6 @@ function validaSenha()
         return false;
     }
     else if(senhaNova !== senhaConfirma)
-    {
-        $("#senha").focus();
-        return false;
-    }
-    else if(senhaNova == senhaAntiga)
     {
         $("#senha").focus();
         return false;
